@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://TODO_CONFIRM_DOMAIN/sitemap.xml
