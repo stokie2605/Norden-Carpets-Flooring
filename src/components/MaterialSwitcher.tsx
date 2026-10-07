@@ -49,7 +49,7 @@ export function MaterialSwitcher() {
         <div
           role="tablist"
           aria-label="Flooring types"
-          className="scroll-strip -mx-4 mt-10 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:px-0"
+          className="mt-10 flex flex-wrap gap-2"
         >
           {materials.map((m, i) => {
             const selected = i === active
