@@ -13,6 +13,7 @@
     "typecheck": "tsc -b",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:mobile": "playwright test",
     "lint:copy": "node scripts/check-copy.mjs",
     "images": "node scripts/optimise-images.mjs",
     "fonts": "node scripts/subset-fonts.mjs"
@@ -26,6 +27,7 @@
     "@cloudflare/workers-types": "^5.20261007.1",
     "@fontsource-variable/archivo": "^5.3.0",
     "@fontsource-variable/inter": "^5.3.0",
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/vite": "^4.3.3",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
