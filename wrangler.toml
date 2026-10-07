@@ -1,0 +1,15 @@
+# Cloudflare Pages configuration.
+# The name must match the Pages project name exactly.
+name = "norden-carpets-flooring"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-10-01"
+
+# Public, non secret values only. Secrets live in the Cloudflare dashboard.
+# vite.config.ts reads VITE_TURNSTILE_SITE_KEY from here at build time,
+# picking [env.preview.vars] on any branch other than main.
+[vars]
+VITE_TURNSTILE_SITE_KEY = "TODO_CONFIRM_TURNSTILE_SITE_KEY"
+
+[env.preview.vars]
+# Cloudflare Turnstile test site key: always passes.
+VITE_TURNSTILE_SITE_KEY = "1x00000000000000000000AA"
