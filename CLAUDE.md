@@ -51,15 +51,17 @@ Norden Carpets & Flooring: mobile-first lead generation site for a family run fl
 
 ### What got done
 - 2026-10-07: Built v1. It has the header, editorial hero, tabbed material switcher, subfloor timeline, team strip, proof wall, showroom card with catchment map and tap-to-load Google map, a 3 step booking modal with Turnstile, the mobile utility bar (Call and WhatsApp), the footer and the privacy notice.
-- The Pages Function, `_headers` (CSP, noindex on pages.dev), JSON-LD, sitemap, robots, the image and font pipelines, and the copy and dist guards are all in place. 60 tests pass.
+- The Pages Function, `_headers` (CSP, noindex on pages.dev), JSON-LD, sitemap, robots, the image and font pipelines, and the copy and dist guards are all in place. 63 tests pass.
+- 2026-10-07: Pinned Node 24 in `.nvmrc`. Added a test proving `check-dist` reports markers in `assets/*.js` chunks on every branch.
 
 ### Where things stand
-- The local repo is linked to the GitHub remote. The first commits are proposed and awaiting approval. Nothing has been pushed.
-- The Cloudflare Pages project has not been created yet. See the README for the setup steps.
+- `main` and `develop` are both pushed to GitHub.
+- The Cloudflare Pages project `norden-carpets-flooring` exists and is connected to Git. `develop` is the preview branch.
+- The `main` build fails on `TODO_CONFIRM` by design. It reports 19 markers. A local or preview build reports 18, because only `main` inlines the `[vars]` placeholder `TODO_CONFIRM_TURNSTILE_SITE_KEY` into the JS bundle. Reproduce the `main` result locally with `CF_PAGES_BRANCH=main npm run build`.
 
 ### Next
-- Approve the commits, confirm push auth, push `main`, then create `develop` and push it.
-- Create the Pages project (Connect to Git), set the secrets, create the Turnstile widget and turn on Web Analytics.
+- Confirm the first `develop` preview build succeeds on Node 24.
+- Set the secrets in the Pages dashboard, create the Turnstile widget and turn on Web Analytics.
 
 ### Blocked on
 - The client: whether the prices are VAT inclusive, Charlotte Simpson's exact review text, the platform behind the 96% rating, the retention period for the privacy notice, real installation photos, and the production domain.
