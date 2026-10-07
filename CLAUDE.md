@@ -38,6 +38,9 @@ Norden Carpets & Flooring: mobile-first lead generation site for a family run fl
 
 ## 4. Session Mode
 
+- **Client note (standing rule):** At the start of every session, read `C:\Users\Wilshaw\Documents\Second memory\Clients\Norden Carpets\Norden Carpets.md` for context. At the end of every session, update it.
+  - Keep it short and written for a human. Sections, in order: properties at the top (status: building, preview or live; client; hosting; repo; preview URL; domain; next action), Status (two or three lines), Links (preview, GitHub repo, Cloudflare project), Waiting on client (checklist), Next actions (checklist), Session log (dated, one or two lines per session).
+  - Never put secrets, API keys or customer personal data in the note.
 - Plan first for any multi-file change.
 - Ask before adding dependencies.
 - Never read, print or modify `.dev.vars` or real secrets. Print the key name needed and stop.
