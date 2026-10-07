@@ -1,0 +1,67 @@
+# CLAUDE.md
+
+Norden Carpets & Flooring: mobile-first lead generation site for a family run flooring showroom at Tenterhouse Mill, Norden, Rochdale. Specs live in the Second Memory vault: `01 Projects/Norden Carpets & Flooring.md` and `02 Areas/Global Developer Standards.md`.
+
+## 1. Git Workflow
+
+- Remote: `https://github.com/stokie2605/Norden-Carpets-Flooring`
+- `main` is production. Cloudflare Pages deploys it to the live site.
+- `develop` is the working branch. Every push to it builds a Cloudflare Pages preview. Short-lived feature branches come off `develop` and merge back into it.
+- Promote to production by merging `develop` into `main`. Never push work straight to `main`.
+- Conventional commits (`feat:`, `fix:`, `chore:`, `docs:`). Propose commit messages before committing.
+- Stage files explicitly. Never `git add -A` or `git add .`.
+- **A `main` build fails by design** while any `TODO_CONFIRM` marker reaches `dist/` (`scripts/check-dist.mjs`). Preview branches only warn.
+
+---
+
+## 2. Notifications
+
+- None configured for this repo yet.
+
+---
+
+## 3. Decisions
+
+- 2026-10-07: Hosting is Cloudflare Pages through Connect to Git, not Vercel. This overrides the global standard for this project only. The project name `norden-carpets-flooring` must match `wrangler.toml`.
+- 2026-10-07: The stack is Vite, React 19, TypeScript strict and Tailwind CSS v4, with no router. Two HTML entry points, `index.html` and `privacy.html`. Pages serves the second at `/privacy`.
+- 2026-10-07: Both pages are prerendered at build time (`src/entry-server.tsx`, `scripts/prerender.mjs`) and hydrated on the client. CSS is inlined and the display font is preloaded. Mobile Lighthouse scores 96 or above on all four categories.
+- 2026-10-07: Light theme only (Studio White Edition). There is no dark mode toggle in v1.
+- 2026-10-07: There is no AggregateRating in the JSON-LD. The 96% rating is visible page content only.
+- 2026-10-07: Booking flow: Pages Function `functions/api/book.ts`, then Turnstile siteverify plus a honeypot, then shared validation in `src/lib/booking.ts`, then the Resend REST API.
+- 2026-10-07: `wrangler.toml [vars]` holds public values only. `VITE_TURNSTILE_SITE_KEY` is read at build time by `vite.config.ts`: `[vars]` on `main`, `[env.preview.vars]` (the Cloudflare test key) elsewhere. Secrets live only in the Cloudflare dashboard and in a local `.dev.vars`.
+- 2026-10-07: Cloudflare Web Analytics comes from the Pages dashboard toggle, with no script in the source.
+- 2026-10-07: Unsplash is used only for neutral imagery, credited in `src/content/credits.ts`. The installation gallery renders only real team photos and is hidden while empty.
+- 2026-10-07: Fonts are subset and axis limited builds of Archivo (700 to 800, wdth 75 to 112) and Inter (400 to 700), committed in `src/assets/fonts`. `scripts/subset-fonts.mjs` runs as `prebuild`, collects the glyph set from source, and fails the build on any character outside the Latin fonts.
+- 2026-10-07: Every `tel:` link uses +44 format and comes from `phones` in `src/content/site.ts`.
+
+---
+
+## 4. Session Mode
+
+- Plan first for any multi-file change.
+- Ask before adding dependencies.
+- Never read, print or modify `.dev.vars` or real secrets. Print the key name needed and stop.
+- All client copy lives in `src/content/site.ts`. No em dashes, en dashes, spaced hyphens or decorative emojis anywhere (`npm run lint:copy`).
+- Before proposing a commit, run `npm run typecheck`, `npm test`, `npm run lint:copy` and `npm run build`.
+- Check that ports 5173 (Vite) and 8788 (wrangler) are free before starting dev servers.
+
+---
+
+## 5. Current State
+
+### What got done
+- 2026-10-07: Built v1. It has the header, editorial hero, tabbed material switcher, subfloor timeline, team strip, proof wall, showroom card with catchment map and tap-to-load Google map, a 3 step booking modal with Turnstile, the mobile utility bar (Call and WhatsApp), the footer and the privacy notice.
+- The Pages Function, `_headers` (CSP, noindex on pages.dev), JSON-LD, sitemap, robots, the image and font pipelines, and the copy and dist guards are all in place. 60 tests pass.
+
+### Where things stand
+- The local repo is linked to the GitHub remote. The first commits are proposed and awaiting approval. Nothing has been pushed.
+- The Cloudflare Pages project has not been created yet. See the README for the setup steps.
+
+### Next
+- Approve the commits, confirm push auth, push `main`, then create `develop` and push it.
+- Create the Pages project (Connect to Git), set the secrets, create the Turnstile widget and turn on Web Analytics.
+
+### Blocked on
+- The client: whether the prices are VAT inclusive, Charlotte Simpson's exact review text, the platform behind the 96% rating, the retention period for the privacy notice, real installation photos, and the production domain.
+- Resend domain verification. That needs the domain first.
+- The production Turnstile site key, which must go into `wrangler.toml [vars]`.
