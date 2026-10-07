@@ -41,8 +41,12 @@ Norden Carpets & Flooring: mobile-first lead generation site for a family run fl
 - **Client note (standing rule):** At the start of every session, read `C:\Users\Wilshaw\Documents\Second memory\01 Projects\Norden Carpets\Norden Carpets & Flooring.md` for context. At the end of every session, update it.
   - Keep it short and written for a human. Sections, in order: 1 properties at the top (status: building, preview or live; client; hosting; repo; preview URL; domain; next action), 2 Status (two or three lines), 3 Links (preview, GitHub repo, Cloudflare project, connected notes), 4 Waiting on client (checklist), 5 Next actions (checklist), 6 Brief, 7 Session log (dated, newest first, one or two lines per session).
   - Only ever update sections 1 to 5 and 7 automatically. Leave the Brief alone unless the user asks.
-  - Only read, edit or stage vault files under `01 Projects\Norden Carpets\`. Never open `01 Projects\Forge Platform\` or `03 Resources\Phil's Frameworks\`. Commit vault changes in the vault's own git repo.
-  - A local vault pre-commit hook rejects any commit that mixes Norden and Forge files, or a Norden note that mentions Forge (and the reverse). Never bypass it with `--no-verify`.
+  - **Vault scope:**
+    - Norden zone (read and edit): `01 Projects\Norden Carpets\`.
+    - Shared zone (read only, edit only when the user asks): everything in `02 Areas\` and `03 Resources\` outside the Forge zone.
+    - Forge zone (never open): `01 Projects\Forge Platform\`, `03 Resources\Phil's Frameworks\`, `03 Resources\Forge Skill Directory.md`, `03 Resources\Forge Tooling & MCP Connectors.md`.
+    - Commit vault changes in the vault's own git repo.
+  - A local vault pre-commit hook rejects any commit that mixes Norden and Forge files, a Norden note that mentions Forge or links into the Forge zone, and the reverse. Never bypass it with `--no-verify`.
   - Never put secrets, API keys or customer personal data in the note.
 - Plan first for any multi-file change.
 - Ask before adding dependencies.
