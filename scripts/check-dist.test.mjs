@@ -38,6 +38,18 @@ describe('check-dist', () => {
     expect(log.error).not.toHaveBeenCalled()
   })
 
+  it.each(['main', 'develop', undefined])('reports markers in JS chunks on branch %s', async (branch) => {
+    await writeFile(join(dir, 'index.html'), '<h1>Ready</h1>')
+    await writeFile(join(dir, 'assets', 'styles-abc123.js'), 'const k="TODO_CONFIRM_TURNSTILE_SITE_KEY"')
+    expect(await findMarkers(dir)).toEqual([
+      { file: 'assets/styles-abc123.js', excerpt: 'TODO_CONFIRM_TURNSTILE_SITE_KEY' },
+    ])
+    await checkDist({ dir, branch, log })
+    const reported = branch === 'main' ? log.error : log.warn
+    expect(reported).toHaveBeenCalledOnce()
+    expect(String(reported.mock.calls[0][0])).toContain('assets/styles-abc123.js: TODO_CONFIRM_TURNSTILE_SITE_KEY')
+  })
+
   it('ignores binary assets', async () => {
     await writeFile(join(dir, 'assets', 'photo.webp'), 'TODO_CONFIRM')
     expect(await findMarkers(dir)).toEqual([])
