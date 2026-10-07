@@ -38,8 +38,10 @@ Norden Carpets & Flooring: mobile-first lead generation site for a family run fl
 
 ## 4. Session Mode
 
-- **Client note (standing rule):** At the start of every session, read `C:\Users\Wilshaw\Documents\Second memory\Clients\Norden Carpets\Norden Carpets.md` for context. At the end of every session, update it.
-  - Keep it short and written for a human. Sections, in order: properties at the top (status: building, preview or live; client; hosting; repo; preview URL; domain; next action), Status (two or three lines), Links (preview, GitHub repo, Cloudflare project), Waiting on client (checklist), Next actions (checklist), Session log (dated, one or two lines per session).
+- **Client note (standing rule):** At the start of every session, read `C:\Users\Wilshaw\Documents\Second memory\01 Projects\Norden Carpets\Norden Carpets & Flooring.md` for context. At the end of every session, update it.
+  - Keep it short and written for a human. Sections, in order: 1 properties at the top (status: building, preview or live; client; hosting; repo; preview URL; domain; next action), 2 Status (two or three lines), 3 Links (preview, GitHub repo, Cloudflare project, connected notes), 4 Waiting on client (checklist), 5 Next actions (checklist), 6 Brief, 7 Session log (dated, newest first, one or two lines per session).
+  - Only ever update sections 1 to 5 and 7 automatically. Leave the Brief alone unless the user asks.
+  - Commit vault changes in the vault's own git repo, staging only Norden files.
   - Never put secrets, API keys or customer personal data in the note.
 - Plan first for any multi-file change.
 - Ask before adding dependencies.
