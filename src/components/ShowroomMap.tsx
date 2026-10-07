@@ -18,12 +18,12 @@ const COORDS: Record<(typeof towns)[number], [lat: number, lon: number]> = {
 // Hand placed labels so close neighbours (Norden, Bamford, Rochdale) never collide.
 const LABELS: Record<(typeof towns)[number], { dx: number; dy: number; anchor: 'start' | 'middle' | 'end' }> = {
   Norden: { dx: 0, dy: -20, anchor: 'middle' },
-  Bamford: { dx: 11, dy: 5, anchor: 'start' },
-  Birtle: { dx: 11, dy: 4, anchor: 'start' },
+  Bamford: { dx: 0, dy: 24, anchor: 'middle' },
+  Birtle: { dx: -11, dy: 4, anchor: 'end' },
   Edenfield: { dx: 11, dy: 4, anchor: 'start' },
-  Ramsbottom: { dx: 11, dy: 4, anchor: 'start' },
+  Ramsbottom: { dx: 0, dy: -12, anchor: 'middle' },
   Bury: { dx: 11, dy: 4, anchor: 'start' },
-  Rochdale: { dx: 0, dy: 22, anchor: 'middle' },
+  Rochdale: { dx: 0, dy: -12, anchor: 'middle' },
 }
 
 const BOUNDS = { north: 53.69, south: 53.58, west: -2.35, east: -2.13 }
@@ -73,6 +73,8 @@ function CatchmentMap() {
               y={p.y + label.dy}
               textAnchor={label.anchor}
               fontSize={isHome ? 14 : 13}
+              // The map shrinks to about three quarters scale on phones, so labels grow to stay near 13px on screen.
+              className={isHome ? 'max-sm:text-[18px]' : 'max-sm:text-[17px]'}
               fontWeight={isHome ? 800 : 600}
               fill={isHome ? 'var(--accent-deep)' : 'var(--ink)'}
               fontFamily="var(--font-sans)"

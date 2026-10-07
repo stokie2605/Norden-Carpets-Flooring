@@ -5,7 +5,7 @@ This is the website for Norden Carpets & Flooring, Unit 4, Tenterhouse Mill, Gre
 ## Quick start
 
 ```bash
-nvm use            # Node 22, from .nvmrc
+nvm use            # Node 24, from .nvmrc
 npm install
 npm run dev        # http://localhost:5173 (the booking form needs pages:dev)
 ```

@@ -146,14 +146,6 @@
       padding-inline: 2rem;
     }
   }
-
-  /* Hide the scrollbar on horizontal strips while keeping them scrollable. */
-  .scroll-strip {
-    scrollbar-width: none;
-  }
-  .scroll-strip::-webkit-scrollbar {
-    display: none;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

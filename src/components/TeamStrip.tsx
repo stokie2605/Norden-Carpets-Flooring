@@ -12,11 +12,11 @@ export function TeamStrip() {
             Our own fitting team, start to finish. We never pass your floor to a stranger.
           </p>
         </div>
-        <ul className="scroll-strip -mx-4 flex gap-3 overflow-x-auto px-4 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-4">
+        <ul className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           {team.map((person) => (
             <li
               key={person.name}
-              className="flex min-w-[11.5rem] shrink-0 items-center gap-3 rounded-2xl border border-line bg-bg p-3 pr-5"
+              className="flex min-w-0 flex-col items-start gap-2 rounded-2xl border border-line bg-bg p-3 sm:flex-row sm:items-center sm:gap-3 sm:pr-5"
             >
               <span
                 aria-hidden="true"
