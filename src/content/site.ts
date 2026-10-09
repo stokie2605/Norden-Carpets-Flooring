@@ -9,7 +9,7 @@ export const business = {
   legalName: 'David Wilshaw',
   legalLine: 'Norden Carpets & Flooring is the trading name of David Wilshaw, sole trader.',
   yearsInTrade: '30+',
-  email: 'norden.carpetsflooring@gmail.com',
+  email: 'norden.carpetsandflooring@gmail.com',
   address: {
     unit: 'Unit 4, Tenterhouse Mill',
     street: 'Greenbooth Road',
