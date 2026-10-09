@@ -178,9 +178,9 @@ export const copy = {
   showroom: {
     eyebrow: 'Showroom and areas we cover',
     title: 'Come and see us at Tenterhouse Mill.',
-    // Followed by the list of towns.
-    introStart: 'We measure up for free in',
-    introEnd: "and we're happy to travel further if you ask.",
+    intro: "We do free home measures within about 25km of our Norden showroom.",
+    mapPin: 'Norden showroom',
+    mapRadius: 'About 25km',
   },
   footer: {
     blurb: 'Carpets, vinyl, laminate and underlay, supplied and fitted by our own team.',

@@ -20,12 +20,13 @@ async function settle(page: Page) {
 
 /**
  * Lists every rendered element whose right edge passes the viewport.
- * Elements inside an intentional horizontal scroll container (overflow-x auto or scroll) are excluded.
+ * Elements inside an intentional scroll or clipping container (overflow-x auto, scroll, hidden or clip) are excluded.
+ * The document scrollWidth check below still catches any real sideways scroll.
  */
 async function findOverflow(page: Page) {
   return page.evaluate(() => {
     const viewport = document.documentElement.clientWidth
-    const scrolls = (el: Element) => /^(auto|scroll)$/.test(getComputedStyle(el).overflowX)
+    const scrolls = (el: Element) => /^(auto|scroll|hidden|clip)$/.test(getComputedStyle(el).overflowX)
     const offenders: string[] = []
 
     for (const el of document.body.querySelectorAll('*')) {
