@@ -116,6 +116,16 @@ export function MaterialSwitcher() {
               <div className="flex flex-col p-6 sm:p-9">
                 <h3 className="text-2xl font-extrabold sm:text-3xl">{m.headline}</h3>
                 <p className="mt-3 text-ink-soft">{m.pitch}</p>
+                {m.review && (
+                  <figure className="mt-6 border-l-2 border-accent pl-4">
+                    <blockquote className="text-ink">
+                      <p>&ldquo;{m.review.quote}&rdquo;</p>
+                    </blockquote>
+                    <figcaption className="mt-1 text-sm text-muted">
+                      {m.review.author}, {copy.reviews.reviewSource}
+                    </figcaption>
+                  </figure>
+                )}
 
                 <ul className="mt-8 flex flex-wrap gap-2 border-t border-line pt-6" aria-label={`${m.label} is ideal for`}>
                   {m.bestFor.map((room) => (

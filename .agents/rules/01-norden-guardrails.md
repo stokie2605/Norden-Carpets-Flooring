@@ -30,6 +30,7 @@ You are an implementer, not a designer. The design is finished and approved. You
 - Section order in `src/App.tsx`: Hero, MaterialSwitcher, PreviousWork, TeamStrip, ProofWall, SectionDivider, ShowroomMap.
 - Team: Dave, Tom and Jake (Fitters), Wendy (Admin).
 - Never mention Bury.
+- Reviews in `site.ts` are word for word from Facebook. Never write, reword or tidy a review. Never use customer photos.
 - Never mention subcontractors, and never use the word "subfloor" in client copy.
 - All client copy lives in `src/content/site.ts`. Components read from it. No hardcoded sentences in components.
 - Colours come only from the tokens in `src/styles/index.css` (`bg`, `bg-alt`, `ink`, `ink-soft`, `muted`, `accent`, `accent-deep`, `pill`, `line`). No new hex values. The only allowed raw hex values are brand colours for Facebook (#1877F2), WhatsApp (#128C7E) and white (#fff).

@@ -11,6 +11,14 @@ export function TeamStrip() {
           <p className="mt-2 text-ink-soft">
             {copy.team.intro}
           </p>
+          <figure className="mt-4 border-l-2 border-accent pl-4">
+            <blockquote className="font-medium text-ink">
+              <p>&ldquo;{copy.team.review.quote}&rdquo;</p>
+            </blockquote>
+            <figcaption className="mt-1 text-sm text-muted">
+              {copy.team.review.author}, {copy.reviews.reviewSource}
+            </figcaption>
+          </figure>
         </div>
         <ul className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           {team.map((person) => (
