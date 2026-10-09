@@ -62,6 +62,9 @@ export const nav = [
 
 export type MaterialId = 'carpets' | 'lvt' | 'laminate' | 'underlay'
 
+// Customer reviews are copied word for word from our Facebook page. Cut only with "...", never reword.
+export type Review = { quote: string; author: string }
+
 export type Material = {
   id: MaterialId
   label: string
@@ -70,6 +73,7 @@ export type Material = {
   bestFor: readonly string[]
   image: string
   imageAlt: string
+  review?: Review
 }
 
 export const materials: readonly Material[] = [
@@ -82,6 +86,10 @@ export const materials: readonly Material[] = [
     bestFor: ['Bedrooms', 'Lounges', 'Stairs and landings'],
     image: 'carpet',
     imageAlt: 'Close up of a grey loop pile carpet texture',
+    review: {
+      quote: 'Very happy with our gorgeous carpet. Very good value and quality and a brilliant service from start to finish.',
+      author: 'Caroline',
+    },
   },
   {
     id: 'lvt',
@@ -92,6 +100,7 @@ export const materials: readonly Material[] = [
     bestFor: ['Kitchens', 'Bathrooms', 'Open plan living'],
     image: 'lvt-herringbone',
     imageAlt: 'Warm oak effect planks laid in a herringbone pattern',
+    review: { quote: 'Excellent service, love my new carpet and lino, thankyou.', author: 'Joanne' },
   },
   {
     id: 'laminate',
@@ -102,6 +111,10 @@ export const materials: readonly Material[] = [
     bestFor: ['Living rooms', 'Dining rooms', 'Rental properties'],
     image: 'laminate',
     imageAlt: 'Bright living room with mid oak laminate flooring',
+    review: {
+      quote: 'So so happy with the service and the end result. Such good quality flooring.',
+      author: 'Hannah',
+    },
   },
   {
     id: 'underlay',
@@ -117,17 +130,29 @@ export const materials: readonly Material[] = [
 
 export const proof = {
   rating: '96%',
-  ratingLabel: 'of customers recommend us',
-  // Platform behind the 96% rating (Google, Facebook, Checkatrade?).
-  ratingSource: 'TODO_CONFIRM rating source',
+  ratingLabel: 'recommend us on Facebook',
+  ratingSource: 'Based on 24 Facebook reviews',
   featured: {
-    // Exact wording to be pasted from the published review. Never paraphrase.
-    quote: 'TODO_CONFIRM Charlotte Simpson review text',
-    author: 'Charlotte Simpson',
-    detail: 'TODO_CONFIRM review platform and date',
+    quote:
+      'Fitted our whole house with carpets and laminate flooring, looks amazing. Really happy with the results, definitely recommend and will use them again!',
+    author: 'Charlotte',
   },
-  // Further verified reviews, verbatim, with author and source. Empty until supplied.
-  reviews: [] as readonly { quote: string; author: string; source: string }[],
+  reviews: [
+    {
+      quote:
+        'Professional and friendly service. Carpets laid and are fabulous. Thank you Dave, you went over and above, kept me in the loop every step of the way',
+      author: 'Lesley',
+    },
+    {
+      quote:
+        'Absolutely amazing carpets and fitting! We had our lounge, hall, stairs and landing carpeted and it looks fabulous!',
+      author: 'Amy',
+    },
+    {
+      quote: 'I have had many carpets from Dave over the years and he has always done a great job...',
+      author: 'Rebecca',
+    },
+  ] as readonly Review[],
 } as const
 
 // Real installation photos from the team only. Shown in the Our work section.
@@ -169,8 +194,10 @@ export const copy = {
   team: {
     title: 'Meet the team.',
     intro: "We're a small family team. You'll deal with the same people from your first call to the fit.",
+    review: { quote: 'Such a lovely, super friendly team.', author: 'Amy' },
   },
   reviews: {
+    reviewSource: 'Facebook review',
     eyebrow: 'Reviews',
     title: 'What our customers say.',
   },
