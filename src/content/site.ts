@@ -49,10 +49,10 @@ export const hours = [
 export const towns = ['Norden', 'Bamford', 'Birtle', 'Edenfield', 'Ramsbottom', 'Bury', 'Rochdale'] as const
 
 export const team = [
-  { name: 'Dave', role: 'Proprietor and master fitter' },
-  { name: 'Wendy', role: 'Proprietor, showroom and design advice' },
+  { name: 'Dave', role: 'Proprietor' },
+  { name: 'Wendy', role: 'Administration and Accounts' },
   { name: 'Tom', role: 'Fitter' },
-  { name: 'Liam', role: 'Fitter' },
+  { name: 'Jake', role: 'Fitter' },
 ] as const
 
 export const nav = [
@@ -154,7 +154,7 @@ export const subfloorSteps = [
   },
   {
     title: 'Precision fitting',
-    body: 'Dave, Wendy, Tom and Liam fit every job themselves. No subcontractors, no strangers in your home, and one team accountable from measure to finish.',
+    body: 'Our in-house team fits every job themselves. No subcontractors, no strangers in your home, and one team accountable from measure to finish.',
   },
 ] as const
 

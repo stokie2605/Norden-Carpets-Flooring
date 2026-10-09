@@ -16,7 +16,7 @@ export function Hero() {
             Floors fitted by the people who <span className="text-accent">own the shop.</span>
           </h1>
           <p className="mt-5 max-w-xl text-[1.05rem] text-ink-soft sm:text-lg">
-            {business.proprietors} have spent over 30 years measuring, preparing and fitting floors across Rochdale and
+            {business.proprietors} have spent over 30 years building a trusted family business across Rochdale and
             Bury. <span className="hidden sm:inline">Every job is fitted by our own team, with no subcontractors and no shortcuts under the floor.</span>
           </p>
 
@@ -56,7 +56,7 @@ export function Hero() {
               In-house fitters. Zero subcontractors.
             </span>
             <span className="mt-2 block text-sm text-ink-soft">
-              Dave, Wendy, Tom and Liam measure, prepare and fit every floor themselves.
+              Dave, Tom and Jake handle the fitting, while Wendy keeps the business running smoothly.
             </span>
           </p>
         </div>
