@@ -78,9 +78,17 @@ export default function PrivacyPage() {
             </ul>
           </Section>
 
-          <Section title="Google Maps">
+          <Section title="Maps">
             <p>
-              Our showroom section shows a simple map drawn by us. The interactive Google map only loads if you tap
+              The map in our showroom section is built from OpenStreetMap images. To show them, your browser sends
+              your IP address to the OpenStreetMap Foundation, which uses it only to deliver the map, under the{' '}
+              <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener noreferrer">
+                OpenStreetMap privacy policy
+              </a>
+              .
+            </p>
+            <p>
+              The interactive Google map only loads if you tap
               &ldquo;Show interactive map&rdquo;. Once loaded, Google receives your IP address and device information
               and may set cookies, under the{' '}
               <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">

@@ -1,6 +1,6 @@
 import { useId, useRef, useState, type KeyboardEvent } from 'react'
 import { Check } from 'lucide-react'
-import { materials } from '../content/site'
+import { copy, materials } from '../content/site'
 import { useBooking } from '../context/BookingContext'
 import { Button } from './ui/Button'
 import { Picture } from './ui/Picture'
@@ -42,14 +42,12 @@ export function MaterialSwitcher() {
       <div className="container-x">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <p className="eyebrow">Flooring</p>
+            <p className="eyebrow">{copy.flooring.eyebrow}</p>
             <h2 id="flooring-title" className="mt-3 text-section font-extrabold">
-              Every floor we fit.
+              {copy.flooring.title}
             </h2>
           </div>
-          <p className="max-w-sm text-ink-soft">
-            We supply and fit a wide range of flooring. Your exact quote follows a free home measure.
-          </p>
+          <p className="max-w-sm text-ink-soft">{copy.flooring.intro}</p>
         </div>
 
         <div

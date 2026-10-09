@@ -46,18 +46,18 @@ export const hours = [
   { days: 'Sunday', time: 'Closed' },
 ] as const
 
-export const towns = ['Norden', 'Bamford', 'Birtle', 'Edenfield', 'Ramsbottom', 'Bury', 'Rochdale'] as const
+export const towns = ['Norden', 'Bamford', 'Birtle', 'Edenfield', 'Ramsbottom', 'Rochdale'] as const
 
 export const team = [
-  { name: 'Dave', role: 'Owner' },
-  { name: 'Wendy', role: 'Admin' },
+  { name: 'Dave', role: 'Fitter' },
   { name: 'Tom', role: 'Fitter' },
   { name: 'Jake', role: 'Fitter' },
+  { name: 'Wendy', role: 'Admin' },
 ] as const
 
 export const nav = [
   { label: 'Flooring', href: '#flooring' },
-  { label: 'Subfloors', href: '#subfloors' },
+  { label: 'Our work', href: '#work' },
   { label: 'Reviews', href: '#reviews' },
   { label: 'Showroom', href: '#showroom' },
 ] as const
@@ -78,9 +78,9 @@ export const materials: readonly Material[] = [
   {
     id: 'carpets',
     label: 'Carpets',
-    headline: 'Soft underfoot, built to last',
+    headline: 'Carpets that feel good and last',
     pitch:
-      'Twists, loops, saxonies and stain resistant polypropylene from leading UK mills. Every carpet goes down on quality underlay with gripper and door bars fitted by our own team.',
+      "Twists, loops, saxonies and stain resistant polypropylene. Every carpet goes down on good underlay, with gripper and door bars, and it's fitted by our own team.",
     bestFor: ['Bedrooms', 'Lounges', 'Stairs and landings'],
     image: 'carpet',
     imageAlt: 'Close up of a grey loop pile carpet texture',
@@ -88,9 +88,9 @@ export const materials: readonly Material[] = [
   {
     id: 'lvt',
     label: 'Vinyl',
-    headline: 'Luxury vinyl tile and herringbone',
+    headline: 'Luxury vinyl and herringbone',
     pitch:
-      'The look of real wood or stone with none of the upkeep. Waterproof, warm with underfloor heating and laid in plank, tile or herringbone patterns on a perfectly smoothed subfloor.',
+      "Looks like wood or stone, but it's waterproof and easy to keep clean. It works well with underfloor heating, and we lay it as planks, tiles or herringbone on a properly levelled floor.",
     bestFor: ['Kitchens', 'Bathrooms', 'Open plan living'],
     image: 'lvt-herringbone',
     imageAlt: 'Warm oak effect planks laid in a herringbone pattern',
@@ -98,9 +98,9 @@ export const materials: readonly Material[] = [
   {
     id: 'laminate',
     label: 'Laminate',
-    headline: 'Smart wood effect on a budget',
+    headline: "Wood effect that won't break the bank",
     pitch:
-      'Hard wearing click laminate with realistic grain and an acoustic underlay to keep rooms quiet. Finished with matching beading or scotia for a clean edge.',
+      'Tough click laminate with a realistic grain, laid on acoustic underlay so the room stays quiet. We finish the edges with matching beading or scotia.',
     bestFor: ['Living rooms', 'Dining rooms', 'Rental properties'],
     image: 'laminate',
     imageAlt: 'Bright living room with mid oak laminate flooring',
@@ -108,33 +108,14 @@ export const materials: readonly Material[] = [
   {
     id: 'underlay',
     label: 'Underlay',
-    headline: 'The secret to a carpet that lasts',
+    headline: 'Good underlay makes all the difference',
     pitch:
-      'A great carpet feels flat without the right base. We use high density PU foam underlay that extends the life of your carpet, keeps rooms warmer, and feels luxurious underfoot.',
+      'Even a great carpet feels thin on cheap underlay. We use high density PU foam underlay. It helps your carpet last longer, keeps the room warmer and feels softer underfoot.',
     bestFor: ['All carpeted rooms', 'Stairs (high density)', 'Over underfloor heating'],
-    image: 'roll-ends', // Temporarily using roll-ends image since underlay image doesn't exist
-    imageAlt: 'Thick carpet underlay roll',
+    image: 'roll-ends',
+    imageAlt: 'Close up of grey patterned carpet',
   },
 ]
-
-export const subfloorSteps = [
-  {
-    title: 'Moisture checks',
-    body: 'We test concrete and screed with a meter before anything goes down. Damp floors ruin vinyl and adhesive, so we find it first and fix it properly.',
-  },
-  {
-    title: 'Latex screeding',
-    body: 'Uneven or patched floors are levelled with a latex smoothing compound. The result is a flat, sound base that stops ridges and seams showing through.',
-  },
-  {
-    title: 'Ply and hardboard',
-    body: 'Timber floors are overlaid with ply or hardboard and fixed at close centres, so LVT and vinyl stay flat and squeak free for years.',
-  },
-  {
-    title: 'Precision fitting',
-    body: 'Our in-house team fits every job themselves. No strangers in your home, and one team accountable from measure to finish.',
-  },
-] as const
 
 export const proof = {
   rating: '96%',
@@ -151,12 +132,63 @@ export const proof = {
   reviews: [] as readonly { quote: string; author: string; source: string }[],
 } as const
 
-// Real installation photos from the team only. The gallery is hidden while empty.
+// Real installation photos from the team only. Shown in the Our work section.
 // Add entries after running `npm run images` on files in design-source/installations.
 export const installations: readonly { image: string; alt: string; caption: string }[] = []
+
+// Headings, intros and button labels used across the page.
+export const copy = {
+  hero: {
+    eyebrow: `Family run in Norden, Rochdale, for ${business.yearsInTrade} years`,
+    titleStart: 'Floors fitted by the people who',
+    titleAccent: 'own the shop.',
+    intro: "We're Dave and Wendy Wilshaw, and we've been fitting floors across Rochdale for over 30 years.",
+    introMore: 'Every floor is fitted by Dave, Tom or Jake.',
+    reassurance: "Measuring and quotes are free, and there's no obligation.",
+    badge: 'Our own fitters',
+    badgeBody: 'Dave, Tom and Jake do the fitting, and Wendy helps with admin.',
+    imageAlt: 'Bright bedroom with a soft neutral carpet',
+  },
+  cta: {
+    book: 'Book a free measure',
+    bookShort: 'Free measure',
+    callShowroom: 'Call the showroom',
+    callShort: 'Call us',
+  },
+  flooring: {
+    eyebrow: 'Flooring',
+    title: 'Floors for every room and every budget.',
+    intro: "Pop into the showroom to see samples. You'll get an exact quote after a free home measure.",
+  },
+  work: {
+    eyebrow: 'Our work',
+    title: 'Some of our recent jobs.',
+    intro: "Floors we've fitted in homes around Rochdale.",
+    // Shown on preview builds only, until real photos are added to `installations`.
+    empty: 'TODO_CONFIRM installation photos from the client, grouped by material',
+  },
+  team: {
+    title: 'Meet the team.',
+    intro: "We're a small family team. You'll deal with the same people from your first call to the fit.",
+  },
+  reviews: {
+    eyebrow: 'Reviews',
+    title: 'What our customers say.',
+  },
+  showroom: {
+    eyebrow: 'Showroom and areas we cover',
+    title: 'Come and see us at Tenterhouse Mill.',
+    intro: "We do free home measures within about 25km of our Norden showroom.",
+    mapPin: 'Norden showroom',
+    mapRadius: 'About 25km',
+  },
+  footer: {
+    blurb: 'Carpets, vinyl, laminate and underlay, supplied and fitted by our own team.',
+  },
+} as const
 
 export const seo = {
   title: 'Carpets & Flooring in Rochdale | Norden Carpets & Flooring',
   description:
-    'Carpets, vinyl, laminate and underlay supplied and fitted across Rochdale, Bury and Ramsbottom. 30+ years, in-house fitters. Book a free measure.',
+    'Carpets, vinyl, laminate and underlay, supplied and fitted across Rochdale and Ramsbottom. Family run for over 30 years, with our own fitters. Book a free measure.',
 } as const

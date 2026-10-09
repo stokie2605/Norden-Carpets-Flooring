@@ -1,4 +1,4 @@
-import { addressLines, business, hours, links, phones, towns } from '../content/site'
+import { addressLines, business, copy, hours, links, phones, towns } from '../content/site'
 import { credits } from '../content/credits'
 import { FacebookIcon } from './ui/BrandIcons'
 import { Wordmark } from './ui/Wordmark'
@@ -10,7 +10,7 @@ export function Footer() {
         <div>
           <Wordmark />
           <p className="mt-4 max-w-xs text-sm text-ink-soft">
-            Carpets, vinyl, laminate and underlay supplied and fitted by our own in-house team.
+            {copy.footer.blurb}
           </p>
           <a
             href={links.facebook}

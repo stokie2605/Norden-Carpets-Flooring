@@ -1,15 +1,14 @@
-import { installations, links, proof } from '../content/site'
+import { copy, links, proof } from '../content/site'
 import { buttonClasses } from './ui/Button'
 import { FacebookIcon } from './ui/BrandIcons'
-import { Picture } from './ui/Picture'
 
 export function ProofWall() {
   return (
     <section id="reviews" aria-labelledby="reviews-title" className="py-16 sm:py-24">
       <div className="container-x">
-        <p className="eyebrow">Customer reviews</p>
+        <p className="eyebrow">{copy.reviews.eyebrow}</p>
         <h2 id="reviews-title" className="mt-3 max-w-2xl text-section font-extrabold">
-          Rochdale homes, recommended by the people who live in them.
+          {copy.reviews.title}
         </h2>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[0.7fr_1.3fr]">
@@ -58,30 +57,6 @@ export function ProofWall() {
           </ul>
         )}
 
-        {installations.length > 0 && (
-          <div className="mt-14">
-            <h3 className="text-2xl font-extrabold">Recent installations by our team</h3>
-            <ul className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3">
-              {installations.map((item) => (
-                <li key={item.image}>
-                  <figure>
-                    <div className="aspect-[4/3] overflow-hidden rounded-2xl bg-bg-alt">
-                      <Picture
-                        name={item.image}
-                        alt={item.alt}
-                        sizes="(min-width: 768px) 33vw, 50vw"
-                        width={640}
-                        height={480}
-                        className="size-full object-cover"
-                      />
-                    </div>
-                    <figcaption className="mt-2 text-sm text-muted">{item.caption}</figcaption>
-                  </figure>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
 
         <div className="mt-10">
           <a
