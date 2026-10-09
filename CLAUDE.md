@@ -38,6 +38,7 @@ Norden Carpets & Flooring: mobile-first lead generation site for a family run fl
 - 2026-10-09: Reviews are copied word for word from the Facebook page (96% recommend, 24 reviews), first names only, no dates. Cut only with "...", never reword. Skip lines naming former staff. No customer photos: Dave supplies the job photos.
 - 2026-10-09: Retention: enquiries that don't go ahead are deleted after one month, customer contact details once the job is finished and paid for, invoices kept as HMRC requires.
 - 2026-10-09: The business is a sole trader, David Wilshaw trading as Norden Carpets & Flooring, not VAT registered. The legal line sits in the footer and the privacy notice.
+- 2026-10-09: Production domain is nordencarpets.co.uk, registered at Cloudflare to David Wilshaw (UK sole trader), auto renew on.
 - 2026-10-09: Agent rules for Antigravity and other tools live in `AGENTS.md` and `.agents/rules/`. `scripts/guardrails.test.mjs` locks these decisions.
 
 ---
@@ -80,6 +81,6 @@ Norden Carpets & Flooring: mobile-first lead generation site for a family run fl
 - Set the secrets in the Pages dashboard, create the Turnstile widget and turn on Web Analytics.
 
 ### Blocked on
-- The client (Dave): whether the ICO fee is paid or the business is exempt, real installation photos, and the production domain.
-- Resend domain verification. That needs the domain first.
+- The client (Dave): whether the ICO fee is paid or the business is exempt, and real installation photos.
+- Resend domain verification for nordencarpets.co.uk, and Cloudflare Email Routing for hello@nordencarpets.co.uk.
 - The production Turnstile site key, which must go into `wrangler.toml [vars]`.
