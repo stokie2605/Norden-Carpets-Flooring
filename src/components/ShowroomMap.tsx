@@ -11,7 +11,6 @@ const COORDS: Record<(typeof towns)[number], [lat: number, lon: number]> = {
   Birtle: [53.6094, -2.2476],
   Edenfield: [53.6732, -2.3065],
   Ramsbottom: [53.6476, -2.3171],
-  Bury: [53.5933, -2.2966],
   Rochdale: [53.6158, -2.1551],
 }
 
@@ -22,7 +21,6 @@ const LABELS: Record<(typeof towns)[number], { dx: number; dy: number; anchor: '
   Birtle: { dx: -11, dy: 4, anchor: 'end' },
   Edenfield: { dx: 11, dy: 4, anchor: 'start' },
   Ramsbottom: { dx: 0, dy: -12, anchor: 'middle' },
-  Bury: { dx: 11, dy: 4, anchor: 'start' },
   Rochdale: { dx: 0, dy: -12, anchor: 'middle' },
 }
 

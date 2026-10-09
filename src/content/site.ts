@@ -46,12 +46,12 @@ export const hours = [
   { days: 'Sunday', time: 'Closed' },
 ] as const
 
-export const towns = ['Norden', 'Bamford', 'Birtle', 'Edenfield', 'Ramsbottom', 'Bury', 'Rochdale'] as const
+export const towns = ['Norden', 'Bamford', 'Birtle', 'Edenfield', 'Ramsbottom', 'Rochdale'] as const
 
 export const team = [
   { name: 'Dave', role: 'Fitter' },
   { name: 'Tom', role: 'Fitter' },
-  { name: 'Liam', role: 'Fitter' },
+  { name: 'Jake', role: 'Fitter' },
   { name: 'Wendy', role: 'Admin' },
 ] as const
 
@@ -142,11 +142,11 @@ export const copy = {
     eyebrow: `Family run in Norden, Rochdale, for ${business.yearsInTrade} years`,
     titleStart: 'Floors fitted by the people who',
     titleAccent: 'own the shop.',
-    intro: "We're Dave and Wendy Wilshaw, and we've been fitting floors across Rochdale and Bury for over 30 years.",
-    introMore: 'Every floor is fitted by Dave, Tom or Liam.',
+    intro: "We're Dave and Wendy Wilshaw, and we've been fitting floors across Rochdale for over 30 years.",
+    introMore: 'Every floor is fitted by Dave, Tom or Jake.',
     reassurance: "Measuring and quotes are free, and there's no obligation.",
     badge: 'Our own fitters',
-    badgeBody: 'Dave, Tom and Liam do the fitting, and Wendy helps with admin.',
+    badgeBody: 'Dave, Tom and Jake do the fitting, and Wendy helps with admin.',
     imageAlt: 'Bright bedroom with a soft neutral carpet',
   },
   cta: {
@@ -163,13 +163,13 @@ export const copy = {
   work: {
     eyebrow: 'Our work',
     title: 'Some of our recent jobs.',
-    intro: "Floors we've fitted in homes around Rochdale and Bury.",
+    intro: "Floors we've fitted in homes around Rochdale.",
     // Shown on preview builds only, until real photos are added to `installations`.
     empty: 'TODO_CONFIRM installation photos from the client, grouped by material',
   },
   team: {
     title: 'Meet the team.',
-    intro: "We're a small family team. You'll deal with the same people from your first call to the finished floor.",
+    intro: "We're a small family team. You'll deal with the same people from your first call to the fit.",
   },
   reviews: {
     eyebrow: 'Reviews',
@@ -190,5 +190,5 @@ export const copy = {
 export const seo = {
   title: 'Carpets & Flooring in Rochdale | Norden Carpets & Flooring',
   description:
-    'Carpets, vinyl, laminate and underlay, supplied and fitted across Rochdale, Bury and Ramsbottom. Family run for over 30 years, with our own fitters. Book a free measure.',
+    'Carpets, vinyl, laminate and underlay, supplied and fitted across Rochdale and Ramsbottom. Family run for over 30 years, with our own fitters. Book a free measure.',
 } as const
