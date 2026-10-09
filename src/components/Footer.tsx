@@ -71,7 +71,7 @@ export function Footer() {
         <div className="container-x flex flex-col gap-3 py-6 text-xs text-muted md:flex-row md:items-center md:justify-between">
           <p>
             {/* Prerendered at build time, so the year may differ from the visitor's clock on hydration. */}
-            &copy; <span suppressHydrationWarning>{new Date().getFullYear()}</span> {business.name}.{' '}
+            &copy; <span suppressHydrationWarning>{new Date().getFullYear()}</span> {business.name}. {business.legalLine}{' '}
             <a href={links.privacy} className="underline hover:text-ink">
               Privacy notice
             </a>
