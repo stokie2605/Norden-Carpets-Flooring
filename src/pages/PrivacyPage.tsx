@@ -129,7 +129,11 @@ export default function PrivacyPage() {
           </Section>
 
           <Section title="How long we keep your details">
-            <p>TODO_CONFIRM retention period for enquiries that do not go ahead and for completed jobs.</p>
+            <ul>
+              <li>If your enquiry doesn&apos;t go ahead, we delete your details after one month.</li>
+              <li>If we do the job, we keep your contact details until it&apos;s finished and paid for, then delete them.</li>
+              <li>We keep invoices and payment records for as long as HMRC requires.</li>
+            </ul>
           </Section>
 
           <Section title="Your rights">
