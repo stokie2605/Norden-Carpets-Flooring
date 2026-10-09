@@ -3,10 +3,9 @@
 
 export const MATERIAL_OPTIONS = [
   { value: 'carpets', label: 'Carpets' },
-  { value: 'lvt', label: 'LVT or herringbone' },
+  { value: 'lvt', label: 'Vinyl' },
   { value: 'laminate', label: 'Laminate' },
-  { value: 'safety', label: 'Safety flooring' },
-  { value: 'roll-ends', label: 'Roll ends' },
+  { value: 'underlay', label: 'Underlay' },
   { value: 'unsure', label: 'Not sure yet' },
 ] as const
 
