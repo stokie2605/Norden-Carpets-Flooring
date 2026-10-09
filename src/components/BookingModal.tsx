@@ -420,12 +420,11 @@ export function BookingModal() {
                         className="mt-0.5 size-5 shrink-0 accent-[var(--accent)]"
                       />
                       <span>
-                        I agree to Norden Carpets &amp; Flooring using these details to contact me about my free measure.
-                        Read our{' '}
+                        I&apos;ve read the{' '}
                         <a href={links.privacy} target="_blank" className="font-semibold text-ink underline">
                           privacy notice
-                        </a>
-                        .
+                        </a>{' '}
+                        and I&apos;m happy for Norden Carpets &amp; Flooring to contact me about my free measure.
                       </span>
                     </label>
                     <FieldError id="consent-error" message={errors.consent} />

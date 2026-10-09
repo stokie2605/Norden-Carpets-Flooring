@@ -78,6 +78,6 @@ Norden Carpets & Flooring: mobile-first lead generation site for a family run fl
 - Set the secrets in the Pages dashboard, create the Turnstile widget and turn on Web Analytics.
 
 ### Blocked on
-- The client: the retention period for the privacy notice, real installation photos, and the production domain.
+- The client (Dave): the retention period (suggested 12 months for enquiries, 6 years after a job), the business's legal form and name for the footer and privacy notice (sole trader, partnership or limited company), whether it is VAT registered and the number, whether the ICO fee is paid, real installation photos, and the production domain.
 - Resend domain verification. That needs the domain first.
 - The production Turnstile site key, which must go into `wrangler.toml [vars]`.
