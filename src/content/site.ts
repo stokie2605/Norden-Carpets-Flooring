@@ -49,8 +49,8 @@ export const hours = [
 export const towns = ['Norden', 'Bamford', 'Birtle', 'Edenfield', 'Ramsbottom', 'Bury', 'Rochdale'] as const
 
 export const team = [
-  { name: 'Dave', role: 'Proprietor' },
-  { name: 'Wendy', role: 'Administration and Accounts' },
+  { name: 'Dave', role: 'Owner' },
+  { name: 'Wendy', role: 'Admin' },
   { name: 'Tom', role: 'Fitter' },
   { name: 'Jake', role: 'Fitter' },
 ] as const
@@ -62,15 +62,13 @@ export const nav = [
   { label: 'Showroom', href: '#showroom' },
 ] as const
 
-export type MaterialId = 'carpets' | 'lvt' | 'laminate' | 'safety' | 'roll-ends'
+export type MaterialId = 'carpets' | 'lvt' | 'laminate' | 'underlay'
 
 export type Material = {
   id: MaterialId
   label: string
   headline: string
   pitch: string
-  price: string
-  priceNote: string
   bestFor: readonly string[]
   image: string
   imageAlt: string
@@ -83,21 +81,17 @@ export const materials: readonly Material[] = [
     headline: 'Soft underfoot, built to last',
     pitch:
       'Twists, loops, saxonies and stain resistant polypropylene from leading UK mills. Every carpet goes down on quality underlay with gripper and door bars fitted by our own team.',
-    price: 'From £16',
-    priceNote: 'per sqm',
     bestFor: ['Bedrooms', 'Lounges', 'Stairs and landings'],
     image: 'carpet',
     imageAlt: 'Close up of a grey loop pile carpet texture',
   },
   {
     id: 'lvt',
-    label: 'LVT',
+    label: 'Vinyl',
     headline: 'Luxury vinyl tile and herringbone',
     pitch:
       'The look of real wood or stone with none of the upkeep. Waterproof, warm with underfloor heating and laid in plank, tile or herringbone patterns on a perfectly smoothed subfloor.',
-    price: 'From £26',
-    priceNote: 'per sqm',
-    bestFor: ['Kitchens', 'Hallways', 'Open plan living'],
+    bestFor: ['Kitchens', 'Bathrooms', 'Open plan living'],
     image: 'lvt-herringbone',
     imageAlt: 'Warm oak effect planks laid in a herringbone pattern',
   },
@@ -107,35 +101,19 @@ export const materials: readonly Material[] = [
     headline: 'Smart wood effect on a budget',
     pitch:
       'Hard wearing click laminate with realistic grain and an acoustic underlay to keep rooms quiet. Finished with matching beading or scotia for a clean edge.',
-    price: 'From £18',
-    priceNote: 'per sqm',
     bestFor: ['Living rooms', 'Dining rooms', 'Rental properties'],
     image: 'laminate',
     imageAlt: 'Bright living room with mid oak laminate flooring',
   },
   {
-    id: 'safety',
-    label: 'Safety Flooring',
-    headline: 'Slip resistant flooring for wet and busy areas',
+    id: 'underlay',
+    label: 'Underlay',
+    headline: 'The secret to a carpet that lasts',
     pitch:
-      'Commercial grade safety vinyl for kitchens, bathrooms, care settings and workplaces. Welded seams and coved edges where hygiene matters.',
-    price: 'Priced on survey',
-    priceNote: 'free measure',
-    bestFor: ['Bathrooms and wet rooms', 'Commercial kitchens', 'Care homes and clinics'],
-    image: 'safety',
-    imageAlt: 'Clean commercial corridor with pale hard flooring',
-  },
-  {
-    id: 'roll-ends',
-    label: 'Roll Ends',
-    headline: 'Quality remnants at a fraction of the price',
-    pitch:
-      'Ends of rolls from top ranges, ideal for smaller rooms, offices and box rooms. Pop into the showroom to see what is in stock this week.',
-    price: 'From £45',
-    priceNote: 'per remnant',
-    bestFor: ['Box rooms', 'Home offices', 'Landlord refits'],
-    image: 'roll-ends',
-    imageAlt: 'Grey patterned carpet tile texture',
+      'A great carpet feels flat without the right base. We use high density PU foam underlay that extends the life of your carpet, keeps rooms warmer, and feels luxurious underfoot.',
+    bestFor: ['All carpeted rooms', 'Stairs (high density)', 'Over underfloor heating'],
+    image: 'roll-ends', // Temporarily using roll-ends image since underlay image doesn't exist
+    imageAlt: 'Thick carpet underlay roll',
   },
 ]
 
@@ -154,7 +132,7 @@ export const subfloorSteps = [
   },
   {
     title: 'Precision fitting',
-    body: 'Our in-house team fits every job themselves. No subcontractors, no strangers in your home, and one team accountable from measure to finish.',
+    body: 'Our in-house team fits every job themselves. No strangers in your home, and one team accountable from measure to finish.',
   },
 ] as const
 

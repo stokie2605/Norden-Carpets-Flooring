@@ -36,13 +36,13 @@ export function MaterialSwitcher() {
       <div className="container-x">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <p className="eyebrow">Flooring and prices</p>
+            <p className="eyebrow">Flooring</p>
             <h2 id="flooring-title" className="mt-3 text-section font-extrabold">
-              Every floor we fit, priced up front.
+              Every floor we fit.
             </h2>
           </div>
           <p className="max-w-sm text-ink-soft">
-            Prices start from the figures below. Your exact quote follows a free home measure.
+            We supply and fit a wide range of flooring. Your exact quote follows a free home measure.
           </p>
         </div>
 
@@ -104,12 +104,7 @@ export function MaterialSwitcher() {
                 <h3 className="text-2xl font-extrabold sm:text-3xl">{m.headline}</h3>
                 <p className="mt-3 text-ink-soft">{m.pitch}</p>
 
-                <p className="mt-6 flex items-baseline gap-2 border-t border-line pt-5">
-                  <span className="font-display text-4xl font-extrabold text-accent-deep">{m.price}</span>
-                  <span className="text-sm font-medium text-muted">{m.priceNote}</span>
-                </p>
-
-                <ul className="mt-5 flex flex-wrap gap-2" aria-label={`${m.label} is ideal for`}>
+                <ul className="mt-8 flex flex-wrap gap-2 border-t border-line pt-6" aria-label={`${m.label} is ideal for`}>
                   {m.bestFor.map((room) => (
                     <li
                       key={room}

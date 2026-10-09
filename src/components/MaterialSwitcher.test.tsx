@@ -49,9 +49,5 @@ describe('MaterialSwitcher', () => {
     expect(tabs[0]).toHaveFocus()
   })
 
-  it('shows the price for the selected material', async () => {
-    const { user, tabs } = setup()
-    await user.click(tabs[4]!)
-    expect(screen.getByRole('tabpanel')).toHaveTextContent('From £45')
-  })
+
 })

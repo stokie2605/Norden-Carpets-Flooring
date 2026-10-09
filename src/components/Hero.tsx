@@ -17,7 +17,7 @@ export function Hero() {
           </h1>
           <p className="mt-5 max-w-xl text-[1.05rem] text-ink-soft sm:text-lg">
             {business.proprietors} have spent over 30 years building a trusted family business across Rochdale and
-            Bury. <span className="hidden sm:inline">Every job is fitted by our own team, with no subcontractors and no shortcuts under the floor.</span>
+            Bury. <span className="hidden sm:inline">Every job is fitted by our own in-house team to the highest standard.</span>
           </p>
 
           <div className="mt-7 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
@@ -53,10 +53,10 @@ export function Hero() {
           </div>
           <p className="absolute -bottom-4 left-4 right-4 rounded-2xl bg-bg p-4 shadow-[0_18px_40px_-18px_rgb(15_23_42/0.35)] sm:left-auto sm:right-6 sm:max-w-xs">
             <span className="inline-block rounded-full bg-pill px-3 py-1 text-xs font-bold uppercase tracking-wide text-accent-deep">
-              In-house fitters. Zero subcontractors.
+              In-house fitting team.
             </span>
             <span className="mt-2 block text-sm text-ink-soft">
-              Dave, Tom and Jake handle the fitting, while Wendy keeps the business running smoothly.
+              Dave runs the business and Wendy helps with admin, while Tom and Jake handle the fitting.
             </span>
           </p>
         </div>
