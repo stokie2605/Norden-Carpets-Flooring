@@ -49,15 +49,15 @@ export const hours = [
 export const towns = ['Norden', 'Bamford', 'Birtle', 'Edenfield', 'Ramsbottom', 'Bury', 'Rochdale'] as const
 
 export const team = [
-  { name: 'Dave', role: 'Owner' },
-  { name: 'Wendy', role: 'Admin' },
+  { name: 'Dave', role: 'Fitter' },
   { name: 'Tom', role: 'Fitter' },
-  { name: 'Jake', role: 'Fitter' },
+  { name: 'Liam', role: 'Fitter' },
+  { name: 'Wendy', role: 'Admin' },
 ] as const
 
 export const nav = [
   { label: 'Flooring', href: '#flooring' },
-  { label: 'Subfloors', href: '#subfloors' },
+  { label: 'Our work', href: '#work' },
   { label: 'Reviews', href: '#reviews' },
   { label: 'Showroom', href: '#showroom' },
 ] as const
@@ -117,25 +117,6 @@ export const materials: readonly Material[] = [
   },
 ]
 
-export const subfloorSteps = [
-  {
-    title: 'Checking for damp',
-    body: 'We test concrete and screed with a moisture meter before anything goes down. Damp ruins vinyl and adhesive, so we find it first and sort it out.',
-  },
-  {
-    title: 'Levelling the floor',
-    body: 'Uneven or patched floors get a latex smoothing compound. That gives a flat, solid base, so ridges and seams don\'t show through later.',
-  },
-  {
-    title: 'Ply and hardboard',
-    body: "Wooden floors get a layer of ply or hardboard, fixed down closely, so your vinyl stays flat and doesn't squeak.",
-  },
-  {
-    title: 'Fitting',
-    body: 'Our own fitters do every job. We never use subcontractors, so the same small team looks after you from measure to finish.',
-  },
-] as const
-
 export const proof = {
   rating: '96%',
   ratingLabel: 'of customers recommend us',
@@ -151,7 +132,7 @@ export const proof = {
   reviews: [] as readonly { quote: string; author: string; source: string }[],
 } as const
 
-// Real installation photos from the team only. The gallery is hidden while empty.
+// Real installation photos from the team only. Shown in the Our work section.
 // Add entries after running `npm run images` on files in design-source/installations.
 export const installations: readonly { image: string; alt: string; caption: string }[] = []
 
@@ -162,10 +143,10 @@ export const copy = {
     titleStart: 'Floors fitted by the people who',
     titleAccent: 'own the shop.',
     intro: "We're Dave and Wendy Wilshaw, and we've been fitting floors across Rochdale and Bury for over 30 years.",
-    introMore: 'Every job is done by our own fitters, never subcontractors.',
+    introMore: 'Every floor is fitted by Dave, Tom or Liam.',
     reassurance: "Measuring and quotes are free, and there's no obligation.",
     badge: 'Our own fitters',
-    badgeBody: 'Dave runs the shop, Wendy looks after the office, and Tom and Jake do the fitting.',
+    badgeBody: 'Dave, Tom and Liam do the fitting, and Wendy helps with admin.',
     imageAlt: 'Bright bedroom with a soft neutral carpet',
   },
   cta: {
@@ -179,16 +160,16 @@ export const copy = {
     title: 'Floors for every room and every budget.',
     intro: "Pop into the showroom to see samples. You'll get an exact quote after a free home measure.",
   },
-  subfloors: {
-    eyebrow: 'Subfloor preparation',
-    title: 'Good floors start underneath.',
-    intro:
-      "Most problems with new floors come from what's under them: bumps, damp and loose boards that show through within months. So we sort the subfloor out first, every time.",
-    promise: "If the floor underneath isn't right, we won't fit over it.",
+  work: {
+    eyebrow: 'Our work',
+    title: 'Some of our recent jobs.',
+    intro: "Floors we've fitted in homes around Rochdale and Bury.",
+    // Shown on preview builds only, until real photos are added to `installations`.
+    empty: 'TODO_CONFIRM installation photos from the client, grouped by material',
   },
   team: {
     title: 'Meet the team.',
-    intro: "We're a small family business and our own fitters do every job. We never pass work on to anyone else.",
+    intro: "We're a small family team. You'll deal with the same people from your first call to the finished floor.",
   },
   reviews: {
     eyebrow: 'Reviews',

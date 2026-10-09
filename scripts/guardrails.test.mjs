@@ -35,7 +35,7 @@ describe('guardrails', () => {
     expect(order).toEqual([
       'Hero',
       'MaterialSwitcher',
-      'SubfloorAdvantage',
+      'PreviousWork',
       'TeamStrip',
       'ProofWall',
       'SectionDivider',
@@ -46,7 +46,7 @@ describe('guardrails', () => {
   it('keeps the approved team', () => {
     const team = read('src/content/site.ts').match(/export const team = \[([\s\S]*?)\]/)?.[1] ?? ''
     const names = [...team.matchAll(/name: '(\w+)'/g)].map((m) => m[1])
-    expect(names.sort()).toEqual(['Dave', 'Jake', 'Tom', 'Wendy'])
+    expect(names.sort()).toEqual(['Dave', 'Liam', 'Tom', 'Wendy'])
   })
 
   it('uses only design tokens or approved brand colours', () => {

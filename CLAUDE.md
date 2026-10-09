@@ -33,6 +33,9 @@ Norden Carpets & Flooring: mobile-first lead generation site for a family run fl
 - 2026-10-07: Unsplash is used only for neutral imagery, credited in `src/content/credits.ts`. The installation gallery renders only real team photos and is hidden while empty.
 - 2026-10-07: Fonts are subset and axis limited builds of Archivo (700 to 800, wdth 75 to 112) and Inter (400 to 700), committed in `src/assets/fonts`. `scripts/subset-fonts.mjs` runs as `prebuild`, collects the glyph set from source, and fails the build on any character outside the Latin fonts.
 - 2026-10-07: Every `tel:` link uses +44 format and comes from `phones` in `src/content/site.ts`.
+- 2026-10-09: Team is Dave, Tom and Liam (fitters) and Wendy (admin). No subcontractor wording anywhere.
+- 2026-10-09: The subfloor section is removed. An Our work section (`PreviousWork.tsx`) replaces it and shows only real installation photos from `installations`. No prices anywhere, including the JSON-LD.
+- 2026-10-09: Agent rules for Antigravity and other tools live in `AGENTS.md` and `.agents/rules/`. `scripts/guardrails.test.mjs` locks these decisions.
 
 ---
 
@@ -74,6 +77,6 @@ Norden Carpets & Flooring: mobile-first lead generation site for a family run fl
 - Set the secrets in the Pages dashboard, create the Turnstile widget and turn on Web Analytics.
 
 ### Blocked on
-- The client: whether the prices are VAT inclusive, Charlotte Simpson's exact review text, the platform behind the 96% rating, the retention period for the privacy notice, real installation photos, and the production domain.
+- The client: Charlotte Simpson's exact review text, the platform behind the 96% rating, the retention period for the privacy notice, real installation photos, and the production domain.
 - Resend domain verification. That needs the domain first.
 - The production Turnstile site key, which must go into `wrangler.toml [vars]`.

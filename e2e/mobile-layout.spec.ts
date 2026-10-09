@@ -77,7 +77,7 @@ for (const width of WIDTHS) {
       await page.goto('/')
       await settle(page)
       const tabs = page.getByRole('tablist', { name: 'Flooring types' }).getByRole('tab')
-      await expect(tabs).toHaveCount(5)
+      await expect(tabs).toHaveCount(4)
 
       for (const tab of await tabs.all()) {
         const box = await tab.boundingBox()
