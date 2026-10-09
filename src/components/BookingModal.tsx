@@ -209,7 +209,7 @@ export function BookingModal() {
       if (firstBad >= 0) {
         setStep(firstBad)
         setTimeout(() => {
-          const first = STEPS[firstBad].fields.find((f) => allErrors[f])
+          const first = STEPS[firstBad]?.fields.find((f) => allErrors[f])
           if (first) (document.querySelector(`[name="${first}"]`) as HTMLElement)?.focus()
         }, 0)
       }
@@ -242,11 +242,11 @@ export function BookingModal() {
         setServerMessage(data.error ?? 'Security check failed. Please try again.')
         setStatus('editing')
       } else {
-        setServerMessage(data.error ?? 'Something went wrong sending your request.')
+        setServerMessage(data.error ?? 'Something went wrong sending that.')
         setStatus('error')
       }
     } catch {
-      setServerMessage('We could not reach the server. Please check your connection or call us.')
+      setServerMessage("We couldn't send that. Check your connection, or give us a call.")
       setStatus('error')
     }
     // Turnstile tokens are single use.
@@ -273,7 +273,7 @@ export function BookingModal() {
               {status === 'success' ? 'Request sent' : `Free measure, step ${step + 1} of ${STEPS.length}`}
             </p>
             <h2 id={titleId} ref={headingRef} tabIndex={-1} className="mt-1 text-2xl font-extrabold focus:outline-none">
-              {status === 'success' ? 'Thank you' : status === 'error' ? 'Sorry, that did not send' : currentStep.title}
+              {status === 'success' ? 'Thank you' : status === 'error' ? "Sorry, that didn't send" : currentStep.title}
             </h2>
           </div>
           <button

@@ -1,4 +1,4 @@
-import { installations, links, proof } from '../content/site'
+import { copy, installations, links, proof } from '../content/site'
 import { buttonClasses } from './ui/Button'
 import { FacebookIcon } from './ui/BrandIcons'
 import { Picture } from './ui/Picture'
@@ -7,9 +7,9 @@ export function ProofWall() {
   return (
     <section id="reviews" aria-labelledby="reviews-title" className="py-16 sm:py-24">
       <div className="container-x">
-        <p className="eyebrow">Customer reviews</p>
+        <p className="eyebrow">{copy.reviews.eyebrow}</p>
         <h2 id="reviews-title" className="mt-3 max-w-2xl text-section font-extrabold">
-          Rochdale homes, recommended by the people who live in them.
+          {copy.reviews.title}
         </h2>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[0.7fr_1.3fr]">

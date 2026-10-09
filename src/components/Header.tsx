@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Phone } from 'lucide-react'
-import { links, nav, phones } from '../content/site'
+import { copy, links, nav, phones } from '../content/site'
 import { useBooking } from '../context/BookingContext'
 import { Button } from './ui/Button'
 import { FacebookIcon } from './ui/BrandIcons'
@@ -62,7 +62,7 @@ export function Header() {
           {/* Below 416px the hero and utility bar carry the actions, so the header stays uncluttered. */}
           <div className="hidden xs:block">
             <Button size="md" onClick={() => openBooking()}>
-              Book Measure
+              {copy.cta.bookShort}
             </Button>
           </div>
         </div>

@@ -94,7 +94,7 @@ for (const width of WIDTHS) {
 
     test('home: all four team members are fully on screen', async ({ page }) => {
       await page.goto('/')
-      const members = page.getByRole('region', { name: 'The same four faces at every job.' }).getByRole('listitem')
+      const members = page.getByRole('region', { name: 'Meet the team.' }).getByRole('listitem')
       await expect(members).toHaveCount(4)
       for (const member of await members.all()) {
         const box = (await member.boundingBox())!

@@ -34,7 +34,7 @@ describe('MaterialSwitcher', () => {
     await user.keyboard('{ArrowRight}')
     expect(tabs[1]).toHaveFocus()
     expect(tabs[1]).toHaveAttribute('aria-selected', 'true')
-    expect(screen.getByRole('tabpanel')).toHaveAccessibleName('LVT')
+    expect(screen.getByRole('tabpanel')).toHaveAccessibleName('Vinyl')
 
     await user.keyboard('{End}')
     expect(tabs.at(-1)).toHaveFocus()

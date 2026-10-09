@@ -1,4 +1,4 @@
-import { team } from '../content/site'
+import { copy, team } from '../content/site'
 
 export function TeamStrip() {
   return (
@@ -6,10 +6,10 @@ export function TeamStrip() {
       <div className="container-x grid gap-8 xl:grid-cols-[minmax(0,20rem)_1fr] xl:items-center xl:gap-12">
         <div className="max-w-sm">
           <h2 id="team-title" className="text-2xl font-extrabold sm:text-3xl">
-            The same four faces at every job.
+            {copy.team.title}
           </h2>
           <p className="mt-2 text-ink-soft">
-            Our own fitting team, start to finish. We never pass your floor to a stranger.
+            {copy.team.intro}
           </p>
         </div>
         <ul className="grid grid-cols-2 gap-3 lg:grid-cols-4">

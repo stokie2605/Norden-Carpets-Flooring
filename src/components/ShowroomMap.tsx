@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Clock, Mail, MapPin, Navigation, Phone } from 'lucide-react'
-import { addressLines, business, hours, links, phones, towns } from '../content/site'
+import { addressLines, business, hours, links, phones, towns, copy } from '../content/site'
 import { buttonClasses } from './ui/Button'
 import { FacebookIcon } from './ui/BrandIcons'
 
@@ -98,12 +98,12 @@ export function ShowroomMap() {
   return (
     <section id="showroom" aria-labelledby="showroom-title" className="bg-bg-alt py-16 sm:py-24">
       <div className="container-x">
-        <p className="eyebrow">Showroom and coverage</p>
+        <p className="eyebrow">{copy.showroom.eyebrow}</p>
         <h2 id="showroom-title" className="mt-3 max-w-3xl text-section font-extrabold">
-          Visit us at Tenterhouse Mill, or we come to you.
+          {copy.showroom.title}
         </h2>
         <p className="mt-4 max-w-2xl text-ink-soft">
-          Free measuring across {towns.slice(0, -1).join(', ')} and {towns.at(-1)}, plus surrounding areas on request.
+          {copy.showroom.introStart} {towns.slice(0, -1).join(', ')} and {towns.at(-1)}, {copy.showroom.introEnd}
         </p>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">

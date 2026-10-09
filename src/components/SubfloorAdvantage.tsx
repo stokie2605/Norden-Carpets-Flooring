@@ -1,20 +1,19 @@
-import { subfloorSteps } from '../content/site'
+import { copy, subfloorSteps } from '../content/site'
 
 export function SubfloorAdvantage() {
   return (
     <section id="subfloors" aria-labelledby="subfloors-title" className="py-16 sm:py-24">
       <div className="container-x grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
         <div className="lg:sticky lg:top-28 lg:self-start">
-          <p className="eyebrow">Subfloor preparation</p>
+          <p className="eyebrow">{copy.subfloors.eyebrow}</p>
           <h2 id="subfloors-title" className="mt-3 text-section font-extrabold">
-            A floor is only as good as what sits under it.
+            {copy.subfloors.title}
           </h2>
           <p className="mt-5 max-w-md text-ink-soft">
-            Most flooring problems start below the surface: lumps, damp and loose boards that show through within
-            months. We prepare every subfloor properly before a single plank or roll goes down.
+            {copy.subfloors.intro}
           </p>
           <p className="mt-6 inline-block rounded-full bg-pill px-4 py-2 text-sm font-semibold text-accent-deep">
-            Prepared properly, or not fitted at all.
+            {copy.subfloors.promise}
           </p>
         </div>
 
