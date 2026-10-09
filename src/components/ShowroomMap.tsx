@@ -1,15 +1,14 @@
-import { useState } from 'react'
 import { Clock, Mail, MapPin, Navigation, Phone } from 'lucide-react'
 import { addressLines, business, hours, links, phones, towns, copy } from '../content/site'
 import { buttonClasses } from './ui/Button'
-import { FacebookIcon } from './ui/BrandIcons'
+import { FacebookIcon, WhatsAppIcon } from './ui/BrandIcons'
 
 // Map tiles come from OpenStreetMap and load in the visitor's browser (see the privacy notice).
 // The view is fixed: zoom 10, centred on Norden, with a ring showing roughly how far we travel.
 const SHOWROOM = { lat: 53.6285, lon: -2.2169 }
 const ZOOM = 10
 const TILE = 256
-const BOX = { w: 704, h: 576 } // 11:9, in map pixels at ZOOM
+const BOX = { w: 600, h: 600 } // square, in map pixels at ZOOM, so the ring fills the frame
 const RADIUS_KM = 25
 
 function toPixels(lat: number, lon: number) {
@@ -38,7 +37,7 @@ function CatchmentMap() {
     <div
       role="img"
       aria-label={`Map of the areas we cover: about ${RADIUS_KM}km around our Norden showroom.`}
-      className="relative aspect-[11/9] w-full overflow-hidden bg-bg-alt"
+      className="relative aspect-square w-full overflow-hidden bg-bg-alt"
     >
       {tiles.map((t) => (
         <img
@@ -95,8 +94,6 @@ function CatchmentMap() {
 }
 
 export function ShowroomMap() {
-  const [showLiveMap, setShowLiveMap] = useState(false)
-
   return (
     <section id="showroom" aria-labelledby="showroom-title" className="bg-bg-alt py-16 sm:py-24">
       <div className="container-x">
@@ -157,10 +154,10 @@ export function ShowroomMap() {
             </ul>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href={business.mapsDirectionsUrl} target="_blank" rel="noopener noreferrer" className={buttonClasses({ size: 'md' })}>
-                <Navigation className="size-4" aria-hidden="true" />
-                Get directions
-                <span className="sr-only">(opens Google Maps in a new tab)</span>
+              <a href={links.whatsapp} target="_blank" rel="noopener noreferrer" className={buttonClasses({ size: 'md' })}>
+                <WhatsAppIcon className="size-4" />
+                {copy.cta.whatsapp}
+                <span className="sr-only">(opens in a new tab)</span>
               </a>
               <a href={links.facebook} target="_blank" rel="noopener noreferrer" className={buttonClasses({ variant: 'secondary', size: 'md' })}>
                 <FacebookIcon className="size-4 text-[#1877F2]" />
@@ -171,17 +168,7 @@ export function ShowroomMap() {
           </div>
 
           <div className="flex flex-col overflow-hidden rounded-[1.75rem] border border-line bg-bg">
-            {showLiveMap ? (
-              <iframe
-                title="Google Map showing Norden Carpets & Flooring at Tenterhouse Mill"
-                src={business.mapsEmbedUrl}
-                className="aspect-[11/9] w-full border-0"
-                loading="lazy"
-                referrerPolicy="strict-origin-when-cross-origin"
-              />
-            ) : (
-              <CatchmentMap />
-            )}
+            <CatchmentMap />
             <div className="mt-auto flex flex-col gap-3 border-t border-line p-5 sm:flex-row sm:items-center sm:justify-between">
               <ul className="flex flex-wrap gap-1.5" aria-label="Areas covered">
                 {towns.map((t) => (
@@ -190,25 +177,17 @@ export function ShowroomMap() {
                   </li>
                 ))}
               </ul>
-              {!showLiveMap && (
-                <button
-                  type="button"
-                  onClick={() => setShowLiveMap(true)}
-                  className={buttonClasses({ variant: 'secondary', size: 'md', className: 'shrink-0' })}
-                >
-                  Show interactive map
-                </button>
-              )}
+              <a
+                href={business.mapsDirectionsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={buttonClasses({ variant: 'secondary', size: 'md', className: 'shrink-0' })}
+              >
+                <Navigation className="size-4 text-accent" aria-hidden="true" />
+                {copy.cta.directions}
+                <span className="sr-only">(opens Google Maps in a new tab)</span>
+              </a>
             </div>
-            {!showLiveMap && (
-              <p className="px-5 pb-5 text-xs text-muted">
-                The interactive map is provided by Google and only loads when you tap the button. See our{' '}
-                <a href={links.privacy} className="underline">
-                  privacy notice
-                </a>
-                .
-              </p>
-            )}
           </div>
         </div>
       </div>
