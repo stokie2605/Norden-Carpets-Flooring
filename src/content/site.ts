@@ -158,5 +158,5 @@ export const installations: readonly { image: string; alt: string; caption: stri
 export const seo = {
   title: 'Carpets & Flooring in Rochdale | Norden Carpets & Flooring',
   description:
-    'Carpets, LVT, laminate and safety flooring supplied and fitted across Rochdale, Bury and Ramsbottom. 30+ years, in-house fitters. Book a free measure.',
+    'Carpets, vinyl, laminate and underlay supplied and fitted across Rochdale, Bury and Ramsbottom. 30+ years, in-house fitters. Book a free measure.',
 } as const

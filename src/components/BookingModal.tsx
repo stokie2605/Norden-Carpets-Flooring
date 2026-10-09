@@ -186,7 +186,14 @@ export function BookingModal() {
   const goNext = () => {
     const stepErrors = validateBooking(form, currentStep.fields)
     setErrors(stepErrors)
-    if (!hasErrors(stepErrors)) setStep((s) => Math.min(s + 1, STEPS.length - 1))
+    if (!hasErrors(stepErrors)) {
+      setStep((s) => Math.min(s + 1, STEPS.length - 1))
+    } else {
+      setTimeout(() => {
+        const first = currentStep.fields.find((f) => stepErrors[f])
+        if (first) (document.querySelector(`[name="${first}"]`) as HTMLElement)?.focus()
+      }, 0)
+    }
   }
 
   const submit = async (event: FormEvent) => {
@@ -199,7 +206,13 @@ export function BookingModal() {
     setErrors(allErrors)
     if (hasErrors(allErrors)) {
       const firstBad = STEPS.findIndex((s) => s.fields.some((f) => allErrors[f]))
-      if (firstBad >= 0) setStep(firstBad)
+      if (firstBad >= 0) {
+        setStep(firstBad)
+        setTimeout(() => {
+          const first = STEPS[firstBad].fields.find((f) => allErrors[f])
+          if (first) (document.querySelector(`[name="${first}"]`) as HTMLElement)?.focus()
+        }, 0)
+      }
       return
     }
     if (!token) {
@@ -326,7 +339,7 @@ export function BookingModal() {
                     autoComplete="postal-code"
                     autoCapitalize="characters"
                     maxLength={LIMITS.postcode}
-                    placeholder="OL12 7TD"
+                    placeholder="M1 1AA"
                   />
                   <ChoiceGroup
                     legend="When suits you for the visit?"

@@ -46,8 +46,8 @@ function CatchmentMap() {
         </pattern>
       </defs>
       <rect width={VIEW.w} height={VIEW.h} fill="url(#map-grid)" />
-      <circle cx={home.x} cy={home.y} r="150" fill="var(--pill)" opacity="0.55" />
-      <circle cx={home.x} cy={home.y} r="150" fill="none" stroke="var(--accent)" strokeDasharray="4 6" strokeWidth="1.25" />
+      <circle cx={home.x} cy={home.y} r="190" fill="var(--pill)" opacity="0.55" />
+      <circle cx={home.x} cy={home.y} r="190" fill="none" stroke="var(--accent)" strokeDasharray="4 6" strokeWidth="1.25" />
       {towns
         .filter((t) => t !== 'Norden')
         .map((town) => {

@@ -8,12 +8,18 @@ import { Picture } from './ui/Picture'
 export function MaterialSwitcher() {
   const { openBooking } = useBooking()
   const [active, setActive] = useState(0)
+  const [visited, setVisited] = useState(() => new Set([0]))
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
   const baseId = useId()
 
   const focusTab = (index: number) => {
     const next = (index + materials.length) % materials.length
     setActive(next)
+    setVisited((prev) => {
+      const copy = new Set(prev)
+      copy.add(next)
+      return copy
+    })
     tabRefs.current[next]?.focus()
   }
 
@@ -65,7 +71,14 @@ export function MaterialSwitcher() {
                 aria-selected={selected}
                 aria-controls={`${baseId}-panel-${m.id}`}
                 tabIndex={selected ? 0 : -1}
-                onClick={() => setActive(i)}
+                onClick={() => {
+                  setActive(i)
+                  setVisited((prev) => {
+                    const copy = new Set(prev)
+                    copy.add(i)
+                    return copy
+                  })
+                }}
                 onKeyDown={onKeyDown}
                 className={`min-h-12 shrink-0 rounded-full border px-5 text-sm font-semibold transition-colors ${
                   selected
@@ -91,14 +104,16 @@ export function MaterialSwitcher() {
           >
             <div className="grid md:grid-cols-[1.1fr_1fr]">
               <div className="aspect-[4/3] bg-bg-alt md:aspect-auto md:min-h-[26rem]">
-                <Picture
-                  name={m.image}
-                  alt={m.imageAlt}
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  width={1024}
-                  height={768}
-                  className="size-full object-cover"
-                />
+                {visited.has(i) && (
+                  <Picture
+                    name={m.image}
+                    alt={m.imageAlt}
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    width={1024}
+                    height={768}
+                    className="size-full object-cover"
+                  />
+                )}
               </div>
               <div className="flex flex-col p-6 sm:p-9">
                 <h3 className="text-2xl font-extrabold sm:text-3xl">{m.headline}</h3>

@@ -10,7 +10,7 @@ export function Footer() {
         <div>
           <Wordmark />
           <p className="mt-4 max-w-xs text-sm text-ink-soft">
-            Carpets, LVT, laminate and safety flooring supplied and fitted by {business.proprietors} and their own team.
+            Carpets, vinyl, laminate and underlay supplied and fitted by our own in-house team.
           </p>
           <a
             href={links.facebook}
@@ -39,7 +39,7 @@ export function Footer() {
             <a href={phones.mobile.href} className="flex min-h-11 items-center hover:text-accent-deep">
               {phones.mobile.display} (mobile)
             </a>
-            <a href={`mailto:${business.email}`} className="flex min-h-11 items-center break-all hover:text-accent-deep">
+            <a href={`mailto:${business.email}`} className="flex min-h-11 items-center hover:text-accent-deep">
               {business.email}
             </a>
           </address>
@@ -61,7 +61,7 @@ export function Footer() {
           <h2 className="text-sm font-bold uppercase tracking-[0.14em] text-ink">Areas we cover</h2>
           <ul className="mt-3 space-y-1 text-sm text-ink-soft">
             {towns.map((t) => (
-              <li key={t}>Flooring in {t}</li>
+              <li key={t}>{t}</li>
             ))}
           </ul>
         </div>
