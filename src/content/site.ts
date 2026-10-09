@@ -17,8 +17,6 @@ export const business = {
   },
   mapsDirectionsUrl:
     'https://www.google.com/maps/dir/?api=1&destination=Tenterhouse+Mill%2C+Greenbooth+Road%2C+Norden%2C+Rochdale+OL12+7TD',
-  mapsEmbedUrl:
-    'https://www.google.com/maps?q=Tenterhouse+Mill,+Greenbooth+Road,+Norden,+Rochdale+OL12+7TD&output=embed',
 } as const
 
 export const phones = {
@@ -140,20 +138,21 @@ export const installations: readonly { image: string; alt: string; caption: stri
 export const copy = {
   hero: {
     eyebrow: `Family run in Norden, Rochdale, for ${business.yearsInTrade} years`,
-    titleStart: 'Floors fitted by the people who',
-    titleAccent: 'own the shop.',
-    intro: "We're Dave and Wendy Wilshaw, and we've been fitting floors across Rochdale for over 30 years.",
-    introMore: 'Every floor is fitted by Dave, Tom or Jake.',
+    titleStart: 'Welcome to',
+    titleAccent: 'Norden Carpets & Flooring.',
+    intro:
+      "Hi, we're Dave and Wendy. We've been fitting floors across Rochdale for over 30 years. Dave, Tom and Jake do the fitting, and Wendy helps with admin.",
     reassurance: "Measuring and quotes are free, and there's no obligation.",
-    badge: 'Our own fitters',
-    badgeBody: 'Dave, Tom and Jake do the fitting, and Wendy helps with admin.',
+    badge: 'Visit our showroom',
+    badgeBody: "Pop into Tenterhouse Mill to see samples, or we'll come to you for a free measure.",
     imageAlt: 'Bright bedroom with a soft neutral carpet',
   },
   cta: {
-    book: 'Book a free measure',
     bookShort: 'Free measure',
-    callShowroom: 'Call the showroom',
     callShort: 'Call us',
+    whatsapp: 'WhatsApp us',
+    whatsappFloating: 'Message us on WhatsApp',
+    directions: 'Get directions',
   },
   flooring: {
     eyebrow: 'Flooring',

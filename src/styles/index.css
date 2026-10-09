@@ -29,7 +29,6 @@
   --accent-deep: #be123c;
   --pill: #ffe4e6;
   --line: #e2e8f0;
-  --utility-bar-height: 4.5rem;
 }
 
 @theme {
@@ -69,14 +68,6 @@
     line-height: 1.6;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
-    /* Room for the mobile utility bar so it never covers the footer. */
-    padding-bottom: calc(var(--utility-bar-height) + env(safe-area-inset-bottom));
-  }
-
-  @media (min-width: 48rem) {
-    body {
-      padding-bottom: 0;
-    }
   }
 
   h1,

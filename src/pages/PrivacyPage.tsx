@@ -88,13 +88,12 @@ export default function PrivacyPage() {
               .
             </p>
             <p>
-              The interactive Google map only loads if you tap
-              &ldquo;Show interactive map&rdquo;. Once loaded, Google receives your IP address and device information
-              and may set cookies, under the{' '}
+              The &ldquo;Get directions&rdquo; button opens Google Maps in a new tab. Nothing is sent to Google unless
+              you tap it, and from then on the{' '}
               <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
                 Google Privacy Policy
-              </a>
-              . If you never tap the button, nothing is sent to Google from that section.
+              </a>{' '}
+              applies.
             </p>
           </Section>
 
@@ -128,7 +127,7 @@ export default function PrivacyPage() {
           <Section title="Cookies">
             <p>
               This website does not set cookies of its own, and Cloudflare Web Analytics is cookieless. Cookies may only
-              be set by Turnstile when you use the booking form, or by Google if you choose to load the interactive map.
+              be set by Turnstile when you use the booking form.
             </p>
           </Section>
         </div>

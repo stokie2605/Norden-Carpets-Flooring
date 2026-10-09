@@ -23,7 +23,7 @@ export function Header() {
         scrolled ? 'border-line shadow-[0_1px_0_rgb(15_23_42/0.04)]' : 'border-transparent'
       }`}
     >
-      <div className="container-x flex h-16 items-center justify-between gap-3 md:h-[4.5rem]">
+      <div className="container-x flex h-16 items-center justify-between gap-2 md:h-[4.5rem]">
         <a href="/" className="shrink-0 rounded">
           <Wordmark />
         </a>
@@ -40,31 +40,28 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-1.5 sm:gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
           <a
             href={links.facebook}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Norden Carpets & Flooring on Facebook (opens in a new tab)"
-            className="grid size-11 place-items-center rounded-full text-ink-soft hover:bg-bg-alt hover:text-accent-deep"
+            className="hidden size-11 place-items-center rounded-full text-ink-soft hover:bg-bg-alt hover:text-accent-deep sm:grid"
           >
             <FacebookIcon />
           </a>
           <a
             href={phones.showroom.href}
-            className="inline-flex min-h-11 items-center gap-2 rounded-full px-2 text-sm font-semibold text-ink hover:text-accent-deep sm:px-3"
+            className="inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap rounded-full px-1 text-sm font-semibold text-ink hover:text-accent-deep sm:gap-2 sm:px-3"
           >
             <Phone className="size-[1.1rem] text-accent" aria-hidden="true" />
-            {/* Visible "Call" leads the accessible name on small screens, followed by the number. */}
-            <span className="sm:hidden">Call </span>
-            <span className="sr-only sm:not-sr-only">{phones.showroom.display}</span>
+            {/* "Call us" on phones, the number from 640px. The number stays in the accessible name. */}
+            <span className="sm:hidden">{copy.cta.callShort}</span>
+            <span className="sr-only sm:not-sr-only"> {phones.showroom.display}</span>
           </a>
-          {/* Below 416px the hero and utility bar carry the actions, so the header stays uncluttered. */}
-          <div className="hidden xs:block">
-            <Button size="md" onClick={() => openBooking()}>
-              {copy.cta.bookShort}
-            </Button>
-          </div>
+          <Button size="md" onClick={() => openBooking()} className="whitespace-nowrap px-3 xs:px-4 sm:px-5">
+            {copy.cta.bookShort}
+          </Button>
         </div>
       </div>
     </header>

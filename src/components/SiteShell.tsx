@@ -3,7 +3,7 @@ import { BookingProvider } from '../context/BookingContext'
 import { BookingModal } from './BookingModal'
 import { Footer } from './Footer'
 import { Header } from './Header'
-import { MobileUtilityBar } from './MobileUtilityBar'
+import { FloatingWhatsApp } from './FloatingWhatsApp'
 
 export function SiteShell({ children }: { children: ReactNode }) {
   return (
@@ -17,7 +17,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
       <Header />
       <main id="main">{children}</main>
       <Footer />
-      <MobileUtilityBar />
+      <FloatingWhatsApp />
       <BookingModal />
     </BookingProvider>
   )

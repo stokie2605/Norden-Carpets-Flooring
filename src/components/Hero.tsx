@@ -1,12 +1,8 @@
-import { MapPin, Phone } from 'lucide-react'
-import { business, copy, phones } from '../content/site'
-import { useBooking } from '../context/BookingContext'
-import { Button, ButtonLink } from './ui/Button'
+import { MapPin } from 'lucide-react'
+import { business, copy } from '../content/site'
 import { Picture } from './ui/Picture'
 
 export function Hero() {
-  const { openBooking } = useBooking()
-
   return (
     <section aria-labelledby="hero-title" className="relative overflow-hidden">
       <div className="container-x grid items-center gap-10 pb-12 pt-6 sm:pt-10 lg:min-h-[calc(100dvh-4.5rem)] lg:grid-cols-[1.08fr_0.92fr] lg:gap-14 lg:py-12">
@@ -16,19 +12,10 @@ export function Hero() {
             {copy.hero.titleStart} <span className="text-accent">{copy.hero.titleAccent}</span>
           </h1>
           <p className="mt-5 max-w-xl text-[1.05rem] text-ink-soft sm:text-lg">
-            {copy.hero.intro} <span className="hidden sm:inline">{copy.hero.introMore}</span>
+            {copy.hero.intro}
           </p>
 
-          <div className="mt-7 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
-            <ButtonLink href={phones.showroom.href} variant="secondary" className="px-4 leading-tight sm:px-6">
-              <Phone className="size-[1.1rem] text-accent" aria-hidden="true" />
-              {copy.cta.callShowroom}
-            </ButtonLink>
-            <Button onClick={() => openBooking()} className="px-4 leading-tight sm:px-6">
-              {copy.cta.book}
-            </Button>
-          </div>
-          <p className="mt-3 text-sm text-muted">{copy.hero.reassurance}</p>
+          <p className="mt-5 text-sm font-medium text-muted">{copy.hero.reassurance}</p>
 
           <p className="mt-8 inline-flex max-w-full items-start gap-2 rounded-2xl border border-line bg-bg-alt px-4 py-3 text-sm text-ink-soft">
             <MapPin className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
