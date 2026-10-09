@@ -62,7 +62,7 @@ All copy, prices, hours, phone numbers and links live in `src/content/site.ts`. 
    |---|---|---|
    | `RESEND_API_KEY` | live Resend key | Resend key |
    | `TURNSTILE_SECRET_KEY` | widget secret | `1x0000000000000000000000000000000AA` (test) |
-   | `BOOKING_TO_EMAIL` | `norden.carpetsflooring@gmail.com` | the developer's own address |
+   | `BOOKING_TO_EMAIL` | `norden.carpetsandflooring@gmail.com` | the developer's own address |
    | `BOOKING_FROM_EMAIL` | `Norden Website <bookings@DOMAIN>` | `Norden Website <onboarding@resend.dev>` |
 
 3. **Turnstile.** Create a widget with the hostnames `norden-carpets-flooring.pages.dev` and, later, the production domain. Put its site key into `wrangler.toml [vars]`. Previews use the test key from `[env.preview.vars]`.
