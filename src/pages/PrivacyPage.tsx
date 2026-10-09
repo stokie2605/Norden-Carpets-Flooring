@@ -26,8 +26,8 @@ export default function PrivacyPage() {
         <div className="mt-10">
           <Section title="Who we are">
             <p>
-              {business.name} is run by {business.proprietors}. We are the data controller for the personal details you
-              give us through this website.
+              {business.legalLine} As a sole trader, {business.legalName} is the data controller for the personal
+              details you give us through this website.
             </p>
             <address className="not-italic">
               <span className="block">{business.name}</span>

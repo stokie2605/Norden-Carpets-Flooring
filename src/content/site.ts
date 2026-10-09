@@ -5,6 +5,9 @@
 export const business = {
   name: 'Norden Carpets & Flooring',
   proprietors: 'David & Wendy Wilshaw',
+  // Sole trader, not VAT registered, so no company or VAT number to show.
+  legalName: 'David Wilshaw',
+  legalLine: 'Norden Carpets & Flooring is the trading name of David Wilshaw, sole trader.',
   yearsInTrade: '30+',
   email: 'norden.carpetsflooring@gmail.com',
   address: {
