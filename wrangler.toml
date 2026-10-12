@@ -9,7 +9,12 @@ compatibility_date = "2026-10-01"
 # picking [env.preview.vars] on any branch other than main.
 [vars]
 VITE_TURNSTILE_SITE_KEY = "0x4AAAAAAFUfyCvf1216o-Gn"
+# Booking emails: sent from the domain verified in Resend, delivered to Dave and Wendy's inbox.
+BOOKING_FROM_EMAIL = "Norden Carpets website <bookings@nordencarpets.co.uk>"
+BOOKING_TO_EMAIL = "norden.carpetsflooring@gmail.com"
 
 [env.preview.vars]
 # Cloudflare Turnstile test site key: always passes.
 VITE_TURNSTILE_SITE_KEY = "1x00000000000000000000AA"
+BOOKING_FROM_EMAIL = "Norden Carpets website <bookings@nordencarpets.co.uk>"
+BOOKING_TO_EMAIL = "norden.carpetsflooring@gmail.com"
