@@ -15,8 +15,8 @@ const CROPS = {
   'tab-vinyl': { left: 150, top: 925, width: 900, height: 675 },
   // Zoom out to reveal the full room, archway, and expansive laminate floor
   'tab-laminate': { left: 0, top: 500, width: 1536, height: 1152 },
-  // Patterned bathroom vinyl, cropped to the floor only so the toilet and door are out of shot
-  'tab-vinyl-02': { left: 260, top: 820, width: 940, height: 705 },
+  // Patterned bathroom vinyl, full width of the original so the room is shown, not just the pattern
+  'tab-vinyl-02': { left: 0, top: 250, width: 1200, height: 900 },
   // Herringbone carpet on the stairs and landing, seen from above
   'tab-carpets-02': { left: 0, top: 560, width: 1134, height: 850 },
 }

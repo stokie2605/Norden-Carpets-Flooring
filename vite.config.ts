@@ -55,8 +55,27 @@ function cleanUrls(): Plugin {
   }
 }
 
+/**
+ * Link previews (WhatsApp, Facebook) need an absolute og:image URL. index.html points at the
+ * production domain; on preview branches Cloudflare sets CF_PAGES_URL, so point it there instead
+ * and previews of pages.dev links show the image too.
+ */
+function previewOgImage(): Plugin {
+  return {
+    name: 'norden-preview-og-image',
+    transformIndexHtml(html) {
+      const previewUrl = process.env.CF_PAGES_URL
+      if (!previewUrl || process.env.CF_PAGES_BRANCH === PRODUCTION_BRANCH) return html
+      return html.replace(
+        /(<meta property="og:image" content=")https:\/\/nordencarpets\.co\.uk/,
+        `$1${previewUrl.replace(/\/$/, '')}`,
+      )
+    },
+  }
+}
+
 export default defineConfig(({ mode, isSsrBuild }) => ({
-  plugins: [react(), tailwindcss(), cleanUrls()],
+  plugins: [react(), tailwindcss(), cleanUrls(), previewOgImage()],
   define: {
     'import.meta.env.VITE_TURNSTILE_SITE_KEY': JSON.stringify(resolveTurnstileSiteKey(mode)),
   },
