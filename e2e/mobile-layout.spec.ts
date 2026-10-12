@@ -20,12 +20,13 @@ async function settle(page: Page) {
 
 /**
  * Lists every rendered element whose right edge passes the viewport.
- * Elements inside an intentional horizontal scroll container (overflow-x auto or scroll) are excluded.
+ * Elements inside an intentional scroll or clipping container (overflow-x auto, scroll, hidden or clip) are excluded.
+ * The document scrollWidth check below still catches any real sideways scroll.
  */
 async function findOverflow(page: Page) {
   return page.evaluate(() => {
     const viewport = document.documentElement.clientWidth
-    const scrolls = (el: Element) => /^(auto|scroll)$/.test(getComputedStyle(el).overflowX)
+    const scrolls = (el: Element) => /^(auto|scroll|hidden|clip)$/.test(getComputedStyle(el).overflowX)
     const offenders: string[] = []
 
     for (const el of document.body.querySelectorAll('*')) {
@@ -77,7 +78,7 @@ for (const width of WIDTHS) {
       await page.goto('/')
       await settle(page)
       const tabs = page.getByRole('tablist', { name: 'Flooring types' }).getByRole('tab')
-      await expect(tabs).toHaveCount(5)
+      await expect(tabs).toHaveCount(4)
 
       for (const tab of await tabs.all()) {
         const box = await tab.boundingBox()
@@ -94,7 +95,7 @@ for (const width of WIDTHS) {
 
     test('home: all four team members are fully on screen', async ({ page }) => {
       await page.goto('/')
-      const members = page.getByRole('region', { name: 'The same four faces at every job.' }).getByRole('listitem')
+      const members = page.getByRole('region', { name: 'Meet the team.' }).getByRole('listitem')
       await expect(members).toHaveCount(4)
       for (const member of await members.all()) {
         const box = (await member.boundingBox())!

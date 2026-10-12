@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://TODO_CONFIRM_DOMAIN/sitemap.xml
+Sitemap: https://nordencarpets.co.uk/sitemap.xml

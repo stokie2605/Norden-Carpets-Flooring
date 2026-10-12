@@ -1,15 +1,12 @@
-import { installations, links, proof } from '../content/site'
-import { buttonClasses } from './ui/Button'
-import { FacebookIcon } from './ui/BrandIcons'
-import { Picture } from './ui/Picture'
+import { copy, proof } from '../content/site'
 
 export function ProofWall() {
   return (
     <section id="reviews" aria-labelledby="reviews-title" className="py-16 sm:py-24">
       <div className="container-x">
-        <p className="eyebrow">Customer reviews</p>
+        <p className="eyebrow">{copy.reviews.eyebrow}</p>
         <h2 id="reviews-title" className="mt-3 max-w-2xl text-section font-extrabold">
-          Rochdale homes, recommended by the people who live in them.
+          {copy.reviews.title}
         </h2>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[0.7fr_1.3fr]">
@@ -23,7 +20,7 @@ export function ProofWall() {
               </p>
               <p className="mt-2 text-lg font-semibold text-ink">{proof.ratingLabel}</p>
             </div>
-            <p className="mt-8 text-sm text-ink-soft">Source: {proof.ratingSource}</p>
+            <p className="mt-8 text-sm text-ink-soft">{proof.ratingSource}</p>
           </div>
 
           <figure className="flex flex-col justify-between rounded-[1.75rem] border border-line p-7 sm:p-10">
@@ -35,66 +32,26 @@ export function ProofWall() {
             </blockquote>
             <figcaption className="mt-8 border-t border-line pt-5">
               <span className="block font-semibold text-ink">{proof.featured.author}</span>
-              <span className="block text-sm text-muted">{proof.featured.detail}</span>
+              <span className="block text-sm text-muted">{copy.reviews.reviewSource}</span>
             </figcaption>
           </figure>
         </div>
 
-        {proof.reviews.length > 0 && (
-          <ul className="mt-6 columns-1 gap-6 md:columns-2 lg:columns-3">
-            {proof.reviews.map((review) => (
-              <li key={review.author + review.quote.slice(0, 16)} className="mb-6 break-inside-avoid">
-                <figure className="rounded-[1.25rem] border border-line bg-bg-alt p-6">
-                  <blockquote className="text-ink">
-                    <p>{review.quote}</p>
-                  </blockquote>
-                  <figcaption className="mt-4 text-sm">
-                    <span className="font-semibold text-ink">{review.author}</span>
-                    <span className="text-muted">, {review.source}</span>
-                  </figcaption>
-                </figure>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        {installations.length > 0 && (
-          <div className="mt-14">
-            <h3 className="text-2xl font-extrabold">Recent installations by our team</h3>
-            <ul className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3">
-              {installations.map((item) => (
-                <li key={item.image}>
-                  <figure>
-                    <div className="aspect-[4/3] overflow-hidden rounded-2xl bg-bg-alt">
-                      <Picture
-                        name={item.image}
-                        alt={item.alt}
-                        sizes="(min-width: 768px) 33vw, 50vw"
-                        width={640}
-                        height={480}
-                        className="size-full object-cover"
-                      />
-                    </div>
-                    <figcaption className="mt-2 text-sm text-muted">{item.caption}</figcaption>
-                  </figure>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        <div className="mt-10">
-          <a
-            href={links.facebook}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={buttonClasses({ variant: 'secondary' })}
-          >
-            <FacebookIcon className="size-5 text-[#1877F2]" />
-            See our reviews on Facebook
-            <span className="sr-only">(opens in a new tab)</span>
-          </a>
-        </div>
+        <ul className="mt-6 grid gap-6 md:grid-cols-3">
+          {proof.reviews.map((review) => (
+            <li key={review.author + review.quote.slice(0, 16)}>
+              <figure className="flex h-full flex-col justify-between rounded-[1.25rem] border border-line bg-bg-alt p-6">
+                <blockquote className="text-ink">
+                  <p>&ldquo;{review.quote}&rdquo;</p>
+                </blockquote>
+                <figcaption className="mt-4 text-sm">
+                  <span className="font-semibold text-ink">{review.author}</span>
+                  <span className="text-muted">, {copy.reviews.reviewSource}</span>
+                </figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   )

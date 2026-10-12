@@ -108,7 +108,7 @@ describe('BookingModal', () => {
     await fillStepTwo(user)
 
     await user.click(screen.getByRole('button', { name: 'Request my free measure' }))
-    expect(screen.getByText('Please agree so we can contact you about your measure.')).toBeInTheDocument()
+    expect(screen.getByText('Please tick the box so we can contact you about your measure.')).toBeInTheDocument()
     expect(fetchMock).not.toHaveBeenCalled()
 
     await user.click(screen.getByRole('checkbox'))

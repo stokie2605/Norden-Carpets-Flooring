@@ -33,6 +33,13 @@ Norden Carpets & Flooring: mobile-first lead generation site for a family run fl
 - 2026-10-07: Unsplash is used only for neutral imagery, credited in `src/content/credits.ts`. The installation gallery renders only real team photos and is hidden while empty.
 - 2026-10-07: Fonts are subset and axis limited builds of Archivo (700 to 800, wdth 75 to 112) and Inter (400 to 700), committed in `src/assets/fonts`. `scripts/subset-fonts.mjs` runs as `prebuild`, collects the glyph set from source, and fails the build on any character outside the Latin fonts.
 - 2026-10-07: Every `tel:` link uses +44 format and comes from `phones` in `src/content/site.ts`.
+- 2026-10-09: Team is Dave, Tom and Jake (fitters) and Wendy (admin). No subcontractor wording anywhere. Bury is not mentioned anywhere, including the areas covered.
+- 2026-10-09: The subfloor section is removed. An Our work section (`PreviousWork.tsx`) replaces it and shows only real installation photos from `installations`. No prices anywhere, including the JSON-LD.
+- 2026-10-09: Reviews are copied word for word from the Facebook page (96% recommend, 24 reviews), first names only, no dates. Cut only with "...", never reword. Skip lines naming former staff. No customer photos: Dave supplies the job photos.
+- 2026-10-09: Retention: enquiries that don't go ahead are deleted after one month, customer contact details once the job is finished and paid for, invoices kept as HMRC requires.
+- 2026-10-09: The business is a sole trader, David Wilshaw trading as Norden Carpets & Flooring, not VAT registered. The legal line sits in the footer and the privacy notice.
+- 2026-10-09: Production domain is nordencarpets.co.uk, registered at Cloudflare to David Wilshaw (UK sole trader), auto renew on.
+- 2026-10-09: Agent rules for Antigravity and other tools live in `AGENTS.md` and `.agents/rules/`. `scripts/guardrails.test.mjs` locks these decisions.
 
 ---
 
@@ -41,7 +48,12 @@ Norden Carpets & Flooring: mobile-first lead generation site for a family run fl
 - **Client note (standing rule):** At the start of every session, read `C:\Users\Wilshaw\Documents\Second memory\01 Projects\Norden Carpets\Norden Carpets & Flooring.md` for context. At the end of every session, update it.
   - Keep it short and written for a human. Sections, in order: 1 properties at the top (status: building, preview or live; client; hosting; repo; preview URL; domain; next action), 2 Status (two or three lines), 3 Links (preview, GitHub repo, Cloudflare project, connected notes), 4 Waiting on client (checklist), 5 Next actions (checklist), 6 Brief, 7 Session log (dated, newest first, one or two lines per session).
   - Only ever update sections 1 to 5 and 7 automatically. Leave the Brief alone unless the user asks.
-  - Commit vault changes in the vault's own git repo, staging only Norden files.
+  - **Vault scope:**
+    - Norden zone (read and edit): `01 Projects\Norden Carpets\`.
+    - Shared zone (read only, edit only when the user asks): everything in `02 Areas\` and `03 Resources\` outside the Forge zone.
+    - Forge zone (never open): `01 Projects\Forge Platform\`, `03 Resources\Phil's Frameworks\`, `03 Resources\Forge Skill Directory.md`, `03 Resources\Forge Tooling & MCP Connectors.md`.
+    - Commit vault changes in the vault's own git repo.
+  - A local vault pre-commit hook rejects any commit that mixes Norden and Forge files, a Norden note that mentions Forge or links into the Forge zone, and the reverse. Never bypass it with `--no-verify`.
   - Never put secrets, API keys or customer personal data in the note.
 - Plan first for any multi-file change.
 - Ask before adding dependencies.
@@ -69,6 +81,6 @@ Norden Carpets & Flooring: mobile-first lead generation site for a family run fl
 - Set the secrets in the Pages dashboard, create the Turnstile widget and turn on Web Analytics.
 
 ### Blocked on
-- The client: whether the prices are VAT inclusive, Charlotte Simpson's exact review text, the platform behind the 96% rating, the retention period for the privacy notice, real installation photos, and the production domain.
-- Resend domain verification. That needs the domain first.
+- The client (Dave): whether the ICO fee is paid or the business is exempt, and real installation photos.
+- Resend domain verification for nordencarpets.co.uk, and Cloudflare Email Routing for hello@nordencarpets.co.uk.
 - The production Turnstile site key, which must go into `wrangler.toml [vars]`.

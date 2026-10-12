@@ -1,6 +1,6 @@
 import { useId, useRef, useState, type KeyboardEvent } from 'react'
 import { Check } from 'lucide-react'
-import { materials } from '../content/site'
+import { copy, materials } from '../content/site'
 import { useBooking } from '../context/BookingContext'
 import { Button } from './ui/Button'
 import { Picture } from './ui/Picture'
@@ -8,12 +8,18 @@ import { Picture } from './ui/Picture'
 export function MaterialSwitcher() {
   const { openBooking } = useBooking()
   const [active, setActive] = useState(0)
+  const [visited, setVisited] = useState(() => new Set([0]))
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
   const baseId = useId()
 
   const focusTab = (index: number) => {
     const next = (index + materials.length) % materials.length
     setActive(next)
+    setVisited((prev) => {
+      const copy = new Set(prev)
+      copy.add(next)
+      return copy
+    })
     tabRefs.current[next]?.focus()
   }
 
@@ -36,14 +42,12 @@ export function MaterialSwitcher() {
       <div className="container-x">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <p className="eyebrow">Flooring and prices</p>
+            <p className="eyebrow">{copy.flooring.eyebrow}</p>
             <h2 id="flooring-title" className="mt-3 text-section font-extrabold">
-              Every floor we fit, priced up front.
+              {copy.flooring.title}
             </h2>
           </div>
-          <p className="max-w-sm text-ink-soft">
-            Prices start from the figures below. Your exact quote follows a free home measure.
-          </p>
+          <p className="max-w-sm text-ink-soft">{copy.flooring.intro}</p>
         </div>
 
         <div
@@ -65,7 +69,14 @@ export function MaterialSwitcher() {
                 aria-selected={selected}
                 aria-controls={`${baseId}-panel-${m.id}`}
                 tabIndex={selected ? 0 : -1}
-                onClick={() => setActive(i)}
+                onClick={() => {
+                  setActive(i)
+                  setVisited((prev) => {
+                    const copy = new Set(prev)
+                    copy.add(i)
+                    return copy
+                  })
+                }}
                 onKeyDown={onKeyDown}
                 className={`min-h-12 shrink-0 rounded-full border px-5 text-sm font-semibold transition-colors ${
                   selected
@@ -91,25 +102,32 @@ export function MaterialSwitcher() {
           >
             <div className="grid md:grid-cols-[1.1fr_1fr]">
               <div className="aspect-[4/3] bg-bg-alt md:aspect-auto md:min-h-[26rem]">
-                <Picture
-                  name={m.image}
-                  alt={m.imageAlt}
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  width={1024}
-                  height={768}
-                  className="size-full object-cover"
-                />
+                {visited.has(i) && (
+                  <Picture
+                    name={m.image}
+                    alt={m.imageAlt}
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    width={1024}
+                    height={768}
+                    className="size-full object-cover"
+                  />
+                )}
               </div>
               <div className="flex flex-col p-6 sm:p-9">
                 <h3 className="text-2xl font-extrabold sm:text-3xl">{m.headline}</h3>
                 <p className="mt-3 text-ink-soft">{m.pitch}</p>
+                {m.review && (
+                  <figure className="mt-6 border-l-2 border-accent pl-4">
+                    <blockquote className="text-ink">
+                      <p>&ldquo;{m.review.quote}&rdquo;</p>
+                    </blockquote>
+                    <figcaption className="mt-1 text-sm text-muted">
+                      {m.review.author}, {copy.reviews.reviewSource}
+                    </figcaption>
+                  </figure>
+                )}
 
-                <p className="mt-6 flex items-baseline gap-2 border-t border-line pt-5">
-                  <span className="font-display text-4xl font-extrabold text-accent-deep">{m.price}</span>
-                  <span className="text-sm font-medium text-muted">{m.priceNote}</span>
-                </p>
-
-                <ul className="mt-5 flex flex-wrap gap-2" aria-label={`${m.label} is ideal for`}>
+                <ul className="mt-8 flex flex-wrap gap-2 border-t border-line pt-6" aria-label={`${m.label} is ideal for`}>
                   {m.bestFor.map((room) => (
                     <li
                       key={room}

@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import { addressLines, business, phones } from '../content/site'
 import { SiteShell } from '../components/SiteShell'
 
-const UPDATED = '7 October 2026'
+const UPDATED = '9 October 2026'
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
@@ -26,8 +26,8 @@ export default function PrivacyPage() {
         <div className="mt-10">
           <Section title="Who we are">
             <p>
-              {business.name} is run by {business.proprietors}. We are the data controller for the personal details you
-              give us through this website.
+              {business.legalLine} As a sole trader, {business.legalName} is the data controller for the personal
+              details you give us through this website.
             </p>
             <address className="not-italic">
               <span className="block">{business.name}</span>
@@ -53,10 +53,29 @@ export default function PrivacyPage() {
               <li>any notes you choose to add about the job</li>
             </ul>
             <p>
-              We use these details only to contact you, arrange your measure and prepare your quotation. Our lawful bases
-              are your consent, given when you submit the form, and taking steps at your request before entering into a
-              contract with you. We never sell your details or use them for marketing.
+              We use these details only to contact you, arrange your measure and prepare your quotation. We never sell
+              your details or use them for marketing.
             </p>
+            <p>Under UK data protection law, we rely on two lawful bases:</p>
+            <ul>
+              <li>
+                <strong>Steps before a contract:</strong> you have asked us for a measure and a quote, and we need your
+                details to give you one.
+              </li>
+              <li>
+                <strong>Legitimate interests:</strong> keeping the booking form free of spam, counting visits to the
+                website without identifying you, and keeping a record of enquiries and jobs so we can answer questions
+                about them later.
+              </li>
+            </ul>
+          </Section>
+
+          <Section title="Do you have to give us your details?">
+            <p>
+              No, but we need your name, phone number and postcode to arrange a measure. Without them we can&apos;t book
+              the visit. Your email address and notes are optional.
+            </p>
+            <p>We don&apos;t make any automated decisions about you. A real person reads every request.</p>
           </Section>
 
           <Section title="Who processes your details for us">
@@ -76,17 +95,29 @@ export default function PrivacyPage() {
                 <strong>Google</strong> provides our email inbox, where your request is stored once it arrives.
               </li>
             </ul>
+            <p>
+              Cloudflare and Google are based in the United States and may process your details outside the UK. Both
+              protect these transfers with safeguards approved under UK law, including the UK Extension to the EU-US
+              Data Privacy Framework.
+            </p>
           </Section>
 
-          <Section title="Google Maps">
+          <Section title="Maps">
             <p>
-              Our showroom section shows a simple map drawn by us. The interactive Google map only loads if you tap
-              &ldquo;Show interactive map&rdquo;. Once loaded, Google receives your IP address and device information
-              and may set cookies, under the{' '}
+              The map in our showroom section is built from OpenStreetMap images. To show them, your browser sends
+              your IP address to the OpenStreetMap Foundation, which uses it only to deliver the map, under the{' '}
+              <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener noreferrer">
+                OpenStreetMap privacy policy
+              </a>
+              .
+            </p>
+            <p>
+              The &ldquo;Get directions&rdquo; button opens Google Maps in a new tab. Nothing is sent to Google unless
+              you tap it, and from then on the{' '}
               <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
                 Google Privacy Policy
-              </a>
-              . If you never tap the button, nothing is sent to Google from that section.
+              </a>{' '}
+              applies.
             </p>
           </Section>
 
@@ -98,14 +129,30 @@ export default function PrivacyPage() {
           </Section>
 
           <Section title="How long we keep your details">
-            <p>TODO_CONFIRM retention period for enquiries that do not go ahead and for completed jobs.</p>
+            <ul>
+              <li>If your enquiry doesn&apos;t go ahead, we delete your details after one month.</li>
+              <li>If we do the job, we keep your contact details until it&apos;s finished and paid for, then delete them.</li>
+              <li>We keep invoices and payment records for as long as HMRC requires.</li>
+            </ul>
           </Section>
 
           <Section title="Your rights">
+            <p>Under UK data protection law you can ask us to:</p>
+            <ul>
+              <li>give you a copy of the details we hold about you</li>
+              <li>correct anything that is wrong</li>
+              <li>delete your details</li>
+              <li>limit how we use them</li>
+              <li>send them to you, or to another company, in a common digital format (data portability)</li>
+            </ul>
             <p>
-              Under UK data protection law you can ask to see the details we hold about you, ask us to correct or delete
-              them, object to or restrict how we use them, and withdraw your consent at any time. Email{' '}
-              <a href={`mailto:${business.email}`}>{business.email}</a> and we will reply within one month.
+              You can also object at any time to us using your details for our legitimate interests, and we will stop
+              unless we have a strong reason to carry on, such as dealing with a legal claim.
+            </p>
+            <p>
+              To do any of this, email <a href={`mailto:${business.email}`}>{business.email}</a> or call{' '}
+              <a href={phones.showroom.href}>{phones.showroom.display}</a>. It&apos;s free, and we will reply within one
+              month.
             </p>
             <p>
               If you are unhappy with how we have handled your details, you can complain to the Information
@@ -120,7 +167,7 @@ export default function PrivacyPage() {
           <Section title="Cookies">
             <p>
               This website does not set cookies of its own, and Cloudflare Web Analytics is cookieless. Cookies may only
-              be set by Turnstile when you use the booking form, or by Google if you choose to load the interactive map.
+              be set by Turnstile when you use the booking form.
             </p>
           </Section>
         </div>

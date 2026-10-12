@@ -186,7 +186,14 @@ export function BookingModal() {
   const goNext = () => {
     const stepErrors = validateBooking(form, currentStep.fields)
     setErrors(stepErrors)
-    if (!hasErrors(stepErrors)) setStep((s) => Math.min(s + 1, STEPS.length - 1))
+    if (!hasErrors(stepErrors)) {
+      setStep((s) => Math.min(s + 1, STEPS.length - 1))
+    } else {
+      setTimeout(() => {
+        const first = currentStep.fields.find((f) => stepErrors[f])
+        if (first) (document.querySelector(`[name="${first}"]`) as HTMLElement)?.focus()
+      }, 0)
+    }
   }
 
   const submit = async (event: FormEvent) => {
@@ -199,7 +206,13 @@ export function BookingModal() {
     setErrors(allErrors)
     if (hasErrors(allErrors)) {
       const firstBad = STEPS.findIndex((s) => s.fields.some((f) => allErrors[f]))
-      if (firstBad >= 0) setStep(firstBad)
+      if (firstBad >= 0) {
+        setStep(firstBad)
+        setTimeout(() => {
+          const first = STEPS[firstBad]?.fields.find((f) => allErrors[f])
+          if (first) (document.querySelector(`[name="${first}"]`) as HTMLElement)?.focus()
+        }, 0)
+      }
       return
     }
     if (!token) {
@@ -229,11 +242,11 @@ export function BookingModal() {
         setServerMessage(data.error ?? 'Security check failed. Please try again.')
         setStatus('editing')
       } else {
-        setServerMessage(data.error ?? 'Something went wrong sending your request.')
+        setServerMessage(data.error ?? 'Something went wrong sending that.')
         setStatus('error')
       }
     } catch {
-      setServerMessage('We could not reach the server. Please check your connection or call us.')
+      setServerMessage("We couldn't send that. Check your connection, or give us a call.")
       setStatus('error')
     }
     // Turnstile tokens are single use.
@@ -260,7 +273,7 @@ export function BookingModal() {
               {status === 'success' ? 'Request sent' : `Free measure, step ${step + 1} of ${STEPS.length}`}
             </p>
             <h2 id={titleId} ref={headingRef} tabIndex={-1} className="mt-1 text-2xl font-extrabold focus:outline-none">
-              {status === 'success' ? 'Thank you' : status === 'error' ? 'Sorry, that did not send' : currentStep.title}
+              {status === 'success' ? 'Thank you' : status === 'error' ? "Sorry, that didn't send" : currentStep.title}
             </h2>
           </div>
           <button
@@ -326,7 +339,7 @@ export function BookingModal() {
                     autoComplete="postal-code"
                     autoCapitalize="characters"
                     maxLength={LIMITS.postcode}
-                    placeholder="OL12 7TD"
+                    placeholder="M1 1AA"
                   />
                   <ChoiceGroup
                     legend="When suits you for the visit?"
@@ -407,12 +420,11 @@ export function BookingModal() {
                         className="mt-0.5 size-5 shrink-0 accent-[var(--accent)]"
                       />
                       <span>
-                        I agree to Norden Carpets &amp; Flooring using these details to contact me about my free measure.
-                        Read our{' '}
+                        I&apos;ve read the{' '}
                         <a href={links.privacy} target="_blank" className="font-semibold text-ink underline">
                           privacy notice
-                        </a>
-                        .
+                        </a>{' '}
+                        and I&apos;m happy for Norden Carpets &amp; Flooring to contact me about my free measure.
                       </span>
                     </label>
                     <FieldError id="consent-error" message={errors.consent} />

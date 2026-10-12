@@ -8,7 +8,7 @@ const SOURCES = ['design-source/unsplash', 'design-source/installations']
 const OUT = 'public/images'
 const WIDTHS = [480, 720, 1024, 1600]
 // Hero is shown as a tall portrait crop; every other image is 4:3.
-const ASPECT = { 'hero-bedroom': 4 / 5 }
+const ASPECT = { 'hero-bedroom': 4 / 5, 'hero-stairs': 4 / 5 }
 const DEFAULT_ASPECT = 4 / 3
 
 await mkdir(OUT, { recursive: true })

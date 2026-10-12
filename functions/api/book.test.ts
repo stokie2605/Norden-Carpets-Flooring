@@ -70,7 +70,7 @@ describe('POST /api/book', () => {
     const payload = JSON.parse(String(init?.body))
     expect(payload.to).toEqual(['owner@example.com'])
     expect(payload.reply_to).toBe('jo@example.com')
-    expect(payload.subject).toContain('LVT or herringbone')
+    expect(payload.subject).toContain('Vinyl')
     expect(payload.html).toContain('&lt;b&gt;Kitchen&lt;/b&gt;')
     expect(payload.html).not.toContain('<b>Kitchen</b>')
   })

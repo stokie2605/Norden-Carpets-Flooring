@@ -3,10 +3,8 @@
 
 export const MATERIAL_OPTIONS = [
   { value: 'carpets', label: 'Carpets' },
-  { value: 'lvt', label: 'LVT or herringbone' },
+  { value: 'lvt', label: 'Vinyl' },
   { value: 'laminate', label: 'Laminate' },
-  { value: 'safety', label: 'Safety flooring' },
-  { value: 'roll-ends', label: 'Roll ends' },
   { value: 'unsure', label: 'Not sure yet' },
 ] as const
 
@@ -94,7 +92,7 @@ export function validateBooking(input: BookingInput, fields?: readonly BookingFi
     if (email && (email.length > LIMITS.email || !EMAIL.test(email))) errors.email = 'Enter a valid email address or leave it blank.'
   }
   if (check('consent') && input.consent !== true) {
-    errors.consent = 'Please agree so we can contact you about your measure.'
+    errors.consent = 'Please tick the box so we can contact you about your measure.'
   }
   return errors
 }
