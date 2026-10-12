@@ -56,13 +56,6 @@ export const team = [
   { name: 'Wendy', role: 'Admin' },
 ] as const
 
-export const nav = [
-  { label: 'Flooring', href: '#flooring' },
-  { label: 'Our work', href: '#work' },
-  { label: 'Reviews', href: '#reviews' },
-  { label: 'Showroom', href: '#showroom' },
-] as const
-
 export type MaterialId = 'carpets' | 'lvt' | 'laminate'
 
 // Customer reviews are copied word for word from our Facebook page. Cut only with "...", never reword.

@@ -22,6 +22,10 @@ const ASPECT = {
   'hero-herringbone': 1024 / 456,
 }
 const DEFAULT_ASPECT = 4 / 3
+// Full width images also get a 2048px file so large screens are not stretching the 1600px one.
+const EXTRA_WIDTHS = {
+  'work-herringbone-02': [2048],
+}
 
 await mkdir(OUT, { recursive: true })
 
@@ -35,7 +39,7 @@ for (const dir of SOURCES) {
   for (const file of files) {
     const name = basename(file, extname(file))
     const ratio = ASPECT[name] ?? DEFAULT_ASPECT
-    for (const width of WIDTHS) {
+    for (const width of [...WIDTHS, ...(EXTRA_WIDTHS[name] ?? [])]) {
       const height = Math.round(width / ratio)
       let pipeline = sharp(join(dir, file))
       if (CROPS[name]) {
