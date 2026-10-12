@@ -9,7 +9,7 @@ export const business = {
   legalName: 'David Wilshaw',
   legalLine: 'Norden Carpets & Flooring is the trading name of David Wilshaw, sole trader.',
   yearsInTrade: '30+',
-  email: 'norden.carpetsandflooring@gmail.com',
+  email: 'norden.carpetsflooring@gmail.com',
   address: {
     unit: 'Unit 4, Tenterhouse Mill',
     street: 'Greenbooth Road',
@@ -32,6 +32,8 @@ export const links = {
     "https://wa.me/447904322879?text=Hi%20Dave%20and%20Wendy,%20I'd%20like%20to%20send%20some%20room%20photos%20for%20a%20flooring%20quote.",
   facebook: 'https://www.facebook.com/nordencarpetsandflooring',
   privacy: '/privacy',
+  terms: '/terms',
+  designer: 'https://www.designsystemsweb.co.uk/',
 } as const
 
 export const addressLines = [
@@ -42,8 +44,8 @@ export const addressLines = [
 ] as const
 
 export const hours = [
-  { days: 'Monday to Friday', time: '09:00 to 16:00' },
-  { days: 'Saturday', time: '09:00 to 12:00' },
+  { days: 'Monday to Friday', time: '9am to 4pm' },
+  { days: 'Saturday', time: '9am to 12pm' },
   { days: 'Sunday', time: 'Closed' },
 ] as const
 
@@ -54,13 +56,6 @@ export const team = [
   { name: 'Tom', role: 'Fitter' },
   { name: 'Jake', role: 'Fitter' },
   { name: 'Wendy', role: 'Admin' },
-] as const
-
-export const nav = [
-  { label: 'Flooring', href: '#flooring' },
-  { label: 'Our work', href: '#work' },
-  { label: 'Reviews', href: '#reviews' },
-  { label: 'Showroom', href: '#showroom' },
 ] as const
 
 export type MaterialId = 'carpets' | 'lvt' | 'laminate'
@@ -83,12 +78,12 @@ export const materials: readonly Material[] = [
   {
     id: 'carpets',
     label: 'Carpets',
-    headline: 'Carpets that feel good and last',
+    headline: 'Soft, cosy carpets for every room',
     pitch:
-      'Twists, loops, saxonies and stain resistant polypropylene from leading UK mills. Optional underlay, grippers, and door bars can be supplied and fitted with your carpet by our own team.',
+      'Pop into the showroom to feel the samples and pick your colour. We can supply and fit the underlay, grippers and door bars too, all done by our own team.',
     bestFor: ['Bedrooms', 'Lounges', 'Stairs and landings'],
-    image: 'tab-carpets',
-    imageAlt: 'Neutral carpet runner and landing fitted to stairs',
+    image: 'tab-carpets-02',
+    imageAlt: 'Cream herringbone carpet fitted on a staircase and landing with oak handrails',
     review: {
       quote: 'Very happy with our gorgeous carpet. Very good value and quality and a brilliant service from start to finish.',
       author: 'Caroline',
@@ -97,23 +92,23 @@ export const materials: readonly Material[] = [
   {
     id: 'lvt',
     label: 'Vinyl',
-    headline: 'Luxury vinyl and herringbone',
+    headline: 'Vinyl that looks like wood or tile',
     pitch:
-      'The look of real wood or stone, waterproof and easy to keep clean. Laid as planks, tiles or herringbone patterns by our own fitters on a prepared subfloor.',
+      "It's waterproof and easy to wipe clean, so it's ideal where things get messy. Choose wood effect planks or patterned tiles like these, all laid by our own fitters.",
     bestFor: ['Kitchens', 'Bathrooms', 'Open plan living'],
-    image: 'tab-vinyl',
-    imageAlt: 'Geometric patterned vinyl flooring fitted neatly in a bathroom',
+    image: 'tab-vinyl-02',
+    imageAlt: 'Grey and white patterned tile effect vinyl fitted in a bathroom',
     review: { quote: 'Excellent service, love my new carpet and lino, thankyou.', author: 'Joanne' },
   },
   {
     id: 'laminate',
     label: 'Laminate',
-    headline: 'Smart wood effect built for busy rooms',
+    headline: 'Wood effect laminate for busy homes',
     pitch:
-      'Hard wearing click laminate with realistic wood grain. Fitted on acoustic underlay so rooms stay quiet, and neatly edged with matching beading.',
+      'Hard wearing laminate with a realistic wood look, made for busy family rooms. We finish every edge neatly with matching beading.',
     bestFor: ['Living rooms', 'Dining rooms', 'Rental properties'],
     image: 'tab-laminate',
-    imageAlt: 'Wide plank light oak laminate flooring fitted in an open hallway',
+    imageAlt: 'Rustic oak laminate flooring fitted through a lounge into the dining room',
     review: {
       quote: 'So so happy with the service and the end result. Such good quality flooring.',
       author: 'Hannah',
@@ -125,6 +120,11 @@ export const proof = {
   rating: '96%',
   ratingLabel: 'recommend us on Facebook',
   ratingSource: 'Based on 24 Facebook reviews',
+  highlights: [
+    `${business.yearsInTrade} years fitting floors in Rochdale`,
+    'Free measure and quote, no obligation',
+    'Every job fitted by our own team',
+  ],
   featured: {
     quote:
       'Fitted our whole house with carpets and laminate flooring, looks amazing. Really happy with the results, definitely recommend and will use them again!',
@@ -153,33 +153,23 @@ export const proof = {
 export const installations: readonly { image: string; alt: string; caption: string }[] = [
   {
     image: 'work-stairs-carpet-02',
-    alt: 'Close up of a black and white chevron carpet runner fitted to stairs and landing',
-    caption: 'Chevron stair runner and landing',
-  },
-  {
-    image: 'work-herringbone-01',
-    alt: 'Oak herringbone luxury vinyl flooring fitted across a living room',
-    caption: 'Oak herringbone LVT',
-  },
-  {
-    image: 'work-kitchen-laminate-01',
-    alt: 'Open plan modern kitchen fitted with wide plank wood effect flooring around an island',
-    caption: 'Open plan kitchen and diner',
-  },
-  {
-    image: 'work-lounge-laminate-02',
-    alt: 'Light grey laminate flooring fitted in a living room with bay window',
-    caption: 'Grey oak laminate in lounge',
+    alt: 'Black and white chevron carpet fitted across a landing',
+    caption: 'Black and white chevron carpet on a landing',
   },
   {
     image: 'work-hallway-transition-01',
-    alt: 'Oak laminate hallway floor meeting carpeted stairs and patterned vinyl doorway threshold',
-    caption: 'Hallway with multi-floor transitions',
+    alt: 'Oak effect laminate hallway floor with carpeted stairs and a patterned vinyl doorway',
+    caption: 'Oak effect laminate in a hallway, with carpet on the stairs',
   },
   {
-    image: 'work-garden-room-01',
-    alt: 'Rustic oak laminate flooring fitted in a bright sunroom with bifold doors',
-    caption: 'Sunroom with bifold doors',
+    image: 'work-hall-carpet-01',
+    alt: 'Neutral carpet fitted across a living room and up two curved bottom steps',
+    caption: 'Carpet in a living room, fitted round curved steps',
+  },
+  {
+    image: 'work-kitchen-laminate-01',
+    alt: 'Wood effect laminate flooring fitted through a kitchen',
+    caption: 'Wood effect laminate in a kitchen',
   },
 ]
 
@@ -190,17 +180,19 @@ export const copy = {
     titleStart: 'Welcome to',
     titleAccent: 'Norden Carpets & Flooring.',
     intro:
-      "Hi, we're Dave and Wendy. We've been fitting floors across Rochdale for over 30 years. Dave, Tom and Jake do the fitting, and Wendy helps with admin.",
+      "Hi, we're Dave and Wendy. We've been fitting floors across Rochdale for over 30 years, and every job is fitted by our own team: Dave, Tom and Jake.",
     reassurance: "Measuring and quotes are free, and there's no obligation.",
-    badge: 'Our own fitters',
-    badgeBody: 'Dave, Tom and Jake do the fitting, and Wendy helps with admin.',
-    imageAlt: 'Living room with oak herringbone flooring, modern fireplace, and corner sofa',
+    ctaBook: 'Book a free measure',
+    ctaCall: 'Call',
+    trustFitters: 'Our own fitters',
+    trustShowroom: 'Showroom at Tenterhouse Mill',
+    imageAlt: 'Grey oak herringbone flooring fitted across a room with glazed doors',
   },
   cta: {
     bookShort: 'Free measure',
     callShort: 'Call us',
     whatsapp: 'WhatsApp us',
-    whatsappFloating: 'Message us on WhatsApp',
+    backToTop: 'Back to top',
     directions: 'Get directions',
   },
   flooring: {
@@ -221,18 +213,24 @@ export const copy = {
   },
   reviews: {
     reviewSource: 'Facebook review',
+    facebookLink: 'Read our reviews',
     eyebrow: 'Reviews',
     title: 'What our customers say.',
   },
   showroom: {
     eyebrow: 'Showroom and areas we cover',
     title: 'Come and see us at Tenterhouse Mill.',
-    intro: "We do free home measures within about 25km of our Norden showroom.",
+    intro: "We do free home measures within about 15 miles of our Norden showroom.",
+    areasTitle: 'Areas we cover',
     mapPin: 'Norden showroom',
-    mapRadius: 'About 25km',
+    mapRadius: 'About 15 miles',
+    mapLabel: 'Map of the areas we cover: about 15 miles around our Norden showroom.',
   },
   footer: {
     blurb: 'Carpets, vinyl, laminate and underlay, supplied and fitted by our own team.',
+    facebook: 'Facebook',
+    designedBy: 'Website designed by',
+    designerName: 'Design Systems Web',
   },
 } as const
 

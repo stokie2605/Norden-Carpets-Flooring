@@ -56,7 +56,7 @@ async function main() {
   for (const file of await contentFiles('src/content')) {
     problems.push(...findViolations(stringsFromSource(await readFile(file, 'utf8')), file))
   }
-  for (const file of ['index.html', 'privacy.html']) {
+  for (const file of ['index.html', 'privacy.html', 'terms.html']) {
     problems.push(...findViolations(textFromHtml(await readFile(file, 'utf8')), file))
   }
   if (problems.length) {

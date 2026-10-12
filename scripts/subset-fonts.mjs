@@ -9,7 +9,7 @@ import { pathToFileURL } from 'node:url'
 
 const OUT = 'src/assets/fonts'
 const SOURCE_DIRS = ['src']
-const SOURCE_FILES = ['index.html', 'privacy.html']
+const SOURCE_FILES = ['index.html', 'privacy.html', 'terms.html']
 const SOURCE_EXT = /\.(tsx?|css|html)$/
 
 // Always included: printable ASCII and the no-break space.

@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import { addressLines, business, phones } from '../content/site'
 import { SiteShell } from '../components/SiteShell'
 
-const UPDATED = '9 October 2026'
+const UPDATED = '12 October 2026'
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
@@ -27,7 +27,7 @@ export default function PrivacyPage() {
           <Section title="Who we are">
             <p>
               {business.legalLine} As a sole trader, {business.legalName} is the data controller for the personal
-              details you give us through this website.
+              details you give us through this website, by phone, by email, on WhatsApp or in our showroom.
             </p>
             <address className="not-italic">
               <span className="block">{business.name}</span>
@@ -53,14 +53,25 @@ export default function PrivacyPage() {
               <li>any notes you choose to add about the job</li>
             </ul>
             <p>
-              We use these details only to contact you, arrange your measure and prepare your quotation. We never sell
+              If you go ahead with a job, we also keep your address, your room measurements, the details of your order
+              and any photos of your rooms you send us.
+            </p>
+            <p>
+              We use these details only to contact you, arrange your measure, prepare your quote and carry out the job. We never sell
               your details or use them for marketing.
             </p>
-            <p>Under UK data protection law, we rely on two lawful bases:</p>
+            <p>Under UK data protection law, we rely on these lawful bases:</p>
             <ul>
               <li>
                 <strong>Steps before a contract:</strong> you have asked us for a measure and a quote, and we need your
                 details to give you one.
+              </li>
+              <li>
+                <strong>Contract:</strong> once you accept a quote, we need your details to fit your flooring and honour
+                our guarantee.
+              </li>
+              <li>
+                <strong>Legal obligation:</strong> we must keep invoices and payment records for tax purposes.
               </li>
               <li>
                 <strong>Legitimate interests:</strong> keeping the booking form free of spam, counting visits to the
@@ -131,7 +142,10 @@ export default function PrivacyPage() {
           <Section title="How long we keep your details">
             <ul>
               <li>If your enquiry doesn&apos;t go ahead, we delete your details after one month.</li>
-              <li>If we do the job, we keep your contact details until it&apos;s finished and paid for, then delete them.</li>
+              <li>
+                If we do the job, we keep your contact and job details until it&apos;s finished and paid for and our 12
+                month fitting guarantee has ended, then delete them.
+              </li>
               <li>We keep invoices and payment records for as long as HMRC requires.</li>
             </ul>
           </Section>
@@ -155,7 +169,8 @@ export default function PrivacyPage() {
               month.
             </p>
             <p>
-              If you are unhappy with how we have handled your details, you can complain to the Information
+              If you are unhappy with how we have handled your details, please tell us first so we can put it right.
+              You can also complain to the Information
               Commissioner&apos;s Office at{' '}
               <a href="https://ico.org.uk/make-a-complaint/" target="_blank" rel="noopener noreferrer">
                 ico.org.uk
@@ -166,8 +181,9 @@ export default function PrivacyPage() {
 
           <Section title="Cookies">
             <p>
-              This website does not set cookies of its own, and Cloudflare Web Analytics is cookieless. Cookies may only
-              be set by Turnstile when you use the booking form.
+              This website does not set cookies of its own, and Cloudflare Web Analytics is cookieless. Turnstile may set
+              cookies when you use the booking form. They are strictly necessary to protect the form from spam, so we
+              don&apos;t ask for consent for them.
             </p>
           </Section>
         </div>

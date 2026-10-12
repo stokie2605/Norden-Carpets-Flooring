@@ -15,13 +15,33 @@ const CROPS = {
   'tab-vinyl': { left: 150, top: 925, width: 900, height: 675 },
   // Zoom out to reveal the full room, archway, and expansive laminate floor
   'tab-laminate': { left: 0, top: 500, width: 1536, height: 1152 },
+  // Patterned bathroom vinyl, full width of the original so the room is shown, not just the pattern
+  'tab-vinyl-02': { left: 0, top: 250, width: 1200, height: 900 },
+  // Herringbone carpet on the stairs and landing, seen from above
+  'tab-carpets-02': { left: 0, top: 560, width: 1134, height: 850 },
 }
+// Fine patterns go soft at the default quality, so these get a higher setting and a light sharpen.
+const CRISP = new Set(['tab-vinyl-02', 'tab-carpets-02'])
 
 // Hero is shown in its natural panoramic ratio so nothing is cut off; tabs and gallery use 4:3.
 const ASPECT = {
   'hero-herringbone': 1024 / 456,
 }
 const DEFAULT_ASPECT = 4 / 3
+// Full width images also get a 2048px file so large screens are not stretching the 1600px one.
+const EXTRA_WIDTHS = {
+  'work-herringbone-02': [2048],
+}
+// Our work gallery: extra 3:4 portrait crops (saved as name-tall) with a light colour lift,
+// because the originals are dim phone photos taken upright.
+const TALL = new Set([
+  'work-stairs-carpet-02',
+  'work-hallway-transition-01',
+  'work-hall-carpet-01',
+  'work-kitchen-laminate-01',
+])
+const lift = (pipeline) =>
+  pipeline.normalise({ lower: 1, upper: 99 }).modulate({ brightness: 1.04, saturation: 1.06 }).sharpen({ sigma: 0.6 })
 
 await mkdir(OUT, { recursive: true })
 
@@ -35,16 +55,25 @@ for (const dir of SOURCES) {
   for (const file of files) {
     const name = basename(file, extname(file))
     const ratio = ASPECT[name] ?? DEFAULT_ASPECT
-    for (const width of WIDTHS) {
+    for (const width of [...WIDTHS, ...(EXTRA_WIDTHS[name] ?? [])]) {
       const height = Math.round(width / ratio)
       let pipeline = sharp(join(dir, file))
       if (CROPS[name]) {
         pipeline = pipeline.extract(CROPS[name]).resize(width, height)
+        if (CRISP.has(name)) pipeline = pipeline.sharpen({ sigma: 0.7 })
       } else {
         pipeline = pipeline.resize(width, height, { fit: 'cover', position: 'attention' })
       }
-      await pipeline.clone().avif({ quality: 50 }).toFile(join(OUT, `${name}-${width}.avif`))
-      await pipeline.clone().webp({ quality: 72 }).toFile(join(OUT, `${name}-${width}.webp`))
+      const crisp = CRISP.has(name)
+      await pipeline.clone().avif({ quality: crisp ? 64 : 50 }).toFile(join(OUT, `${name}-${width}.avif`))
+      await pipeline.clone().webp({ quality: crisp ? 85 : 72 }).toFile(join(OUT, `${name}-${width}.webp`))
+    }
+    if (TALL.has(name)) {
+      for (const width of WIDTHS) {
+        const tall = lift(sharp(join(dir, file)).resize(width, Math.round((width * 4) / 3), { fit: 'cover', position: 'attention' }))
+        await tall.clone().avif({ quality: 50 }).toFile(join(OUT, `${name}-tall-${width}.avif`))
+        await tall.clone().webp({ quality: 72 }).toFile(join(OUT, `${name}-tall-${width}.webp`))
+      }
     }
     console.log(`optimised ${name}`)
   }

@@ -4,6 +4,7 @@ const WIDTHS = [360, 375, 390, 414] as const
 const PAGES = [
   { name: 'home', path: '/' },
   { name: 'privacy', path: '/privacy.html' },
+  { name: 'terms', path: '/terms.html' },
 ] as const
 const SCREENSHOT_WIDTH = 375
 
@@ -78,7 +79,7 @@ for (const width of WIDTHS) {
       await page.goto('/')
       await settle(page)
       const tabs = page.getByRole('tablist', { name: 'Flooring types' }).getByRole('tab')
-      await expect(tabs).toHaveCount(4)
+      await expect(tabs).toHaveCount(3)
 
       for (const tab of await tabs.all()) {
         const box = await tab.boundingBox()

@@ -35,9 +35,9 @@ function resolveTurnstileSiteKey(mode: string): string {
   return key
 }
 
-/** Serve /privacy locally the same way Cloudflare Pages does (privacy.html at /privacy). */
+/** Serve /privacy and /terms locally the same way Cloudflare Pages does (privacy.html at /privacy). */
 function cleanUrls(): Plugin {
-  const rewrite = (url: string | undefined) => url?.replace(/^\/privacy\/?(?=$|\?)/, '/privacy.html')
+  const rewrite = (url: string | undefined) => url?.replace(/^\/(privacy|terms)\/?(?=$|\?)/, '/$1.html')
   return {
     name: 'norden-clean-urls',
     configureServer(server) {
@@ -55,8 +55,27 @@ function cleanUrls(): Plugin {
   }
 }
 
+/**
+ * Link previews (WhatsApp, Facebook) need an absolute og:image URL. index.html points at the
+ * production domain; on preview branches Cloudflare sets CF_PAGES_URL, so point it there instead
+ * and previews of pages.dev links show the image too.
+ */
+function previewOgImage(): Plugin {
+  return {
+    name: 'norden-preview-og-image',
+    transformIndexHtml(html) {
+      const previewUrl = process.env.CF_PAGES_URL
+      if (!previewUrl || process.env.CF_PAGES_BRANCH === PRODUCTION_BRANCH) return html
+      return html.replace(
+        /(<meta property="og:image" content=")https:\/\/nordencarpets\.co\.uk/,
+        `$1${previewUrl.replace(/\/$/, '')}`,
+      )
+    },
+  }
+}
+
 export default defineConfig(({ mode, isSsrBuild }) => ({
-  plugins: [react(), tailwindcss(), cleanUrls()],
+  plugins: [react(), tailwindcss(), cleanUrls(), previewOgImage()],
   define: {
     'import.meta.env.VITE_TURNSTILE_SITE_KEY': JSON.stringify(resolveTurnstileSiteKey(mode)),
   },
@@ -69,6 +88,7 @@ export default defineConfig(({ mode, isSsrBuild }) => ({
           input: {
             main: resolve(import.meta.dirname, 'index.html'),
             privacy: resolve(import.meta.dirname, 'privacy.html'),
+            terms: resolve(import.meta.dirname, 'terms.html'),
           },
         },
   },

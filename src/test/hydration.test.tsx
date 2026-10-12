@@ -4,11 +4,13 @@ import { describe, expect, it } from 'vitest'
 import { render, type Page } from '../entry-server'
 import App from '../App'
 import PrivacyPage from '../pages/PrivacyPage'
+import TermsPage from '../pages/TermsPage'
 
 // Guards the build time prerender: the client must hydrate the server HTML without mismatches.
 describe.each<[Page, () => React.JSX.Element]>([
   ['home', () => <App />],
   ['privacy', () => <PrivacyPage />],
+  ['terms', () => <TermsPage />],
 ])('%s page hydration', (page, Component) => {
   it('hydrates the prerendered HTML without recoverable errors', async () => {
     const container = document.createElement('div')
