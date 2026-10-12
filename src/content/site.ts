@@ -77,9 +77,9 @@ export const materials: readonly Material[] = [
   {
     id: 'carpets',
     label: 'Carpets',
-    headline: 'Carpets that feel good and last',
+    headline: 'Soft, cosy carpets for every room',
     pitch:
-      'Twists, loops, saxonies and stain resistant polypropylene from leading UK mills. Optional underlay, grippers and door bars can be supplied and fitted with your carpet by our own team.',
+      'Pop into the showroom to feel the samples and pick your colour. We can supply and fit the underlay, grippers and door bars too, all done by our own team.',
     bestFor: ['Bedrooms', 'Lounges', 'Stairs and landings'],
     image: 'tab-carpets',
     imageAlt: 'Grey carpet fitted to a staircase and landing',
@@ -91,20 +91,20 @@ export const materials: readonly Material[] = [
   {
     id: 'lvt',
     label: 'Vinyl',
-    headline: 'Luxury vinyl, plain or patterned',
+    headline: 'Vinyl that looks like wood or tile',
     pitch:
-      'The look of real wood or stone, waterproof and easy to keep clean. Laid as planks, tiles or herringbone patterns by our own fitters on a properly prepared floor.',
+      "It's waterproof and easy to wipe clean, so it's ideal where things get messy. Choose planks, tiles or herringbone, all laid by our own fitters.",
     bestFor: ['Kitchens', 'Bathrooms', 'Open plan living'],
-    image: 'tab-vinyl',
-    imageAlt: 'Geometric patterned vinyl flooring fitted neatly in a bathroom',
+    image: 'work-herringbone-01',
+    imageAlt: 'Grey oak herringbone vinyl fitted across a living room',
     review: { quote: 'Excellent service, love my new carpet and lino, thankyou.', author: 'Joanne' },
   },
   {
     id: 'laminate',
     label: 'Laminate',
-    headline: 'Smart wood effect built for busy rooms',
+    headline: 'Wood effect laminate for busy homes',
     pitch:
-      'Hard wearing click laminate with realistic wood grain. Fitted on acoustic underlay so rooms stay quiet, and neatly edged with matching beading.',
+      'Hard wearing laminate with a realistic wood look, made for busy family rooms. We finish every edge neatly with matching beading.',
     bestFor: ['Living rooms', 'Dining rooms', 'Rental properties'],
     image: 'tab-laminate',
     imageAlt: 'Rustic oak laminate flooring fitted through a lounge into the dining room',
@@ -119,6 +119,11 @@ export const proof = {
   rating: '96%',
   ratingLabel: 'recommend us on Facebook',
   ratingSource: 'Based on 24 Facebook reviews',
+  highlights: [
+    `${business.yearsInTrade} years fitting floors in Rochdale`,
+    'Free measure and quote, no obligation',
+    'Every job fitted by our own team',
+  ],
   featured: {
     quote:
       'Fitted our whole house with carpets and laminate flooring, looks amazing. Really happy with the results, definitely recommend and will use them again!',
@@ -148,32 +153,22 @@ export const installations: readonly { image: string; alt: string; caption: stri
   {
     image: 'work-stairs-carpet-02',
     alt: 'Black and white chevron carpet fitted across a landing',
-    caption: 'Chevron carpet on a landing',
-  },
-  {
-    image: 'work-herringbone-01',
-    alt: 'Grey oak herringbone luxury vinyl flooring fitted across a living room',
-    caption: 'Grey oak herringbone vinyl',
-  },
-  {
-    image: 'work-kitchen-laminate-01',
-    alt: 'Open plan modern kitchen fitted with wide plank wood effect flooring around an island',
-    caption: 'Open plan kitchen and diner',
-  },
-  {
-    image: 'work-lounge-laminate-02',
-    alt: 'Dark grey laminate flooring fitted in a living room',
-    caption: 'Grey oak laminate in lounge',
+    caption: 'Black and white chevron carpet on a landing',
   },
   {
     image: 'work-hallway-transition-01',
-    alt: 'Oak laminate hallway floor meeting carpeted stairs and a patterned vinyl doorway',
-    caption: 'Hallway where laminate, carpet and vinyl meet',
+    alt: 'Oak effect laminate hallway floor with carpeted stairs and a patterned vinyl doorway',
+    caption: 'Oak effect laminate in a hallway, with carpet on the stairs',
   },
   {
     image: 'work-garden-room-01',
-    alt: 'Rustic oak laminate flooring fitted in a bright garden room with glazed doors',
-    caption: 'Rustic oak laminate in a garden room',
+    alt: 'Oak effect laminate flooring fitted in a bright garden room with glazed doors',
+    caption: 'Oak effect laminate in a garden room',
+  },
+  {
+    image: 'work-kitchen-laminate-01',
+    alt: 'Wood effect laminate flooring fitted through an open plan kitchen diner',
+    caption: 'Wood effect laminate in a kitchen diner',
   },
 ]
 
@@ -217,6 +212,7 @@ export const copy = {
   },
   reviews: {
     reviewSource: 'Facebook review',
+    facebookLink: 'Read our reviews',
     eyebrow: 'Reviews',
     title: 'What our customers say.',
   },
@@ -224,6 +220,7 @@ export const copy = {
     eyebrow: 'Showroom and areas we cover',
     title: 'Come and see us at Tenterhouse Mill.',
     intro: "We do free home measures within about 15 miles of our Norden showroom.",
+    areasTitle: 'Areas we cover',
     mapPin: 'Norden showroom',
     mapRadius: 'About 15 miles',
     mapLabel: 'Map of the areas we cover: about 15 miles around our Norden showroom.',

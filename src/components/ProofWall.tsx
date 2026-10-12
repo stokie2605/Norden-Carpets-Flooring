@@ -1,4 +1,7 @@
-import { copy, proof } from '../content/site'
+import { Check } from 'lucide-react'
+import { copy, links, proof } from '../content/site'
+import { FacebookIcon } from './ui/BrandIcons'
+import { buttonClasses } from './ui/Button'
 
 export function ProofWall() {
   return (
@@ -19,8 +22,28 @@ export function ProofWall() {
                 {proof.rating}
               </p>
               <p className="mt-2 text-lg font-semibold text-ink">{proof.ratingLabel}</p>
+              <ul className="mt-6 space-y-2.5 border-t border-accent/15 pt-6">
+                {proof.highlights.map((item) => (
+                  <li key={item} className="flex gap-2.5 text-ink">
+                    <Check className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <p className="mt-8 text-sm text-ink-soft">{proof.ratingSource}</p>
+            <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
+              <p className="text-sm text-ink-soft">{proof.ratingSource}</p>
+              <a
+                href={links.facebook}
+                target="_blank"
+                rel="noopener"
+                className={buttonClasses({ variant: 'secondary', size: 'md' })}
+              >
+                <FacebookIcon className="size-4 text-[#1877F2]" />
+                {copy.reviews.facebookLink}
+                <span className="sr-only">(opens Facebook in a new tab)</span>
+              </a>
+            </div>
           </div>
 
           <figure className="flex flex-col justify-between rounded-[1.75rem] border border-line p-7 sm:p-10">

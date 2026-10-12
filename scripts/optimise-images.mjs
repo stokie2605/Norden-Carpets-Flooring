@@ -26,6 +26,16 @@ const DEFAULT_ASPECT = 4 / 3
 const EXTRA_WIDTHS = {
   'work-herringbone-02': [2048],
 }
+// Our work gallery: extra 3:4 portrait crops (saved as name-tall) with a light colour lift,
+// because the originals are dim phone photos taken upright.
+const TALL = new Set([
+  'work-stairs-carpet-02',
+  'work-hallway-transition-01',
+  'work-garden-room-01',
+  'work-kitchen-laminate-01',
+])
+const lift = (pipeline) =>
+  pipeline.normalise({ lower: 1, upper: 99 }).modulate({ brightness: 1.04, saturation: 1.06 }).sharpen({ sigma: 0.6 })
 
 await mkdir(OUT, { recursive: true })
 
@@ -49,6 +59,13 @@ for (const dir of SOURCES) {
       }
       await pipeline.clone().avif({ quality: 50 }).toFile(join(OUT, `${name}-${width}.avif`))
       await pipeline.clone().webp({ quality: 72 }).toFile(join(OUT, `${name}-${width}.webp`))
+    }
+    if (TALL.has(name)) {
+      for (const width of WIDTHS) {
+        const tall = lift(sharp(join(dir, file)).resize(width, Math.round((width * 4) / 3), { fit: 'cover', position: 'attention' }))
+        await tall.clone().avif({ quality: 50 }).toFile(join(OUT, `${name}-tall-${width}.avif`))
+        await tall.clone().webp({ quality: 72 }).toFile(join(OUT, `${name}-tall-${width}.webp`))
+      }
     }
     console.log(`optimised ${name}`)
   }

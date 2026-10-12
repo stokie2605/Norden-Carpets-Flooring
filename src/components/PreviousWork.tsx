@@ -15,21 +15,22 @@ export function PreviousWork() {
         </div>
 
         {installations.length > 0 ? (
-          <ul className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
+          <ul className="mt-10 grid grid-cols-2 gap-x-3 gap-y-6 sm:gap-x-5 lg:grid-cols-4">
             {installations.map((item) => (
               <li key={item.image}>
-                <figure>
-                  <div className="aspect-[4/3] overflow-hidden rounded-2xl bg-bg-alt">
+                <figure className="group">
+                  <div className="aspect-[3/4] overflow-hidden rounded-[1.25rem] bg-bg-alt shadow-sm">
+                    {/* Portrait crops (name-tall) keep the floor in frame on phone photos. */}
                     <Picture
-                      name={item.image}
+                      name={`${item.image}-tall`}
                       alt={item.alt}
-                      sizes="(min-width: 1024px) 33vw, 50vw"
-                      width={640}
-                      height={480}
-                      className="size-full object-cover"
+                      sizes="(min-width: 1024px) 25vw, 50vw"
+                      width={480}
+                      height={640}
+                      className="size-full object-cover transition-transform duration-500 motion-safe:group-hover:scale-[1.03]"
                     />
                   </div>
-                  <figcaption className="mt-2 text-sm text-muted">{item.caption}</figcaption>
+                  <figcaption className="mt-3 text-sm font-medium leading-snug text-ink-soft">{item.caption}</figcaption>
                 </figure>
               </li>
             ))}

@@ -1,5 +1,5 @@
-import { Clock, Mail, MapPin, Navigation, Phone } from 'lucide-react'
-import { addressLines, business, hours, phones, towns, copy } from '../content/site'
+import { Navigation } from 'lucide-react'
+import { business, towns, copy } from '../content/site'
 import { buttonClasses } from './ui/Button'
 import { Picture } from './ui/Picture'
 
@@ -95,100 +95,51 @@ function CatchmentMap() {
 
 export function ShowroomMap() {
   return (
-    <section id="showroom" aria-labelledby="showroom-title" className="relative isolate overflow-hidden bg-bg-alt py-16 sm:py-24">
-      {/* Faded job photo behind the heading, matching the hero. */}
-      <div aria-hidden="true" className="absolute inset-x-0 top-0 -z-10 h-[26rem] sm:h-[30rem]">
+    <section id="showroom" aria-labelledby="showroom-title" className="relative isolate overflow-hidden bg-bg-alt py-12 sm:py-16">
+      {/* Dave's herringbone lounge job, shown whole and faded behind the section like the hero. */}
+      <div aria-hidden="true" className="absolute inset-x-0 top-0 -z-10 h-[22rem] sm:h-[26rem] lg:inset-y-0 lg:h-auto">
         <Picture
-          name="work-kitchen-laminate-01"
+          name="hero-herringbone"
           alt=""
           sizes="100vw"
           width={1024}
-          height={768}
-          className="size-full object-cover object-[50%_90%] lg:object-[50%_62%]"
+          height={456}
+          className="size-full object-cover object-[35%_60%] lg:object-[50%_55%]"
         />
-        <div className="absolute inset-0 bg-linear-to-b from-bg-alt/40 via-bg-alt/75 to-bg-alt lg:bg-linear-to-r lg:from-bg-alt lg:via-bg-alt/75 lg:via-40% lg:to-bg-alt/0" />
-        <div className="absolute inset-x-0 bottom-0 hidden h-40 bg-linear-to-b from-bg-alt/0 to-bg-alt lg:block" />
+        <div className="absolute inset-0 bg-linear-to-b from-bg-alt/45 via-bg-alt/80 to-bg-alt lg:bg-linear-to-l lg:from-bg-alt lg:from-35% lg:via-bg-alt/80 lg:via-55% lg:to-bg-alt/5" />
       </div>
       <div className="container-x">
-        <p className="eyebrow">{copy.showroom.eyebrow}</p>
-        <h2 id="showroom-title" className="mt-3 max-w-3xl text-section font-extrabold">
-          {copy.showroom.title}
-        </h2>
-        <p className="mt-4 max-w-2xl text-ink-soft">
-          {copy.showroom.intro}
-        </p>
+        <div className="grid gap-8 lg:grid-cols-[22rem_1fr] lg:items-center lg:gap-12">
+          <div>
+            <p className="eyebrow">{copy.showroom.eyebrow}</p>
+            <h2 id="showroom-title" className="mt-3 max-w-2xl text-section font-extrabold">
+              {copy.showroom.title}
+            </h2>
+            <p className="mt-4 max-w-xl text-ink-soft">{copy.showroom.intro}</p>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_24rem] lg:items-start">
-          <div className="rounded-[1.75rem] border border-line bg-bg p-7 shadow-sm sm:p-9">
-            <h3 className="text-2xl font-extrabold">{business.name}</h3>
-            <address className="mt-4 flex gap-3 not-italic text-ink-soft">
-              <MapPin className="mt-1 size-5 shrink-0 text-accent" aria-hidden="true" />
-              <span>
-                {addressLines.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
-              </span>
-            </address>
-
-            <div className="mt-6 flex gap-3">
-              <Clock className="mt-1 size-5 shrink-0 text-accent" aria-hidden="true" />
-              <dl className="grid flex-1 grid-cols-[auto_1fr] gap-x-6 gap-y-1 text-sm">
-                {hours.map((h) => (
-                  <div key={h.days} className="contents">
-                    <dt className="font-medium text-ink">{h.days}</dt>
-                    <dd className="text-ink-soft">{h.time}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-
-            <ul className="mt-6 space-y-1 border-t border-line pt-6">
-              {[phones.showroom, phones.mobile].map((p) => (
-                <li key={p.href}>
-                  <a href={p.href} className="flex min-h-11 items-center gap-3 font-semibold text-ink hover:text-accent-deep">
-                    <Phone className="size-5 text-accent" aria-hidden="true" />
-                    <span>
-                      {p.display} <span className="font-normal text-muted">({p.label})</span>
-                    </span>
-                  </a>
+            <h3 className="mt-6 text-sm font-bold uppercase tracking-[0.14em] text-ink">{copy.showroom.areasTitle}</h3>
+            <ul className="mt-3 flex max-w-xl flex-wrap gap-2" aria-label={copy.showroom.areasTitle}>
+              {towns.map((t) => (
+                <li key={t} className="rounded-full border border-line bg-bg px-3 py-1.5 text-sm font-medium text-ink-soft">
+                  {t}
                 </li>
               ))}
-              <li>
-                <a
-                  href={`mailto:${business.email}`}
-                  className="flex min-h-11 items-center gap-3 break-all font-semibold text-ink hover:text-accent-deep"
-                >
-                  <Mail className="size-5 shrink-0 text-accent" aria-hidden="true" />
-                  {business.email}
-                </a>
-              </li>
             </ul>
 
+            <a
+              href={business.mapsDirectionsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={buttonClasses({ variant: 'secondary', size: 'md', className: 'mt-6' })}
+            >
+              <Navigation className="size-4 text-accent" aria-hidden="true" />
+              {copy.cta.directions}
+              <span className="sr-only">(opens Google Maps in a new tab)</span>
+            </a>
           </div>
 
-          <div className="mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-[1.75rem] border border-line bg-bg shadow-sm lg:max-w-none">
+          <div className="mx-auto w-full max-w-sm overflow-hidden rounded-[1.75rem] border border-line bg-bg shadow-lg lg:order-first lg:max-w-none">
             <CatchmentMap />
-            <div className="flex flex-col gap-3 border-t border-line p-5">
-              <ul className="flex flex-wrap gap-1.5" aria-label="Areas covered">
-                {towns.map((t) => (
-                  <li key={t} className="rounded-full bg-bg-alt px-2.5 py-1 text-xs font-medium text-ink-soft">
-                    {t}
-                  </li>
-                ))}
-              </ul>
-              <a
-                href={business.mapsDirectionsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={buttonClasses({ variant: 'secondary', size: 'md', className: 'self-start' })}
-              >
-                <Navigation className="size-4 text-accent" aria-hidden="true" />
-                {copy.cta.directions}
-                <span className="sr-only">(opens Google Maps in a new tab)</span>
-              </a>
-            </div>
           </div>
         </div>
       </div>
