@@ -8,7 +8,7 @@ compatibility_date = "2026-10-01"
 # vite.config.ts reads VITE_TURNSTILE_SITE_KEY from here at build time,
 # picking [env.preview.vars] on any branch other than main.
 [vars]
-VITE_TURNSTILE_SITE_KEY = "TODO_CONFIRM_TURNSTILE_SITE_KEY"
+VITE_TURNSTILE_SITE_KEY = "0x4AAAAAAFUfyCvf1216o-Gn"
 
 [env.preview.vars]
 # Cloudflare Turnstile test site key: always passes.
