@@ -9,7 +9,7 @@ export const business = {
   legalName: 'David Wilshaw',
   legalLine: 'Norden Carpets & Flooring is the trading name of David Wilshaw, sole trader.',
   yearsInTrade: '30+',
-  email: 'norden.carpetsandflooring@gmail.com',
+  email: 'norden.carpetsflooring@gmail.com',
   address: {
     unit: 'Unit 4, Tenterhouse Mill',
     street: 'Greenbooth Road',
@@ -32,6 +32,7 @@ export const links = {
     "https://wa.me/447904322879?text=Hi%20Dave%20and%20Wendy,%20I'd%20like%20to%20send%20some%20room%20photos%20for%20a%20flooring%20quote.",
   facebook: 'https://www.facebook.com/nordencarpetsandflooring',
   privacy: '/privacy',
+  designer: 'https://www.designsystemsweb.co.uk/',
 } as const
 
 export const addressLines = [
@@ -195,7 +196,7 @@ export const copy = {
     bookShort: 'Free measure',
     callShort: 'Call us',
     whatsapp: 'WhatsApp us',
-    whatsappFloating: 'Message us on WhatsApp',
+    backToTop: 'Back to top',
     directions: 'Get directions',
   },
   flooring: {
@@ -229,6 +230,9 @@ export const copy = {
   },
   footer: {
     blurb: 'Carpets, vinyl, laminate and underlay, supplied and fitted by our own team.',
+    facebook: 'Facebook',
+    designedBy: 'Website designed by',
+    designerName: 'Design Systems Web',
   },
 } as const
 

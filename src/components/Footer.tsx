@@ -1,6 +1,6 @@
 import { addressLines, business, copy, hours, links, phones, towns } from '../content/site'
 import { credits } from '../content/credits'
-import { FacebookIcon } from './ui/BrandIcons'
+import { FacebookIcon, WhatsAppIcon } from './ui/BrandIcons'
 import { Wordmark } from './ui/Wordmark'
 
 export function Footer() {
@@ -12,16 +12,28 @@ export function Footer() {
           <p className="mt-4 max-w-xs text-sm text-ink-soft">
             {copy.footer.blurb}
           </p>
-          <a
-            href={links.facebook}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-ink hover:text-accent-deep"
-          >
-            <FacebookIcon className="size-5 text-[#1877F2]" />
-            Follow us on Facebook
-            <span className="sr-only">(opens in a new tab)</span>
-          </a>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <a
+              href={links.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center gap-2 rounded-full bg-[#128C7E] px-5 text-sm font-semibold text-white hover:opacity-90"
+            >
+              <WhatsAppIcon className="size-5" />
+              {copy.cta.whatsapp}
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
+            <a
+              href={links.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center gap-2 rounded-full bg-[#1877F2] px-5 text-sm font-semibold text-white hover:opacity-90"
+            >
+              <FacebookIcon className="size-5" />
+              {copy.footer.facebook}
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
+          </div>
         </div>
 
         <div>
@@ -68,13 +80,20 @@ export function Footer() {
       </div>
 
       <div className="border-t border-line">
-        <div className="container-x flex flex-col gap-3 py-6 text-xs text-muted md:flex-row md:items-center md:justify-between">
+        <div className="container-x flex flex-col gap-3 pb-24 pt-6 text-xs text-muted md:flex-row md:pb-6 md:items-center md:justify-between">
           <p>
             {/* Prerendered at build time, so the year may differ from the visitor's clock on hydration. */}
             &copy; <span suppressHydrationWarning>{new Date().getFullYear()}</span> {business.name}. {business.legalLine}{' '}
             <a href={links.privacy} className="underline hover:text-ink">
               Privacy notice
             </a>
+          </p>
+          <p>
+            {copy.footer.designedBy}{' '}
+            <a href={links.designer} target="_blank" rel="noopener" className="font-semibold underline hover:text-ink">
+              {copy.footer.designerName}
+            </a>
+            <span className="sr-only"> (opens in a new tab)</span>
           </p>
           {credits.length > 0 && (
             <p>
