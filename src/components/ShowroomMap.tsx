@@ -36,7 +36,7 @@ function CatchmentMap() {
   return (
     <div
       role="img"
-      aria-label={`Map of the areas we cover: about ${RADIUS_KM}km around our Norden showroom.`}
+      aria-label={copy.showroom.mapLabel}
       className="relative aspect-square w-full overflow-hidden bg-bg-alt"
     >
       {tiles.map((t) => (

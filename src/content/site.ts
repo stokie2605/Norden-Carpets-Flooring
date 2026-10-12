@@ -42,8 +42,8 @@ export const addressLines = [
 ] as const
 
 export const hours = [
-  { days: 'Monday to Friday', time: '09:00 to 16:00' },
-  { days: 'Saturday', time: '09:00 to 12:00' },
+  { days: 'Monday to Friday', time: '9am to 4pm' },
+  { days: 'Saturday', time: '9am to 12pm' },
   { days: 'Sunday', time: 'Closed' },
 ] as const
 
@@ -85,10 +85,10 @@ export const materials: readonly Material[] = [
     label: 'Carpets',
     headline: 'Carpets that feel good and last',
     pitch:
-      'Twists, loops, saxonies and stain resistant polypropylene from leading UK mills. Optional underlay, grippers, and door bars can be supplied and fitted with your carpet by our own team.',
+      'Twists, loops, saxonies and stain resistant polypropylene from leading UK mills. Optional underlay, grippers and door bars can be supplied and fitted with your carpet by our own team.',
     bestFor: ['Bedrooms', 'Lounges', 'Stairs and landings'],
     image: 'tab-carpets',
-    imageAlt: 'Neutral carpet runner and landing fitted to stairs',
+    imageAlt: 'Grey carpet fitted to a staircase and landing',
     review: {
       quote: 'Very happy with our gorgeous carpet. Very good value and quality and a brilliant service from start to finish.',
       author: 'Caroline',
@@ -97,9 +97,9 @@ export const materials: readonly Material[] = [
   {
     id: 'lvt',
     label: 'Vinyl',
-    headline: 'Luxury vinyl and herringbone',
+    headline: 'Luxury vinyl, plain or patterned',
     pitch:
-      'The look of real wood or stone, waterproof and easy to keep clean. Laid as planks, tiles or herringbone patterns by our own fitters on a prepared subfloor.',
+      'The look of real wood or stone, waterproof and easy to keep clean. Laid as planks, tiles or herringbone patterns by our own fitters on a properly prepared floor.',
     bestFor: ['Kitchens', 'Bathrooms', 'Open plan living'],
     image: 'tab-vinyl',
     imageAlt: 'Geometric patterned vinyl flooring fitted neatly in a bathroom',
@@ -113,7 +113,7 @@ export const materials: readonly Material[] = [
       'Hard wearing click laminate with realistic wood grain. Fitted on acoustic underlay so rooms stay quiet, and neatly edged with matching beading.',
     bestFor: ['Living rooms', 'Dining rooms', 'Rental properties'],
     image: 'tab-laminate',
-    imageAlt: 'Wide plank light oak laminate flooring fitted in an open hallway',
+    imageAlt: 'Rustic oak laminate flooring fitted through a lounge into the dining room',
     review: {
       quote: 'So so happy with the service and the end result. Such good quality flooring.',
       author: 'Hannah',
@@ -153,13 +153,13 @@ export const proof = {
 export const installations: readonly { image: string; alt: string; caption: string }[] = [
   {
     image: 'work-stairs-carpet-02',
-    alt: 'Close up of a black and white chevron carpet runner fitted to stairs and landing',
-    caption: 'Chevron stair runner and landing',
+    alt: 'Black and white chevron carpet fitted across a landing',
+    caption: 'Chevron carpet on a landing',
   },
   {
     image: 'work-herringbone-01',
-    alt: 'Oak herringbone luxury vinyl flooring fitted across a living room',
-    caption: 'Oak herringbone LVT',
+    alt: 'Grey oak herringbone luxury vinyl flooring fitted across a living room',
+    caption: 'Grey oak herringbone vinyl',
   },
   {
     image: 'work-kitchen-laminate-01',
@@ -168,18 +168,18 @@ export const installations: readonly { image: string; alt: string; caption: stri
   },
   {
     image: 'work-lounge-laminate-02',
-    alt: 'Light grey laminate flooring fitted in a living room with bay window',
+    alt: 'Dark grey laminate flooring fitted in a living room',
     caption: 'Grey oak laminate in lounge',
   },
   {
     image: 'work-hallway-transition-01',
-    alt: 'Oak laminate hallway floor meeting carpeted stairs and patterned vinyl doorway threshold',
-    caption: 'Hallway with multi-floor transitions',
+    alt: 'Oak laminate hallway floor meeting carpeted stairs and a patterned vinyl doorway',
+    caption: 'Hallway where laminate, carpet and vinyl meet',
   },
   {
     image: 'work-garden-room-01',
-    alt: 'Rustic oak laminate flooring fitted in a bright sunroom with bifold doors',
-    caption: 'Sunroom with bifold doors',
+    alt: 'Rustic oak laminate flooring fitted in a bright garden room with glazed doors',
+    caption: 'Rustic oak laminate in a garden room',
   },
 ]
 
@@ -229,9 +229,10 @@ export const copy = {
   showroom: {
     eyebrow: 'Showroom and areas we cover',
     title: 'Come and see us at Tenterhouse Mill.',
-    intro: "We do free home measures within about 25km of our Norden showroom.",
+    intro: "We do free home measures within about 15 miles of our Norden showroom.",
     mapPin: 'Norden showroom',
-    mapRadius: 'About 25km',
+    mapRadius: 'About 15 miles',
+    mapLabel: 'Map of the areas we cover: about 15 miles around our Norden showroom.',
   },
   footer: {
     blurb: 'Carpets, vinyl, laminate and underlay, supplied and fitted by our own team.',
