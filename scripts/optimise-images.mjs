@@ -15,7 +15,13 @@ const CROPS = {
   'tab-vinyl': { left: 150, top: 925, width: 900, height: 675 },
   // Zoom out to reveal the full room, archway, and expansive laminate floor
   'tab-laminate': { left: 0, top: 500, width: 1536, height: 1152 },
+  // Patterned bathroom vinyl, cropped to the floor only so the toilet and door are out of shot
+  'tab-vinyl-02': { left: 260, top: 820, width: 940, height: 705 },
+  // Herringbone carpet on the stairs and landing, seen from above
+  'tab-carpets-02': { left: 0, top: 560, width: 1134, height: 850 },
 }
+// Fine patterns go soft at the default quality, so these get a higher setting and a light sharpen.
+const CRISP = new Set(['tab-vinyl-02', 'tab-carpets-02'])
 
 // Hero is shown in its natural panoramic ratio so nothing is cut off; tabs and gallery use 4:3.
 const ASPECT = {
@@ -31,7 +37,7 @@ const EXTRA_WIDTHS = {
 const TALL = new Set([
   'work-stairs-carpet-02',
   'work-hallway-transition-01',
-  'work-garden-room-01',
+  'work-hall-carpet-01',
   'work-kitchen-laminate-01',
 ])
 const lift = (pipeline) =>
@@ -54,11 +60,13 @@ for (const dir of SOURCES) {
       let pipeline = sharp(join(dir, file))
       if (CROPS[name]) {
         pipeline = pipeline.extract(CROPS[name]).resize(width, height)
+        if (CRISP.has(name)) pipeline = pipeline.sharpen({ sigma: 0.7 })
       } else {
         pipeline = pipeline.resize(width, height, { fit: 'cover', position: 'attention' })
       }
-      await pipeline.clone().avif({ quality: 50 }).toFile(join(OUT, `${name}-${width}.avif`))
-      await pipeline.clone().webp({ quality: 72 }).toFile(join(OUT, `${name}-${width}.webp`))
+      const crisp = CRISP.has(name)
+      await pipeline.clone().avif({ quality: crisp ? 64 : 50 }).toFile(join(OUT, `${name}-${width}.avif`))
+      await pipeline.clone().webp({ quality: crisp ? 85 : 72 }).toFile(join(OUT, `${name}-${width}.webp`))
     }
     if (TALL.has(name)) {
       for (const width of WIDTHS) {

@@ -4,6 +4,7 @@ import { BookingModal } from './BookingModal'
 import { Footer } from './Footer'
 import { Header } from './Header'
 import { BackToTop } from './BackToTop'
+import { MobileBar } from './MobileBar'
 
 export function SiteShell({ children }: { children: ReactNode }) {
   return (
@@ -18,6 +19,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
       <main id="main">{children}</main>
       <Footer />
       <BackToTop />
+      <MobileBar />
       <BookingModal />
     </BookingProvider>
   )

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { ArrowUp } from 'lucide-react'
 import { copy } from '../content/site'
 
-/** Back to top button for phones and small tablets. Appears once the footer scrolls into view. Hidden from 768px upwards. */
+/** Back to top button for phones and small tablets. Appears once the footer scrolls into view, just above the WhatsApp and Call bar. Hidden from 768px upwards. */
 export function BackToTop() {
   const [show, setShow] = useState(false)
 
@@ -28,7 +28,7 @@ export function BackToTop() {
       className={`fixed right-4 z-50 grid size-14 place-items-center rounded-full bg-ink text-white shadow-[0_10px_25px_-8px_rgb(15_23_42/0.45)] transition-[opacity,visibility] duration-200 active:scale-95 md:hidden ${
         show ? 'visible opacity-100' : 'invisible opacity-0'
       }`}
-      style={{ bottom: 'max(1rem, env(safe-area-inset-bottom))' }}
+      style={{ bottom: 'calc(5.5rem + env(safe-area-inset-bottom))' }}
     >
       <ArrowUp className="size-6" aria-hidden="true" />
     </button>

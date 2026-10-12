@@ -52,12 +52,12 @@ export function Header() {
           >
             <a
               href={phones.showroom.href}
-              className="inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap rounded-full px-1 text-sm font-semibold text-ink hover:text-accent-deep sm:gap-2 sm:px-3"
+              className="hidden min-h-11 items-center gap-2 whitespace-nowrap rounded-full px-3 text-sm font-semibold text-ink hover:text-accent-deep md:inline-flex"
             >
               <Phone className="size-[1.1rem] text-accent" aria-hidden="true" />
-              {/* "Call us" on phones, the number from 640px. The number stays in the accessible name. */}
-              <span className="sm:hidden">{copy.cta.callShort}</span>
-              <span className="sr-only sm:not-sr-only"> {phones.showroom.display}</span>
+              {/* Phones use the Call button in the bottom bar instead. */}
+              <span className="sr-only">{copy.cta.callShort} </span>
+              {phones.showroom.display}
             </a>
             <Button size="md" onClick={() => openBooking()} className="whitespace-nowrap px-3 xs:px-4 sm:px-5">
               {copy.cta.bookShort}
@@ -68,7 +68,7 @@ export function Header() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Norden Carpets & Flooring on Facebook (opens in a new tab)"
-            className="hidden size-11 place-items-center rounded-full text-ink-soft hover:bg-bg-alt hover:text-accent-deep sm:grid"
+            className="grid size-11 place-items-center rounded-full text-ink-soft hover:bg-bg-alt hover:text-accent-deep"
           >
             <FacebookIcon />
           </a>

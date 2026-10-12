@@ -12,7 +12,8 @@ export function Footer() {
           <p className="mt-4 max-w-xs text-sm text-ink-soft">
             {copy.footer.blurb}
           </p>
-          <div className="mt-5 flex flex-wrap gap-3">
+          {/* Phones get the fixed WhatsApp and Call bar instead. */}
+          <div className="mt-5 hidden flex-wrap gap-3 md:flex">
             <a
               href={links.whatsapp}
               target="_blank"
@@ -80,7 +81,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-line">
-        <div className="container-x flex flex-col gap-3 pb-24 pt-6 text-xs text-muted md:flex-row md:pb-6 md:items-center md:justify-between">
+        <div className="container-x flex flex-col gap-3 pb-28 pt-6 text-xs text-muted md:flex-row md:pb-6 md:items-center md:justify-between">
           <p>
             {/* Prerendered at build time, so the year may differ from the visitor's clock on hydration. */}
             &copy; <span suppressHydrationWarning>{new Date().getFullYear()}</span> {business.name}. {business.legalLine}{' '}

@@ -81,8 +81,8 @@ export const materials: readonly Material[] = [
     pitch:
       'Pop into the showroom to feel the samples and pick your colour. We can supply and fit the underlay, grippers and door bars too, all done by our own team.',
     bestFor: ['Bedrooms', 'Lounges', 'Stairs and landings'],
-    image: 'tab-carpets',
-    imageAlt: 'Grey carpet fitted to a staircase and landing',
+    image: 'tab-carpets-02',
+    imageAlt: 'Cream herringbone carpet fitted on a staircase and landing with oak handrails',
     review: {
       quote: 'Very happy with our gorgeous carpet. Very good value and quality and a brilliant service from start to finish.',
       author: 'Caroline',
@@ -93,10 +93,10 @@ export const materials: readonly Material[] = [
     label: 'Vinyl',
     headline: 'Vinyl that looks like wood or tile',
     pitch:
-      "It's waterproof and easy to wipe clean, so it's ideal where things get messy. Choose planks, tiles or herringbone, all laid by our own fitters.",
+      "It's waterproof and easy to wipe clean, so it's ideal where things get messy. Choose wood effect planks or patterned tiles like these, all laid by our own fitters.",
     bestFor: ['Kitchens', 'Bathrooms', 'Open plan living'],
-    image: 'work-herringbone-01',
-    imageAlt: 'Grey oak herringbone vinyl fitted across a living room',
+    image: 'tab-vinyl-02',
+    imageAlt: 'Grey and white patterned tile effect vinyl fitted in a bathroom',
     review: { quote: 'Excellent service, love my new carpet and lino, thankyou.', author: 'Joanne' },
   },
   {
@@ -161,9 +161,9 @@ export const installations: readonly { image: string; alt: string; caption: stri
     caption: 'Oak effect laminate in a hallway, with carpet on the stairs',
   },
   {
-    image: 'work-garden-room-01',
-    alt: 'Oak effect laminate flooring fitted in a bright garden room with glazed doors',
-    caption: 'Oak effect laminate in a garden room',
+    image: 'work-hall-carpet-01',
+    alt: 'Neutral carpet fitted across a hallway and up two curved bottom steps',
+    caption: 'Carpet in a hallway, fitted round curved steps',
   },
   {
     image: 'work-kitchen-laminate-01',
