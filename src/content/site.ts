@@ -194,7 +194,7 @@ export const copy = {
     reassurance: "Measuring and quotes are free, and there's no obligation.",
     badge: 'Our own fitters',
     badgeBody: 'Dave, Tom and Jake do the fitting, and Wendy helps with admin.',
-    imageAlt: 'Grand double-flight staircase with neutral patterned carpet runner and wooden balustrade',
+    imageAlt: 'Living room with oak herringbone flooring, modern fireplace, and corner sofa',
   },
   cta: {
     bookShort: 'Free measure',
