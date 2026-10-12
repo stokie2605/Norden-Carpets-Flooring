@@ -76,17 +76,19 @@ export function Footer() {
               Privacy notice
             </a>
           </p>
-          <p>
-            Illustrative photography from Unsplash by{' '}
-            {credits.map((c, i) => (
-              <span key={c.url}>
-                <a href={c.url} target="_blank" rel="noopener noreferrer" className="underline hover:text-ink">
-                  {c.photographer}
-                </a>
-                {i < credits.length - 2 ? ', ' : i === credits.length - 2 ? ' and ' : '.'}
-              </span>
-            ))}
-          </p>
+          {credits.length > 0 && (
+            <p>
+              Illustrative photography from Unsplash by{' '}
+              {credits.map((c, i) => (
+                <span key={c.url}>
+                  <a href={c.url} target="_blank" rel="noopener noreferrer" className="underline hover:text-ink">
+                    {c.photographer}
+                  </a>
+                  {i < credits.length - 2 ? ', ' : i === credits.length - 2 ? ' and ' : '.'}
+                </span>
+              ))}
+            </p>
+          )}
         </div>
       </div>
     </footer>

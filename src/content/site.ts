@@ -63,7 +63,7 @@ export const nav = [
   { label: 'Showroom', href: '#showroom' },
 ] as const
 
-export type MaterialId = 'carpets' | 'lvt' | 'laminate' | 'underlay'
+export type MaterialId = 'carpets' | 'lvt' | 'laminate'
 
 // Customer reviews are copied word for word from our Facebook page. Cut only with "...", never reword.
 export type Review = { quote: string; author: string }
@@ -85,10 +85,10 @@ export const materials: readonly Material[] = [
     label: 'Carpets',
     headline: 'Carpets that feel good and last',
     pitch:
-      "Twists, loops, saxonies and stain resistant polypropylene. Every carpet goes down on good underlay, with gripper and door bars, and it's fitted by our own team.",
+      'Twists, loops, saxonies and stain resistant polypropylene from leading UK mills. Optional underlay, grippers, and door bars can be supplied and fitted with your carpet by our own team.',
     bestFor: ['Bedrooms', 'Lounges', 'Stairs and landings'],
-    image: 'carpet',
-    imageAlt: 'Close up of a grey loop pile carpet texture',
+    image: 'tab-carpets',
+    imageAlt: 'Neutral carpet runner and landing fitted to stairs',
     review: {
       quote: 'Very happy with our gorgeous carpet. Very good value and quality and a brilliant service from start to finish.',
       author: 'Caroline',
@@ -99,35 +99,25 @@ export const materials: readonly Material[] = [
     label: 'Vinyl',
     headline: 'Luxury vinyl and herringbone',
     pitch:
-      "Looks like wood or stone, but it's waterproof and easy to keep clean. It works well with underfloor heating, and we lay it as planks, tiles or herringbone on a properly levelled floor.",
+      'The look of real wood or stone, waterproof and easy to keep clean. Laid as planks, tiles or herringbone patterns by our own fitters on a prepared subfloor.',
     bestFor: ['Kitchens', 'Bathrooms', 'Open plan living'],
-    image: 'lvt-herringbone',
-    imageAlt: 'Warm oak effect planks laid in a herringbone pattern',
+    image: 'tab-vinyl',
+    imageAlt: 'Geometric patterned vinyl flooring fitted neatly in a bathroom',
     review: { quote: 'Excellent service, love my new carpet and lino, thankyou.', author: 'Joanne' },
   },
   {
     id: 'laminate',
     label: 'Laminate',
-    headline: "Wood effect that won't break the bank",
+    headline: 'Smart wood effect built for busy rooms',
     pitch:
-      'Tough click laminate with a realistic grain, laid on acoustic underlay so the room stays quiet. We finish the edges with matching beading or scotia.',
+      'Hard wearing click laminate with realistic wood grain. Fitted on acoustic underlay so rooms stay quiet, and neatly edged with matching beading.',
     bestFor: ['Living rooms', 'Dining rooms', 'Rental properties'],
-    image: 'laminate',
-    imageAlt: 'Bright living room with mid oak laminate flooring',
+    image: 'tab-laminate',
+    imageAlt: 'Wide plank light oak laminate flooring fitted in an open hallway',
     review: {
       quote: 'So so happy with the service and the end result. Such good quality flooring.',
       author: 'Hannah',
     },
-  },
-  {
-    id: 'underlay',
-    label: 'Underlay',
-    headline: 'Good underlay makes all the difference',
-    pitch:
-      'Even a great carpet feels thin on cheap underlay. We use high density PU foam underlay. It helps your carpet last longer, keeps the room warmer and feels softer underfoot.',
-    bestFor: ['All carpeted rooms', 'Stairs (high density)', 'Over underfloor heating'],
-    image: 'roll-ends',
-    imageAlt: 'Close up of grey patterned carpet',
   },
 ]
 
@@ -139,6 +129,7 @@ export const proof = {
     quote:
       'Fitted our whole house with carpets and laminate flooring, looks amazing. Really happy with the results, definitely recommend and will use them again!',
     author: 'Charlotte',
+    detail: 'Facebook review',
   },
   reviews: [
     {
@@ -159,8 +150,38 @@ export const proof = {
 } as const
 
 // Real installation photos from the team only. Shown in the Our work section.
-// Add entries after running `npm run images` on files in design-source/installations.
-export const installations: readonly { image: string; alt: string; caption: string }[] = []
+export const installations: readonly { image: string; alt: string; caption: string }[] = [
+  {
+    image: 'work-stairs-carpet-02',
+    alt: 'Close up of a black and white chevron carpet runner fitted to stairs and landing',
+    caption: 'Chevron stair runner and landing',
+  },
+  {
+    image: 'work-herringbone-01',
+    alt: 'Oak herringbone luxury vinyl flooring fitted across a living room',
+    caption: 'Oak herringbone LVT',
+  },
+  {
+    image: 'work-kitchen-laminate-01',
+    alt: 'Open plan modern kitchen fitted with wide plank wood effect flooring around an island',
+    caption: 'Open plan kitchen and diner',
+  },
+  {
+    image: 'work-lounge-laminate-02',
+    alt: 'Light grey laminate flooring fitted in a living room with bay window',
+    caption: 'Grey oak laminate in lounge',
+  },
+  {
+    image: 'work-hallway-transition-01',
+    alt: 'Oak laminate hallway floor meeting carpeted stairs and patterned vinyl doorway threshold',
+    caption: 'Hallway with multi-floor transitions',
+  },
+  {
+    image: 'work-garden-room-01',
+    alt: 'Rustic oak laminate flooring fitted in a bright sunroom with bifold doors',
+    caption: 'Sunroom with bifold doors',
+  },
+]
 
 // Headings, intros and button labels used across the page.
 export const copy = {
@@ -171,9 +192,9 @@ export const copy = {
     intro:
       "Hi, we're Dave and Wendy. We've been fitting floors across Rochdale for over 30 years. Dave, Tom and Jake do the fitting, and Wendy helps with admin.",
     reassurance: "Measuring and quotes are free, and there's no obligation.",
-    badge: 'Visit our showroom',
-    badgeBody: "Pop into Tenterhouse Mill to see samples, or we'll come to you for a free measure.",
-    imageAlt: 'Bright bedroom with a soft neutral carpet',
+    badge: 'Our own fitters',
+    badgeBody: 'Dave, Tom and Jake do the fitting, and Wendy helps with admin.',
+    imageAlt: 'Grand double-flight staircase with neutral patterned carpet runner and wooden balustrade',
   },
   cta: {
     bookShort: 'Free measure',
@@ -191,8 +212,7 @@ export const copy = {
     eyebrow: 'Our work',
     title: 'Some of our recent jobs.',
     intro: "Floors we've fitted in homes around Rochdale.",
-    // Shown on preview builds only, until real photos are added to `installations`.
-    empty: 'TODO_CONFIRM installation photos from the client, grouped by material',
+    empty: 'New installation photos coming soon.',
   },
   team: {
     title: 'Meet the team.',

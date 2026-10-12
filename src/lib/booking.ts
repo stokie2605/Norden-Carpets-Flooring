@@ -5,7 +5,6 @@ export const MATERIAL_OPTIONS = [
   { value: 'carpets', label: 'Carpets' },
   { value: 'lvt', label: 'Vinyl' },
   { value: 'laminate', label: 'Laminate' },
-  { value: 'underlay', label: 'Underlay' },
   { value: 'unsure', label: 'Not sure yet' },
 ] as const
 

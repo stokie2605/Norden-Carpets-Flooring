@@ -28,7 +28,7 @@ export function Hero() {
         <div className="relative">
           <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] bg-bg-alt sm:aspect-[5/4] lg:aspect-[4/5]">
             <Picture
-              name="hero-bedroom"
+              name="hero-stairs"
               alt={copy.hero.imageAlt}
               sizes="(min-width: 1024px) 40vw, 100vw"
               width={1024}
