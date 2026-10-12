@@ -1,7 +1,7 @@
 import { Clock, Mail, MapPin, Navigation, Phone } from 'lucide-react'
-import { addressLines, business, hours, links, phones, towns, copy } from '../content/site'
+import { addressLines, business, hours, phones, towns, copy } from '../content/site'
 import { buttonClasses } from './ui/Button'
-import { FacebookIcon, WhatsAppIcon } from './ui/BrandIcons'
+import { Picture } from './ui/Picture'
 
 // Map tiles come from OpenStreetMap and load in the visitor's browser (see the privacy notice).
 // The view is fixed: zoom 10, centred on Norden, with a ring showing roughly how far we travel.
@@ -95,7 +95,20 @@ function CatchmentMap() {
 
 export function ShowroomMap() {
   return (
-    <section id="showroom" aria-labelledby="showroom-title" className="bg-bg-alt py-16 sm:py-24">
+    <section id="showroom" aria-labelledby="showroom-title" className="relative isolate overflow-hidden bg-bg-alt py-16 sm:py-24">
+      {/* Faded job photo behind the heading, matching the hero. */}
+      <div aria-hidden="true" className="absolute inset-x-0 top-0 -z-10 h-[26rem] sm:h-[30rem]">
+        <Picture
+          name="work-kitchen-laminate-01"
+          alt=""
+          sizes="100vw"
+          width={1024}
+          height={768}
+          className="size-full object-cover object-[50%_90%] lg:object-[50%_62%]"
+        />
+        <div className="absolute inset-0 bg-linear-to-b from-bg-alt/40 via-bg-alt/75 to-bg-alt lg:bg-linear-to-r lg:from-bg-alt lg:via-bg-alt/75 lg:via-40% lg:to-bg-alt/0" />
+        <div className="absolute inset-x-0 bottom-0 hidden h-40 bg-linear-to-b from-bg-alt/0 to-bg-alt lg:block" />
+      </div>
       <div className="container-x">
         <p className="eyebrow">{copy.showroom.eyebrow}</p>
         <h2 id="showroom-title" className="mt-3 max-w-3xl text-section font-extrabold">
@@ -105,8 +118,8 @@ export function ShowroomMap() {
           {copy.showroom.intro}
         </p>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="rounded-[1.75rem] border border-line bg-bg p-7 sm:p-9">
+        <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_24rem] lg:items-start">
+          <div className="rounded-[1.75rem] border border-line bg-bg p-7 shadow-sm sm:p-9">
             <h3 className="text-2xl font-extrabold">{business.name}</h3>
             <address className="mt-4 flex gap-3 not-italic text-ink-soft">
               <MapPin className="mt-1 size-5 shrink-0 text-accent" aria-hidden="true" />
@@ -153,23 +166,11 @@ export function ShowroomMap() {
               </li>
             </ul>
 
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a href={links.whatsapp} target="_blank" rel="noopener noreferrer" className={buttonClasses({ size: 'md' })}>
-                <WhatsAppIcon className="size-4" />
-                {copy.cta.whatsapp}
-                <span className="sr-only">(opens in a new tab)</span>
-              </a>
-              <a href={links.facebook} target="_blank" rel="noopener noreferrer" className={buttonClasses({ variant: 'secondary', size: 'md' })}>
-                <FacebookIcon className="size-4 text-[#1877F2]" />
-                Facebook
-                <span className="sr-only">(opens in a new tab)</span>
-              </a>
-            </div>
           </div>
 
-          <div className="flex flex-col overflow-hidden rounded-[1.75rem] border border-line bg-bg">
+          <div className="mx-auto flex w-full max-w-sm flex-col overflow-hidden rounded-[1.75rem] border border-line bg-bg shadow-sm lg:max-w-none">
             <CatchmentMap />
-            <div className="mt-auto flex flex-col gap-3 border-t border-line p-5 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col gap-3 border-t border-line p-5">
               <ul className="flex flex-wrap gap-1.5" aria-label="Areas covered">
                 {towns.map((t) => (
                   <li key={t} className="rounded-full bg-bg-alt px-2.5 py-1 text-xs font-medium text-ink-soft">
@@ -181,7 +182,7 @@ export function ShowroomMap() {
                 href={business.mapsDirectionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={buttonClasses({ variant: 'secondary', size: 'md', className: 'shrink-0' })}
+                className={buttonClasses({ variant: 'secondary', size: 'md', className: 'self-start' })}
               >
                 <Navigation className="size-4 text-accent" aria-hidden="true" />
                 {copy.cta.directions}
