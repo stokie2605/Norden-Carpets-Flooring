@@ -190,11 +190,13 @@ export const copy = {
     titleStart: 'Welcome to',
     titleAccent: 'Norden Carpets & Flooring.',
     intro:
-      "Hi, we're Dave and Wendy. We've been fitting floors across Rochdale for over 30 years. Dave, Tom and Jake do the fitting, and Wendy helps with admin.",
+      "Hi, we're Dave and Wendy. We've been fitting floors across Rochdale for over 30 years, and every job is fitted by our own team: Dave, Tom and Jake.",
     reassurance: "Measuring and quotes are free, and there's no obligation.",
-    badge: 'Our own fitters',
-    badgeBody: 'Dave, Tom and Jake do the fitting, and Wendy helps with admin.',
-    imageAlt: 'Living room with oak herringbone flooring, modern fireplace, and corner sofa',
+    ctaBook: 'Book a free measure',
+    ctaCall: 'Call',
+    trustFitters: 'Our own fitters',
+    trustShowroom: 'Showroom at Tenterhouse Mill',
+    imageAlt: 'Grey oak herringbone flooring fitted across a room with glazed doors',
   },
   cta: {
     bookShort: 'Free measure',

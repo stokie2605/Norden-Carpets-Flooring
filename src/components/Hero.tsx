@@ -1,50 +1,65 @@
-import { MapPin } from 'lucide-react'
-import { business, copy } from '../content/site'
+import { MapPin, Phone, ThumbsUp, Users } from 'lucide-react'
+import { copy, phones, proof } from '../content/site'
+import { useBooking } from '../context/BookingContext'
+import { Button, ButtonLink } from './ui/Button'
 import { Picture } from './ui/Picture'
 
 export function Hero() {
+  const { openBooking } = useBooking()
+
   return (
-    <section aria-labelledby="hero-title" className="relative overflow-hidden">
-      <div className="container-x grid items-center gap-10 pb-12 pt-6 sm:pt-10 lg:min-h-[calc(100dvh-4.5rem)] lg:grid-cols-[1.08fr_0.92fr] lg:gap-14 lg:py-12">
-        <div>
-          <p className="eyebrow">{copy.hero.eyebrow}</p>
+    <section aria-labelledby="hero-title" className="relative isolate overflow-hidden">
+      {/* Full width photo. Phones: a band across the top that fades into the page. Desktop: fills the hero and fades from the left behind the text. */}
+      <div className="absolute inset-x-0 top-0 -z-10 h-[25rem] sm:h-[31rem] lg:inset-y-0 lg:h-auto">
+        <Picture
+          name="work-herringbone-02"
+          alt={copy.hero.imageAlt}
+          sizes="100vw"
+          width={1024}
+          height={768}
+          priority
+          className="size-full object-cover object-[50%_60%] lg:object-[60%_50%]"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-linear-to-b from-bg/0 via-bg/45 via-55% to-bg lg:bg-linear-to-r lg:from-bg lg:via-bg/80 lg:via-35% lg:to-bg/0"
+        />
+        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 hidden h-24 bg-linear-to-b from-bg/0 to-bg lg:block" />
+      </div>
+
+      <div className="container-x pb-14 pt-[14.5rem] sm:pt-[18rem] lg:flex lg:min-h-[min(calc(100dvh-4.5rem),44rem)] lg:items-center lg:py-16">
+        <div className="max-w-2xl">
+          <p className="eyebrow text-muted">{copy.hero.eyebrow}</p>
           <h1 id="hero-title" className="mt-4 text-display font-extrabold text-ink">
-            {copy.hero.titleStart} <span className="text-accent">{copy.hero.titleAccent}</span>
+            {copy.hero.titleStart} {copy.hero.titleAccent}
           </h1>
-          <p className="mt-5 max-w-xl text-[1.05rem] text-ink-soft sm:text-lg">
-            {copy.hero.intro}
-          </p>
+          <p className="mt-6 max-w-xl text-[1.05rem] text-ink-soft sm:text-lg">{copy.hero.intro}</p>
 
-          <p className="mt-5 text-sm font-medium text-muted">{copy.hero.reassurance}</p>
-
-          <p className="mt-8 inline-flex max-w-full items-start gap-2 rounded-2xl border border-line bg-bg-alt px-4 py-3 text-sm text-ink-soft">
-            <MapPin className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
-            <span>
-              Showroom: {business.address.unit}, {business.address.street}, {business.address.postcode}
-            </span>
-          </p>
-        </div>
-
-        <div className="relative">
-          <div className="relative aspect-[1024/456] overflow-hidden rounded-[1.75rem] bg-bg-alt shadow-sm">
-            <Picture
-              name="hero-herringbone"
-              alt={copy.hero.imageAlt}
-              sizes="(min-width: 1024px) 45vw, 100vw"
-              width={1024}
-              height={456}
-              priority
-              className="size-full object-cover"
-            />
+          <div className="mt-8 flex flex-col gap-3 xs:flex-row">
+            <Button onClick={() => openBooking()}>{copy.hero.ctaBook}</Button>
+            <ButtonLink href={phones.showroom.href} variant="secondary">
+              <Phone className="size-[1.1rem] text-accent" aria-hidden="true" />
+              {copy.hero.ctaCall} {phones.showroom.display}
+            </ButtonLink>
           </div>
-          <p className="mt-4 rounded-2xl border border-line bg-bg-alt p-4 text-left sm:ml-auto sm:max-w-sm">
-            <span className="inline-block rounded-full bg-pill px-3 py-1 text-xs font-bold uppercase tracking-wide text-accent-deep">
-              {copy.hero.badge}
-            </span>
-            <span className="mt-2 block text-sm text-ink-soft">
-              {copy.hero.badgeBody}
-            </span>
-          </p>
+          <p className="mt-4 text-sm font-medium text-muted">{copy.hero.reassurance}</p>
+
+          <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-line pt-6 text-sm font-medium text-ink-soft">
+            <li className="inline-flex items-center gap-2">
+              <ThumbsUp className="size-4 text-accent" aria-hidden="true" />
+              {proof.rating} {proof.ratingLabel}
+            </li>
+            <li className="inline-flex items-center gap-2">
+              <Users className="size-4 text-accent" aria-hidden="true" />
+              {copy.hero.trustFitters}
+            </li>
+            <li>
+              <a href="#showroom" className="inline-flex items-center gap-2 hover:text-accent-deep">
+                <MapPin className="size-4 text-accent" aria-hidden="true" />
+                {copy.hero.trustShowroom}
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </section>
