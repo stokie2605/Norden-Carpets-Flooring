@@ -162,13 +162,13 @@ export const installations: readonly { image: string; alt: string; caption: stri
   },
   {
     image: 'work-hall-carpet-01',
-    alt: 'Neutral carpet fitted across a hallway and up two curved bottom steps',
-    caption: 'Carpet in a hallway, fitted round curved steps',
+    alt: 'Neutral carpet fitted across a living room and up two curved bottom steps',
+    caption: 'Carpet in a living room, fitted round curved steps',
   },
   {
     image: 'work-kitchen-laminate-01',
-    alt: 'Wood effect laminate flooring fitted through an open plan kitchen diner',
-    caption: 'Wood effect laminate in a kitchen diner',
+    alt: 'Wood effect laminate flooring fitted through a kitchen',
+    caption: 'Wood effect laminate in a kitchen',
   },
 ]
 
