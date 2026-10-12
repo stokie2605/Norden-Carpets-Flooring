@@ -4,6 +4,7 @@ const WIDTHS = [360, 375, 390, 414] as const
 const PAGES = [
   { name: 'home', path: '/' },
   { name: 'privacy', path: '/privacy.html' },
+  { name: 'terms', path: '/terms.html' },
 ] as const
 const SCREENSHOT_WIDTH = 375
 

@@ -13,6 +13,7 @@ const ROOT = '<div id="root"></div>'
 const PAGES = [
   { page: 'home', file: 'index.html' },
   { page: 'privacy', file: 'privacy.html' },
+  { page: 'terms', file: 'terms.html' },
 ]
 
 const { render } = await import(pathToFileURL(join(SSR_DIR, 'entry-server.js')).href)

@@ -35,9 +35,9 @@ function resolveTurnstileSiteKey(mode: string): string {
   return key
 }
 
-/** Serve /privacy locally the same way Cloudflare Pages does (privacy.html at /privacy). */
+/** Serve /privacy and /terms locally the same way Cloudflare Pages does (privacy.html at /privacy). */
 function cleanUrls(): Plugin {
-  const rewrite = (url: string | undefined) => url?.replace(/^\/privacy\/?(?=$|\?)/, '/privacy.html')
+  const rewrite = (url: string | undefined) => url?.replace(/^\/(privacy|terms)\/?(?=$|\?)/, '/$1.html')
   return {
     name: 'norden-clean-urls',
     configureServer(server) {
@@ -88,6 +88,7 @@ export default defineConfig(({ mode, isSsrBuild }) => ({
           input: {
             main: resolve(import.meta.dirname, 'index.html'),
             privacy: resolve(import.meta.dirname, 'privacy.html'),
+            terms: resolve(import.meta.dirname, 'terms.html'),
           },
         },
   },

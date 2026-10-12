@@ -87,6 +87,9 @@ export function Footer() {
             &copy; <span suppressHydrationWarning>{new Date().getFullYear()}</span> {business.name}. {business.legalLine}{' '}
             <a href={links.privacy} className="underline hover:text-ink">
               Privacy notice
+            </a>{' '}
+            <a href={links.terms} className="underline hover:text-ink">
+              Terms and conditions
             </a>
           </p>
           <p>

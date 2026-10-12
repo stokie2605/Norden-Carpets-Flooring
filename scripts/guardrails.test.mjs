@@ -25,7 +25,7 @@ describe('guardrails', () => {
 
   it('shows no prices in copy or structured data', () => {
     expect(read('src/content/site.ts')).not.toMatch(/£|\bprice/i)
-    for (const page of ['index.html', 'privacy.html']) {
+    for (const page of ['index.html', 'privacy.html', 'terms.html']) {
       expect(read(page), page).not.toMatch(/minPrice|maxPrice|priceSpecification|£\s?\d/)
     }
   })
