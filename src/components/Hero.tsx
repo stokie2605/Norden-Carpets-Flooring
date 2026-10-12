@@ -26,18 +26,18 @@ export function Hero() {
         </div>
 
         <div className="relative">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] bg-bg-alt sm:aspect-[5/4] lg:aspect-[4/5]">
+          <div className="relative aspect-[1024/456] overflow-hidden rounded-[1.75rem] bg-bg-alt shadow-sm">
             <Picture
-              name="hero-stairs"
+              name="hero-herringbone"
               alt={copy.hero.imageAlt}
-              sizes="(min-width: 1024px) 40vw, 100vw"
+              sizes="(min-width: 1024px) 45vw, 100vw"
               width={1024}
-              height={1280}
+              height={456}
               priority
               className="size-full object-cover"
             />
           </div>
-          <p className="absolute -bottom-4 left-4 right-4 rounded-2xl bg-bg p-4 shadow-[0_18px_40px_-18px_rgb(15_23_42/0.35)] sm:left-auto sm:right-6 sm:max-w-xs">
+          <p className="mt-4 rounded-2xl border border-line bg-bg-alt p-4 text-left sm:ml-auto sm:max-w-sm">
             <span className="inline-block rounded-full bg-pill px-3 py-1 text-xs font-bold uppercase tracking-wide text-accent-deep">
               {copy.hero.badge}
             </span>
