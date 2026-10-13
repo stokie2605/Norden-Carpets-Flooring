@@ -11,7 +11,7 @@ const reduceMotion = () =>
 
 /**
  * Our work. Phones and tablets: an edge to edge swipe row where every photo keeps its own shape.
- * Desktop: one large photo at its own shape with a line of thumbnails underneath.
+ * Desktop: two photos side by side at the same height, with a line of thumbnails underneath.
  * Nothing is cropped and there are no filled bands. Tap a photo for the full size viewer.
  */
 export function PreviousWork() {
@@ -48,15 +48,22 @@ export function PreviousWork() {
     }
   }, [])
 
-  // Desktop: fetch the photos either side so moving on is instant.
+  // Desktop shows photos in pairs. The pair starts on an even position.
+  const pageStart = active - (active % 2)
+  const pair = [pageStart, pageStart + 1]
+    .filter((i) => i < count)
+    .map((index) => ({ index, item: installations[index]! }))
+  const pairRatio = pair.reduce((sum, p) => sum + p.item.width / p.item.height, 0)
+  const move = (d: number) => setActive(() => (((pageStart + d * 2) % count) + count) % count)
+
+  // Desktop: fetch the next pair so moving on is instant.
   useEffect(() => {
-    if (count < 2 || typeof Image === 'undefined') return
-    for (const d of [1, -1]) {
-      const next = installations[(active + d + count) % count]
+    if (count < 3 || typeof Image === 'undefined') return
+    for (const i of [pageStart + 2, pageStart + 3]) {
+      const next = installations[i % count]
       if (next) new Image().src = `/images/${next.image}-show-1024.webp`
     }
-  }, [active, count])
-  const move = (d: number) => setActive((i) => (i + d + count) % count)
+  }, [pageStart, count])
 
   const page = (direction: 1 | -1) => {
     const rail = railRef.current
@@ -98,7 +105,7 @@ export function PreviousWork() {
 
   if (count === 0) {
     return (
-      <section id="work" aria-labelledby="work-title" className="py-11 sm:py-24">
+      <section id="work" aria-labelledby="work-title" className="py-16 sm:py-24">
         <div className="container-x">
           <p className="eyebrow">{copy.work.eyebrow}</p>
           <h2 id="work-title" className="mt-3 text-section font-extrabold">
@@ -114,12 +121,11 @@ export function PreviousWork() {
 
   // count > 0 here, so the first photo is always there as a fallback.
   const shown = installations[viewerIndex] ?? installations[0]!
-  const current = installations[active] ?? installations[0]!
   const arrow =
     'grid size-12 place-items-center rounded-full border border-line text-ink transition-colors hover:border-ink hover:bg-ink hover:text-white'
 
   return (
-    <section id="work" aria-labelledby="work-title" className="overflow-hidden py-11 sm:py-24">
+    <section id="work" aria-labelledby="work-title" className="overflow-hidden py-16 sm:py-24">
       <div className="container-x flex items-end justify-between gap-6">
         <div className="max-w-2xl">
           <p className="eyebrow">{copy.work.eyebrow}</p>
@@ -189,7 +195,7 @@ export function PreviousWork() {
         </div>
       </div>
 
-      {/* Desktop gallery */}
+      {/* Desktop gallery: two photos side by side at the same height, filling the width, with thumbnails underneath. */}
       <div className="container-x mt-12 hidden lg:block">
         <div
           role="region"
@@ -199,31 +205,43 @@ export function PreviousWork() {
           onKeyDown={(e) => {
             if (e.key === 'ArrowRight') move(1)
             if (e.key === 'ArrowLeft') move(-1)
-            if (e.key === 'Enter') openViewer(active)
           }}
-          className="relative flex h-[38rem] items-center justify-center rounded-2xl outline-none"
+          className="relative rounded-2xl outline-none"
         >
-          <button
-            type="button"
-            onClick={() => openViewer(active)}
-            aria-label={`${copy.work.openPhoto} ${current.caption}`}
-            className="h-full cursor-zoom-in"
+          <ul
+            className="mx-auto flex w-full items-start gap-4"
+            style={{ maxWidth: `calc(36rem * ${pairRatio.toFixed(4)} + ${pair.length - 1}rem)` }}
           >
-            <Picture
-              key={current.image}
-              name={`${current.image}-show`}
-              alt={current.alt}
-              sizes="(min-width: 1024px) 60rem, 100vw"
-              width={current.width}
-              height={current.height}
-              className="fade-in h-full w-auto max-w-full rounded-2xl object-contain shadow-[0_24px_60px_-28px_rgb(15_23_42/0.45)]"
-            />
-          </button>
+            {pair.map(({ item, index }) => (
+              <li key={item.image} style={{ flex: `${(item.width / item.height).toFixed(4)} 1 0%` }}>
+                <figure>
+                  <button
+                    type="button"
+                    onClick={() => openViewer(index)}
+                    aria-label={`${copy.work.openPhoto} ${item.caption}`}
+                    style={{ aspectRatio: `${item.width} / ${item.height}` }}
+                    className="group block w-full cursor-zoom-in overflow-hidden rounded-2xl bg-bg-alt shadow-[0_24px_60px_-28px_rgb(15_23_42/0.45)]"
+                  >
+                    <Picture
+                      key={item.image}
+                      name={`${item.image}-show`}
+                      alt={item.alt}
+                      sizes="(min-width: 1024px) 36rem, 50vw"
+                      width={item.width}
+                      height={item.height}
+                      className="fade-in size-full object-cover transition-transform duration-500 motion-safe:group-hover:scale-[1.02]"
+                    />
+                  </button>
+                  <figcaption className="mt-3 text-sm font-medium text-ink-soft">{item.caption}</figcaption>
+                </figure>
+              </li>
+            ))}
+          </ul>
           <button
             type="button"
             onClick={() => move(-1)}
             aria-label={copy.work.previous}
-            className={`absolute left-0 top-1/2 -translate-y-1/2 ${arrow}`}
+            className={`absolute left-0 top-[calc(50%-1rem)] -translate-y-1/2 bg-bg shadow-md ${arrow}`}
           >
             <ChevronLeft className="size-5" aria-hidden="true" />
           </button>
@@ -231,48 +249,40 @@ export function PreviousWork() {
             type="button"
             onClick={() => move(1)}
             aria-label={copy.work.next}
-            className={`absolute right-0 top-1/2 -translate-y-1/2 ${arrow}`}
+            className={`absolute right-0 top-[calc(50%-1rem)] -translate-y-1/2 bg-bg shadow-md ${arrow}`}
           >
             <ChevronRight className="size-5" aria-hidden="true" />
           </button>
         </div>
 
-        <div className="mt-5 flex items-baseline justify-center gap-3 text-sm">
-          <p className="font-medium text-ink" aria-live="polite">
-            {current.caption}
-          </p>
-          <p className="tabular-nums text-muted">
-            {active + 1} {copy.work.of} {count}
-          </p>
-        </div>
-
         <ul
-          className="mt-6 grid gap-2"
+          className="mt-8 grid gap-2"
           style={{ gridTemplateColumns: `repeat(${Math.min(count, 14)}, minmax(0, 1fr))` }}
         >
-          {installations.map((item, i) => (
-            <li key={item.image}>
-              <button
-                type="button"
-                onClick={() => setActive(i)}
-                aria-label={item.caption}
-                aria-current={i === active ? 'true' : undefined}
-                className={`block aspect-square w-full overflow-hidden rounded-xl transition-[opacity,box-shadow] ${
-                  i === active
-                    ? 'opacity-100 ring-2 ring-accent ring-offset-2 ring-offset-bg'
-                    : 'opacity-55 hover:opacity-100'
-                }`}
-              >
-                <img
-                  src={`/images/${item.image}-show-480.webp`}
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                  className="size-full object-cover"
-                />
-              </button>
-            </li>
-          ))}
+          {installations.map((item, i) => {
+            const onShow = i === pageStart || i === pageStart + 1
+            return (
+              <li key={item.image}>
+                <button
+                  type="button"
+                  onClick={() => setActive(i)}
+                  aria-label={item.caption}
+                  aria-current={onShow ? 'true' : undefined}
+                  className={`block aspect-square w-full overflow-hidden rounded-xl transition-[opacity,box-shadow] ${
+                    onShow ? 'opacity-100 ring-2 ring-accent ring-offset-2 ring-offset-bg' : 'opacity-55 hover:opacity-100'
+                  }`}
+                >
+                  <img
+                    src={`/images/${item.image}-show-480.webp`}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="size-full object-cover"
+                  />
+                </button>
+              </li>
+            )
+          })}
         </ul>
       </div>
 
