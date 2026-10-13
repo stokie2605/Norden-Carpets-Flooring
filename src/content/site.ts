@@ -49,8 +49,6 @@ export const hours = [
   { days: 'Sunday', time: 'Closed' },
 ] as const
 
-export const towns = ['Norden', 'Bamford', 'Birtle', 'Edenfield', 'Ramsbottom', 'Rochdale'] as const
-
 export const team = [
   { name: 'Dave', role: 'Fitter' },
   { name: 'Tom', role: 'Fitter' },
@@ -315,10 +313,9 @@ export const copy = {
     title: 'What our customers say.',
   },
   showroom: {
-    eyebrow: 'Showroom and areas we cover',
+    eyebrow: 'Showroom',
     title: 'Come and see us at Tenterhouse Mill.',
-    intro: "We do free home measures within about 15 miles of our Norden showroom.",
-    areasTitle: 'Areas we cover',
+    coverage: 'Free home measures across Rochdale and Greater Manchester.',
     vanAlt: 'The Norden Carpets & Flooring van, with our name and phone number on the side',
   },
   footer: {
@@ -332,5 +329,5 @@ export const copy = {
 export const seo = {
   title: 'Carpets & Flooring in Rochdale | Norden Carpets & Flooring',
   description:
-    'Carpets, vinyl, laminate and underlay, supplied and fitted across Rochdale and Ramsbottom. Family run for over 30 years, with our own fitters. Book a free measure.',
+    'Carpets, vinyl, laminate and underlay, supplied and fitted across Rochdale and Greater Manchester. Family run for over 30 years, with our own fitters. Book a free measure.',
 } as const

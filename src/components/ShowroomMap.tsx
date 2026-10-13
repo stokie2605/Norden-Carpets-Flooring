@@ -1,9 +1,9 @@
-import { Clock, MapPin, Navigation } from 'lucide-react'
-import { addressLines, business, copy, hours, towns } from '../content/site'
+import { Clock, Navigation } from 'lucide-react'
+import { business, copy, hours } from '../content/site'
 import { buttonClasses } from './ui/Button'
 import { Picture } from './ui/Picture'
 
-/** Showroom and areas we cover: Dave's van, the showroom address and hours, the towns we cover and a directions link. */
+/** Showroom: Dave's van, opening hours and a directions link. The full address is in the footer. */
 export function ShowroomMap() {
   return (
     <section id="showroom" aria-labelledby="showroom-title" className="relative isolate overflow-hidden bg-bg-alt py-10 sm:py-16">
@@ -26,13 +26,8 @@ export function ShowroomMap() {
             <h2 id="showroom-title" className="mt-3 max-w-2xl text-section font-extrabold">
               {copy.showroom.title}
             </h2>
-            <p className="mt-4 max-w-xl text-ink-soft">{copy.showroom.intro}</p>
-
-            <p className="mt-6 flex max-w-xl gap-2.5 font-medium text-ink">
-              <MapPin className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden="true" />
-              <span>{addressLines.join(', ')}</span>
-            </p>
-            <p className="mt-3 flex max-w-xl gap-2.5 text-ink-soft">
+            <p className="mt-4 max-w-xl text-ink-soft">{copy.showroom.coverage}</p>
+            <p className="mt-5 flex max-w-xl gap-2.5 text-ink-soft">
               <Clock className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden="true" />
               <span>
                 {hours
@@ -41,15 +36,6 @@ export function ShowroomMap() {
                   .join(', ')}
               </span>
             </p>
-
-            <h3 className="mt-6 text-sm font-bold uppercase tracking-[0.14em] text-ink">{copy.showroom.areasTitle}</h3>
-            <ul className="mt-3 flex max-w-xl flex-wrap gap-2" aria-label={copy.showroom.areasTitle}>
-              {towns.map((t) => (
-                <li key={t} className="rounded-full border border-line bg-bg px-3 py-1.5 text-sm font-medium text-ink-soft">
-                  {t}
-                </li>
-              ))}
-            </ul>
 
             <a
               href={business.mapsDirectionsUrl}
