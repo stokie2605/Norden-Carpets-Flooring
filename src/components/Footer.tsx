@@ -6,8 +6,8 @@ import { Wordmark } from './ui/Wordmark'
 export function Footer() {
   return (
     <footer className="border-t border-line bg-bg">
-      {/* Areas we cover live in the showroom section only. Phones: showroom and hours side by side. */}
-      <div className="container-x grid grid-cols-2 gap-x-6 gap-y-8 py-10 sm:py-14 lg:grid-cols-[1.4fr_1fr_1fr]">
+      {/* Phones: showroom and hours side by side, contact full width underneath. */}
+      <div className="container-x grid grid-cols-2 gap-x-6 gap-y-8 py-10 sm:py-14 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
         <div className="col-span-2 lg:col-span-1">
           <Wordmark />
           <p className="mt-4 max-w-xs text-sm text-ink-soft">
@@ -47,15 +47,6 @@ export function Footer() {
                 {line}
               </span>
             ))}
-            <a href={phones.showroom.href} className="mt-2 flex min-h-11 items-center font-semibold text-ink hover:text-accent-deep">
-              {phones.showroom.display}
-            </a>
-            <a href={phones.mobile.href} className="flex min-h-11 items-center hover:text-accent-deep">
-              {phones.mobile.display} (mobile)
-            </a>
-            <a href={`mailto:${business.email}`} className="flex min-h-11 items-center break-all hover:text-accent-deep">
-              {business.email}
-            </a>
           </address>
         </div>
 
@@ -69,6 +60,22 @@ export function Footer() {
               </div>
             ))}
           </dl>
+        </div>
+
+        {/* Full width on phones so the email address stays on one line. */}
+        <div className="col-span-2 lg:col-span-1">
+          <h2 className="text-sm font-bold uppercase tracking-[0.14em] text-ink">Contact</h2>
+          <div className="mt-1 text-sm text-ink-soft">
+            <a href={phones.showroom.href} className="flex min-h-11 items-center font-semibold text-ink hover:text-accent-deep">
+              {phones.showroom.display}
+            </a>
+            <a href={phones.mobile.href} className="flex min-h-11 items-center hover:text-accent-deep">
+              {phones.mobile.display} (mobile)
+            </a>
+            <a href={`mailto:${business.email}`} className="flex min-h-11 items-center whitespace-nowrap hover:text-accent-deep">
+              {business.email}
+            </a>
+          </div>
         </div>
       </div>
 

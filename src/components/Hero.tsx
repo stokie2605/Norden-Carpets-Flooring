@@ -36,11 +36,14 @@ export function Hero() {
           </h1>
           <p className="mt-4 max-w-xl text-[1.05rem] text-ink-soft sm:mt-6 sm:text-lg">{copy.hero.intro}</p>
 
-          <div id="hero-actions" className="mt-6 flex sm:mt-8 flex-col gap-3 xs:flex-row">
+          <div id="hero-actions" className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row">
             <Button onClick={() => openBooking()}>{copy.hero.ctaBook}</Button>
             <ButtonLink href={phones.showroom.href} variant="secondary">
               <Phone className="size-[1.1rem] text-accent" aria-hidden="true" />
-              {copy.hero.ctaCall} {phones.showroom.display}
+              {/* Kept on one line so the number never splits on narrow phones. */}
+              <span className="whitespace-nowrap">
+                {copy.hero.ctaCall} {phones.showroom.display}
+              </span>
             </ButtonLink>
           </div>
           <p className="mt-4 text-sm font-medium text-muted">{copy.hero.reassurance}</p>

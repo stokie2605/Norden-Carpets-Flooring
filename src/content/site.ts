@@ -264,13 +264,13 @@ export const installations: readonly { image: string; alt: string; caption: stri
 // Headings, intros and button labels used across the page.
 export const copy = {
   hero: {
-    eyebrow: `Family run in Norden, Rochdale, for ${business.yearsInTrade} years`,
+    eyebrow: 'Family run business',
     titleStart: 'Welcome to',
     titleAccent: 'Norden Carpets & Flooring.',
     intro:
       "Hi, we're Dave and Wendy. We've been fitting floors across Rochdale for over 30 years, and every job is fitted by our own team: Dave, Tom and Jake.",
     reassurance: "Measuring and quotes are free, and there's no obligation.",
-    ctaBook: 'Book a free measure',
+    ctaBook: 'Book a free measurement',
     ctaCall: 'Call',
     trustFitters: 'Our own fitters',
     trustShowroom: 'Showroom at Tenterhouse Mill',
