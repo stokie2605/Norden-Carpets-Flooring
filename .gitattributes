@@ -1,0 +1,2 @@
+# Store text files with LF; Windows checkouts may use CRLF without showing as changes
+* text=auto
