@@ -10,12 +10,14 @@ const reduceMotion = () =>
   window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 /**
- * Our work: an edge to edge rail of real jobs. Every photo keeps its own shape at the same height,
- * so nothing is cropped and there are no empty bands. Tap a photo for the full size viewer.
+ * Our work. Phones and tablets: an edge to edge swipe row where every photo keeps its own shape.
+ * Desktop: one large photo at its own shape with a line of thumbnails underneath.
+ * Nothing is cropped and there are no filled bands. Tap a photo for the full size viewer.
  */
 export function PreviousWork() {
   const count = installations.length
   const [viewerIndex, setViewerIndex] = useState(0)
+  const [active, setActive] = useState(0)
   const [bar, setBar] = useState({ start: 0, size: 1 })
   const railRef = useRef<HTMLUListElement>(null)
   const viewerRef = useRef<HTMLDialogElement>(null)
@@ -45,6 +47,16 @@ export function PreviousWork() {
       window.removeEventListener('resize', update)
     }
   }, [])
+
+  // Desktop: fetch the photos either side so moving on is instant.
+  useEffect(() => {
+    if (count < 2 || typeof Image === 'undefined') return
+    for (const d of [1, -1]) {
+      const next = installations[(active + d + count) % count]
+      if (next) new Image().src = `/images/${next.image}-show-1024.webp`
+    }
+  }, [active, count])
+  const move = (d: number) => setActive((i) => (i + d + count) % count)
 
   const page = (direction: 1 | -1) => {
     const rail = railRef.current
@@ -102,6 +114,7 @@ export function PreviousWork() {
 
   // count > 0 here, so the first photo is always there as a fallback.
   const shown = installations[viewerIndex] ?? installations[0]!
+  const current = installations[active] ?? installations[0]!
   const arrow =
     'grid size-12 place-items-center rounded-full border border-line text-ink transition-colors hover:border-ink hover:bg-ink hover:text-white'
 
@@ -115,7 +128,7 @@ export function PreviousWork() {
           </h2>
           <p className="mt-4 text-ink-soft">{copy.work.intro}</p>
         </div>
-        <div className="hidden shrink-0 gap-2 sm:flex">
+        <div className="hidden shrink-0 gap-2 sm:flex lg:hidden">
           <button type="button" onClick={() => page(-1)} aria-label={copy.work.previous} className={arrow}>
             <ChevronLeft className="size-5" aria-hidden="true" />
           </button>
@@ -132,7 +145,7 @@ export function PreviousWork() {
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}
         onPointerLeave={endDrag}
-        className="rail mt-10 flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain [--rail-h:26rem] [scrollbar-width:none] sm:gap-4 lg:[--rail-h:34rem] [&::-webkit-scrollbar]:hidden"
+        className="rail mt-10 flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain [--rail-h:26rem] [scrollbar-width:none] sm:gap-4 sm:[--rail-h:30rem] lg:hidden [&::-webkit-scrollbar]:hidden"
       >
         {installations.map((item, i) => {
           const ratio = item.height / item.width
@@ -167,7 +180,7 @@ export function PreviousWork() {
         })}
       </ul>
 
-      <div className="container-x mt-6">
+      <div className="container-x mt-6 lg:hidden">
         <div className="relative h-0.5 overflow-hidden rounded-full bg-line" aria-hidden="true">
           <div
             className="absolute inset-y-0 rounded-full bg-ink"
@@ -176,9 +189,97 @@ export function PreviousWork() {
         </div>
       </div>
 
+      {/* Desktop gallery */}
+      <div className="container-x mt-12 hidden lg:block">
+        <div
+          role="region"
+          aria-roledescription="carousel"
+          aria-label={copy.work.slideshowLabel}
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'ArrowRight') move(1)
+            if (e.key === 'ArrowLeft') move(-1)
+            if (e.key === 'Enter') openViewer(active)
+          }}
+          className="relative flex h-[38rem] items-center justify-center rounded-2xl outline-none"
+        >
+          <button
+            type="button"
+            onClick={() => openViewer(active)}
+            aria-label={`${copy.work.openPhoto} ${current.caption}`}
+            className="h-full cursor-zoom-in"
+          >
+            <Picture
+              key={current.image}
+              name={`${current.image}-show`}
+              alt={current.alt}
+              sizes="(min-width: 1024px) 60rem, 100vw"
+              width={current.width}
+              height={current.height}
+              className="fade-in h-full w-auto max-w-full rounded-2xl object-contain shadow-[0_24px_60px_-28px_rgb(15_23_42/0.45)]"
+            />
+          </button>
+          <button
+            type="button"
+            onClick={() => move(-1)}
+            aria-label={copy.work.previous}
+            className={`absolute left-0 top-1/2 -translate-y-1/2 ${arrow}`}
+          >
+            <ChevronLeft className="size-5" aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            onClick={() => move(1)}
+            aria-label={copy.work.next}
+            className={`absolute right-0 top-1/2 -translate-y-1/2 ${arrow}`}
+          >
+            <ChevronRight className="size-5" aria-hidden="true" />
+          </button>
+        </div>
+
+        <div className="mt-5 flex items-baseline justify-center gap-3 text-sm">
+          <p className="font-medium text-ink" aria-live="polite">
+            {current.caption}
+          </p>
+          <p className="tabular-nums text-muted">
+            {active + 1} {copy.work.of} {count}
+          </p>
+        </div>
+
+        <ul
+          className="mt-6 grid gap-2"
+          style={{ gridTemplateColumns: `repeat(${Math.min(count, 14)}, minmax(0, 1fr))` }}
+        >
+          {installations.map((item, i) => (
+            <li key={item.image}>
+              <button
+                type="button"
+                onClick={() => setActive(i)}
+                aria-label={item.caption}
+                aria-current={i === active ? 'true' : undefined}
+                className={`block aspect-square w-full overflow-hidden rounded-xl transition-[opacity,box-shadow] ${
+                  i === active
+                    ? 'opacity-100 ring-2 ring-accent ring-offset-2 ring-offset-bg'
+                    : 'opacity-55 hover:opacity-100'
+                }`}
+              >
+                <img
+                  src={`/images/${item.image}-show-480.webp`}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  className="size-full object-cover"
+                />
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+
       <dialog
         ref={viewerRef}
         aria-label={shown.caption}
+        onClose={() => setActive(viewerIndex)}
         onKeyDown={(e) => {
           if (e.key === 'ArrowRight') stepViewer(1)
           if (e.key === 'ArrowLeft') stepViewer(-1)

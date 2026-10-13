@@ -161,6 +161,16 @@
   }
 }
 
+/* Soft fade when the Our work photo changes. Switched off by the reduced motion rule below. */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+.fade-in {
+  animation: fade-in 0.35s ease-out;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
