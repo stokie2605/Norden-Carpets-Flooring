@@ -2,7 +2,7 @@ import { copy, team } from '../content/site'
 
 export function TeamStrip() {
   return (
-    <section aria-labelledby="team-title" className="border-y border-line bg-bg-alt py-12 sm:py-14">
+    <section aria-labelledby="team-title" className="border-y border-line bg-bg-alt py-9 sm:py-14">
       <div className="container-x grid gap-8 xl:grid-cols-[minmax(0,20rem)_1fr] xl:items-center xl:gap-12">
         <div className="max-w-sm">
           <h2 id="team-title" className="text-2xl font-extrabold sm:text-3xl">
@@ -16,7 +16,7 @@ export function TeamStrip() {
               <p>&ldquo;{copy.team.review.quote}&rdquo;</p>
             </blockquote>
             <figcaption className="mt-1 text-sm text-muted">
-              {copy.team.review.author}, {copy.reviews.reviewSource}
+              {copy.reviews.reviewSource}
             </figcaption>
           </figure>
         </div>

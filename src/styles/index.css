@@ -45,9 +45,9 @@
   --font-display: 'Archivo Variable', 'Arial Narrow', Arial, sans-serif;
   --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
-  --text-display: clamp(2.5rem, 1.6rem + 4.2vw, 5.25rem);
+  --text-display: clamp(2.1rem, 1rem + 5vw, 5.25rem);
   --text-display--line-height: 0.95;
-  --text-section: clamp(1.9rem, 1.4rem + 2.2vw, 3.25rem);
+  --text-section: clamp(1.65rem, 1.1rem + 2.6vw, 3.25rem);
   --text-section--line-height: 1.02;
 
   --breakpoint-xs: 26rem;
@@ -119,6 +119,28 @@
     padding-inline: 1rem;
   }
 
+  /* Edge to edge photo rail that starts in line with .container-x content. */
+  .rail {
+    --rail-gutter: 1rem;
+    padding-inline: var(--rail-gutter);
+    scroll-padding-inline: var(--rail-gutter);
+  }
+  @media (min-width: 40rem) {
+    .rail {
+      --rail-gutter: 1.5rem;
+    }
+  }
+  @media (min-width: 64rem) {
+    .rail {
+      --rail-gutter: 2rem;
+    }
+  }
+  @media (min-width: 76rem) {
+    .rail {
+      --rail-gutter: calc((100% - 76rem) / 2 + 2rem);
+    }
+  }
+
   @media (min-width: 40rem) {
     .container-x {
       padding-inline: 1.5rem;
@@ -130,6 +152,16 @@
       padding-inline: 2rem;
     }
   }
+}
+
+/* Soft fade when the Our work photo changes. Switched off by the reduced motion rule below. */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+.fade-in {
+  animation: fade-in 0.35s ease-out;
 }
 
 @media (prefers-reduced-motion: reduce) {

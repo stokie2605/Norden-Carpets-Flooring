@@ -15,7 +15,7 @@ export function MobileBar() {
           href={links.whatsapp}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#128C7E] px-4 font-semibold text-white active:scale-[0.98]"
+          className="inline-flex min-h-12 items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-[#128C7E] px-3 font-semibold text-white active:scale-[0.98]"
         >
           <WhatsAppIcon className="size-5" />
           {copy.cta.whatsapp}
@@ -23,7 +23,7 @@ export function MobileBar() {
         </a>
         <a
           href={phones.showroom.href}
-          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-accent px-4 font-semibold text-white active:scale-[0.98]"
+          className="inline-flex min-h-12 items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-accent px-3 font-semibold text-white active:scale-[0.98]"
         >
           <Phone className="size-5" aria-hidden="true" />
           {copy.cta.callShort}

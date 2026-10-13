@@ -49,8 +49,6 @@ export const hours = [
   { days: 'Sunday', time: 'Closed' },
 ] as const
 
-export const towns = ['Norden', 'Bamford', 'Birtle', 'Edenfield', 'Ramsbottom', 'Rochdale'] as const
-
 export const team = [
   { name: 'Dave', role: 'Fitter' },
   { name: 'Tom', role: 'Fitter' },
@@ -60,8 +58,9 @@ export const team = [
 
 export type MaterialId = 'carpets' | 'lvt' | 'laminate'
 
-// Customer reviews are copied word for word from our Facebook page. Cut only with "...", never reword.
-export type Review = { quote: string; author: string }
+// Customer reviews are copied word for word from our Facebook and Google pages. Cut only with "...", never reword.
+// No customer names anywhere: each review shows only where it came from. Only our own team are named.
+export type Review = { quote: string; source?: 'facebook' | 'google' }
 
 export type Material = {
   id: MaterialId
@@ -86,7 +85,6 @@ export const materials: readonly Material[] = [
     imageAlt: 'Neutral flecked carpet fitted across a living room and round two curved bottom steps',
     review: {
       quote: 'Very happy with our gorgeous carpet. Very good value and quality and a brilliant service from start to finish.',
-      author: 'Caroline',
     },
   },
   {
@@ -98,7 +96,7 @@ export const materials: readonly Material[] = [
     bestFor: ['Kitchens', 'Bathrooms', 'Open plan living'],
     image: 'tab-vinyl-03',
     imageAlt: 'Grey and white patterned tile effect vinyl fitted across a bathroom floor, round the toilet and up to the shower',
-    review: { quote: 'Excellent service, love my new carpet and lino, thankyou.', author: 'Joanne' },
+    review: { quote: 'Excellent service, love my new carpet and lino, thankyou.' },
   },
   {
     id: 'laminate',
@@ -111,7 +109,6 @@ export const materials: readonly Material[] = [
     imageAlt: 'Rustic oak laminate flooring fitted through a lounge into the dining room',
     review: {
       quote: 'So so happy with the service and the end result. Such good quality flooring.',
-      author: 'Hannah',
     },
   },
 ]
@@ -120,69 +117,160 @@ export const proof = {
   rating: '96%',
   ratingLabel: 'recommend us on Facebook',
   ratingSource: 'Based on 24 Facebook reviews',
-  highlights: [
-    `${business.yearsInTrade} years fitting floors in Rochdale`,
-    'Free measure and quote, no obligation',
-    'Every job fitted by our own team',
-  ],
+  google: {
+    rating: '4.9',
+    label: 'out of 5 on Google',
+    source: 'Based on 19 Google reviews',
+  },
   featured: {
     quote:
       'Fitted our whole house with carpets and laminate flooring, looks amazing. Really happy with the results, definitely recommend and will use them again!',
-    author: 'Charlotte',
     detail: 'Facebook review',
   },
+  // Strongest first: on phones these are a swipe row, so the best ones are seen first.
   reviews: [
     {
       quote:
+        "Great service and advice on picking the perfect carpet... They even chopped up the old one and put it in my car so I could take it to the dump. I'm definitely using Norden Carpets again.",
+      source: 'google',
+    },
+    {
+      quote:
         'Professional and friendly service. Carpets laid and are fabulous. Thank you Dave, you went over and above, kept me in the loop every step of the way',
-      author: 'Lesley',
     },
     {
       quote:
         'Absolutely amazing carpets and fitting! We had our lounge, hall, stairs and landing carpeted and it looks fabulous!',
-      author: 'Amy',
+    },
+    {
+      quote: 'Excellent friendly service from all at norden carpets. Very happy with the finish and quality.',
+      source: 'google',
     },
     {
       quote: 'I have had many carpets from Dave over the years and he has always done a great job...',
-      author: 'Rebecca',
+    },
+    {
+      quote: 'Good selection no pushy staff a hassle free experience and very helpful worth a visit to get a new carpet or flooring',
+      source: 'google',
     },
   ] as readonly Review[],
 } as const
 
-// Real installation photos from the team only. Shown in the Our work section.
-export const installations: readonly { image: string; alt: string; caption: string }[] = [
+// Real installation photos from the team only. Shown in the Our work slideshow.
+// One photo per job, and none of these may appear anywhere else on the page.
+// Full room shots come first, then stairs, landings and smaller rooms.
+// width and height are the photo's real shape, so it is always shown whole.
+export const installations: readonly { image: string; alt: string; caption: string; width: number; height: number }[] = [
   {
-    image: 'work-utility-vinyl-01',
-    alt: 'Grey patterned tile effect vinyl fitted across a utility room floor',
-    caption: 'Grey patterned vinyl in a utility room',
+    image: 'work-oak-lounge-laminate-01',
+    width: 1024,
+    height: 1365,
+    alt: 'Natural oak effect laminate fitted across a bright living room',
+    caption: 'Oak laminate, living room',
+  },
+  {
+    image: 'work-dining-laminate-01',
+    width: 1024,
+    height: 1365,
+    alt: 'Light oak effect laminate fitted through a long dining room',
+    caption: 'Oak laminate, dining room',
+  },
+  {
+    image: 'work-lounge-laminate-02',
+    width: 1024,
+    height: 768,
+    alt: 'Grey wood effect laminate fitted across a living room with a fireplace',
+    caption: 'Wood effect laminate, lounge',
+  },
+  {
+    image: 'work-feature-wall-laminate-01',
+    width: 1024,
+    height: 1365,
+    alt: 'Grey oak effect laminate fitted across a living room with a feature wall',
+    caption: 'Grey laminate, lounge',
+  },
+  {
+    image: 'work-kitchen-laminate-02',
+    width: 1024,
+    height: 1365,
+    alt: 'Wood effect laminate fitted through a kitchen with an island',
+    caption: 'Wood effect laminate, kitchen',
+  },
+  {
+    image: 'work-grey-lounge-laminate-01',
+    width: 1024,
+    height: 1365,
+    alt: 'Grey oak effect laminate fitted across a living room',
+    caption: 'Grey laminate, living room',
+  },
+  {
+    image: 'work-garden-room-01',
+    width: 1024,
+    height: 1365,
+    alt: 'Dark oak effect laminate fitted in a garden room with patio doors',
+    caption: 'Dark oak laminate, garden room',
   },
   {
     image: 'work-hallway-transition-01',
+    width: 1024,
+    height: 1365,
     alt: 'Oak effect laminate hallway floor with carpeted stairs and a patterned vinyl doorway',
-    caption: 'Oak effect laminate in a hallway, with carpet on the stairs',
+    caption: 'Oak laminate, hallway',
   },
   {
     image: 'work-leopard-carpet-01',
+    width: 1024,
+    height: 1360,
     alt: 'Leopard print carpet fitted up a staircase and across the landing',
-    caption: 'Leopard print carpet on the stairs and landing',
+    caption: 'Leopard print stairs and landing',
   },
   {
-    image: 'work-kitchen-laminate-01',
-    alt: 'Wood effect laminate flooring fitted through a kitchen',
-    caption: 'Wood effect laminate in a kitchen',
+    image: 'work-cream-carpet-01',
+    width: 1024,
+    height: 1820,
+    alt: 'Cream carpet fitted along a landing and down the stairs, with oak and black spindles',
+    caption: 'Cream carpet, stairs and landing',
+  },
+  {
+    image: 'work-stair-runner-01',
+    width: 768,
+    height: 1024,
+    alt: 'Beige carpet fitted up a staircase with black painted edges',
+    caption: 'Stair carpet, painted edges',
+  },
+  {
+    image: 'work-stairs-carpet-02',
+    width: 1024,
+    height: 1365,
+    alt: 'Black and white chevron carpet fitted across a landing',
+    caption: 'Chevron carpet, landing',
+  },
+  {
+    image: 'work-cloakroom-vinyl-01',
+    width: 1024,
+    height: 1365,
+    alt: 'Wood effect vinyl fitted in a narrow cloakroom',
+    caption: 'Wood effect vinyl, cloakroom',
+  },
+  {
+    image: 'work-utility-vinyl-01',
+    width: 1024,
+    height: 1820,
+    alt: 'Grey patterned tile effect vinyl fitted across a utility room floor',
+    caption: 'Patterned vinyl, utility room',
   },
 ]
 
 // Headings, intros and button labels used across the page.
 export const copy = {
   hero: {
-    eyebrow: `Family run in Norden, Rochdale, for ${business.yearsInTrade} years`,
+    eyebrow: 'Family run business',
     titleStart: 'Welcome to',
     titleAccent: 'Norden Carpets & Flooring.',
     intro:
       "Hi, we're Dave and Wendy. We've been fitting floors across Rochdale for over 30 years, and every job is fitted by our own team: Dave, Tom and Jake.",
     reassurance: "Measuring and quotes are free, and there's no obligation.",
-    ctaBook: 'Book a free measure',
+    ctaBook: 'Book a free measurement',
     ctaCall: 'Call',
     trustFitters: 'Our own fitters',
     trustShowroom: 'Showroom at Tenterhouse Mill',
@@ -203,28 +291,32 @@ export const copy = {
   work: {
     eyebrow: 'Our work',
     title: 'Some of our recent jobs.',
-    intro: "Floors we've fitted in homes around Rochdale.",
+    intro: "Floors we've fitted in homes around Rochdale. Swipe through, or tap a photo to see it full size.",
+    openPhoto: 'See full size:',
     empty: 'New installation photos coming soon.',
+    slideshowLabel: 'Photos of recent jobs',
+    previous: 'Previous photo',
+    next: 'Next photo',
+    close: 'Close',
+    of: 'of',
   },
   team: {
     title: 'Meet the team.',
     intro: "We're a small family team. You'll deal with the same people from your first call to the fit.",
-    review: { quote: 'Such a lovely, super friendly team.', author: 'Amy' },
+    review: { quote: 'Such a lovely, super friendly team.' },
   },
   reviews: {
     reviewSource: 'Facebook review',
+    googleSource: 'Google review',
     facebookLink: 'Read our reviews',
     eyebrow: 'Reviews',
     title: 'What our customers say.',
   },
   showroom: {
-    eyebrow: 'Showroom and areas we cover',
+    eyebrow: 'Showroom',
     title: 'Come and see us at Tenterhouse Mill.',
-    intro: "We do free home measures within about 15 miles of our Norden showroom.",
-    areasTitle: 'Areas we cover',
-    mapPin: 'Norden showroom',
-    mapRadius: 'About 15 miles',
-    mapLabel: 'Map of the areas we cover: about 15 miles around our Norden showroom.',
+    coverage: 'Free home measures across Rochdale and Greater Manchester.',
+    vanAlt: 'The Norden Carpets & Flooring van, with our name and phone number on the side',
   },
   footer: {
     blurb: 'Carpets, vinyl, laminate and underlay, supplied and fitted by our own team.',
@@ -237,5 +329,5 @@ export const copy = {
 export const seo = {
   title: 'Carpets & Flooring in Rochdale | Norden Carpets & Flooring',
   description:
-    'Carpets, vinyl, laminate and underlay, supplied and fitted across Rochdale and Ramsbottom. Family run for over 30 years, with our own fitters. Book a free measure.',
+    'Carpets, vinyl, laminate and underlay, supplied and fitted across Rochdale and Greater Manchester. Family run for over 30 years, with our own fitters. Book a free measure.',
 } as const

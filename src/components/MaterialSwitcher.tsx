@@ -38,7 +38,7 @@ export function MaterialSwitcher() {
   }
 
   return (
-    <section id="flooring" aria-labelledby="flooring-title" className="bg-bg-alt py-16 sm:py-24">
+    <section id="flooring" aria-labelledby="flooring-title" className="bg-bg-alt py-11 sm:py-24">
       <div className="container-x">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
@@ -122,7 +122,7 @@ export function MaterialSwitcher() {
                       <p>&ldquo;{m.review.quote}&rdquo;</p>
                     </blockquote>
                     <figcaption className="mt-1 text-sm text-muted">
-                      {m.review.author}, {copy.reviews.reviewSource}
+                      {copy.reviews.reviewSource}
                     </figcaption>
                   </figure>
                 )}

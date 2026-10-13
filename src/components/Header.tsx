@@ -9,28 +9,11 @@ import { Wordmark } from './ui/Wordmark'
 export function Header() {
   const { openBooking } = useBooking()
   const [scrolled, setScrolled] = useState(false)
-  // The hero has its own Book and Call buttons, so the header ones stay hidden until those scroll out of view.
-  const [showActions, setShowActions] = useState(false)
-
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  useEffect(() => {
-    const heroActions = document.getElementById('hero-actions')
-    if (!heroActions || typeof IntersectionObserver === 'undefined') {
-      setShowActions(true)
-      return
-    }
-    const observer = new IntersectionObserver(
-      ([entry]) => setShowActions(!!entry && !entry.isIntersecting && entry.boundingClientRect.top < 0),
-      { rootMargin: '-72px 0px 0px 0px' },
-    )
-    observer.observe(heroActions)
-    return () => observer.disconnect()
   }, [])
 
   return (
@@ -45,11 +28,8 @@ export function Header() {
         </a>
 
         <div className="flex items-center gap-1 sm:gap-2">
-          <div
-            className={`flex items-center gap-1 transition-[opacity,visibility] duration-200 sm:gap-2 ${
-              showActions ? 'visible opacity-100' : 'invisible opacity-0'
-            }`}
-          >
+          {/* Call and Free measure are always on show, so booking is one tap away anywhere on the page. */}
+          <div className="flex items-center gap-1 sm:gap-2">
             <a
               href={phones.showroom.href}
               className="hidden min-h-11 items-center gap-2 whitespace-nowrap rounded-full px-3 text-sm font-semibold text-ink hover:text-accent-deep md:inline-flex"
@@ -74,6 +54,7 @@ export function Header() {
           </a>
         </div>
       </div>
+
     </header>
   )
 }

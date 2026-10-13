@@ -35,10 +35,12 @@ Norden Carpets & Flooring: mobile-first lead generation site for a family run fl
 - 2026-10-07: Every `tel:` link uses +44 format and comes from `phones` in `src/content/site.ts`.
 - 2026-10-09: Team is Dave, Tom and Jake (fitters) and Wendy (admin). No subcontractor wording anywhere. Bury is not mentioned anywhere, including the areas covered.
 - 2026-10-09: The subfloor section is removed. An Our work section (`PreviousWork.tsx`) replaces it and shows only real installation photos from `installations`. No prices anywhere, including the JSON-LD.
-- 2026-10-09: Reviews are copied word for word from the Facebook page (96% recommend, 24 reviews), first names only, no dates. Cut only with "...", never reword. Skip lines naming former staff. No customer photos: Dave supplies the job photos.
+- 2026-10-09: Reviews are copied word for word from the Facebook page (96% recommend, 24 reviews), no dates. 2026-10-13: no customer names on any review, only the source (Facebook or Google), so only the team are named. Cut only with "...", never reword. Skip lines naming former staff. No customer photos: Dave supplies the job photos.
 - 2026-10-09: Retention: enquiries that don't go ahead are deleted after one month, customer contact details once the job is finished and paid for, invoices kept as HMRC requires.
 - 2026-10-09: The business is a sole trader, David Wilshaw trading as Norden Carpets & Flooring, not VAT registered. The legal line sits in the footer and the privacy notice.
 - 2026-10-09: Production domain is nordencarpets.co.uk, registered at Cloudflare to David Wilshaw (UK sole trader), auto renew on.
+- 2026-10-13: Our work is a swipeable slideshow with thumbnails and a full size viewer. Photos show whole, never cropped (`name-show` files with a light colour lift). One photo per job, and no photo is used twice anywhere on the page (`scripts/photos.test.mjs`).
+- 2026-10-13: Reviews also come from Google (4.9 out of 5, 19 reviews). Google quotes are word for word with no reviewer names. The header has no section links. Its Call number and Free measure button are always on show. Our work starts with the full room photos.
 - 2026-10-09: Agent rules for Antigravity and other tools live in `AGENTS.md` and `.agents/rules/`. `scripts/guardrails.test.mjs` locks these decisions.
 
 ---
