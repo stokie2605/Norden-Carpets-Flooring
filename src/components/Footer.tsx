@@ -1,4 +1,4 @@
-import { addressLines, business, copy, hours, links, phones, towns } from '../content/site'
+import { addressLines, business, copy, hours, links, phones } from '../content/site'
 import { credits } from '../content/credits'
 import { FacebookIcon, WhatsAppIcon } from './ui/BrandIcons'
 import { Wordmark } from './ui/Wordmark'
@@ -6,8 +6,9 @@ import { Wordmark } from './ui/Wordmark'
 export function Footer() {
   return (
     <footer className="border-t border-line bg-bg">
-      <div className="container-x grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
-        <div>
+      {/* Areas we cover live in the showroom section only. Phones: showroom and hours side by side. */}
+      <div className="container-x grid grid-cols-2 gap-x-6 gap-y-8 py-10 sm:py-14 lg:grid-cols-[1.4fr_1fr_1fr]">
+        <div className="col-span-2 lg:col-span-1">
           <Wordmark />
           <p className="mt-4 max-w-xs text-sm text-ink-soft">
             {copy.footer.blurb}
@@ -52,7 +53,7 @@ export function Footer() {
             <a href={phones.mobile.href} className="flex min-h-11 items-center hover:text-accent-deep">
               {phones.mobile.display} (mobile)
             </a>
-            <a href={`mailto:${business.email}`} className="flex min-h-11 items-center hover:text-accent-deep">
+            <a href={`mailto:${business.email}`} className="flex min-h-11 items-center break-all hover:text-accent-deep">
               {business.email}
             </a>
           </address>
@@ -68,15 +69,6 @@ export function Footer() {
               </div>
             ))}
           </dl>
-        </div>
-
-        <div>
-          <h2 className="text-sm font-bold uppercase tracking-[0.14em] text-ink">Areas we cover</h2>
-          <ul className="mt-3 space-y-1 text-sm text-ink-soft">
-            {towns.map((t) => (
-              <li key={t}>{t}</li>
-            ))}
-          </ul>
         </div>
       </div>
 

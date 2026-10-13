@@ -124,11 +124,6 @@ export const proof = {
     label: 'out of 5 on Google',
     source: 'Based on 19 Google reviews',
   },
-  highlights: [
-    `${business.yearsInTrade} years fitting floors in Rochdale`,
-    'Free measure and quote, no obligation',
-    'Every job fitted by our own team',
-  ],
   featured: {
     quote:
       'Fitted our whole house with carpets and laminate flooring, looks amazing. Really happy with the results, definitely recommend and will use them again!',

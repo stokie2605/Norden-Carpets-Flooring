@@ -98,7 +98,7 @@ export function PreviousWork() {
 
   if (count === 0) {
     return (
-      <section id="work" aria-labelledby="work-title" className="py-16 sm:py-24">
+      <section id="work" aria-labelledby="work-title" className="py-11 sm:py-24">
         <div className="container-x">
           <p className="eyebrow">{copy.work.eyebrow}</p>
           <h2 id="work-title" className="mt-3 text-section font-extrabold">
@@ -119,7 +119,7 @@ export function PreviousWork() {
     'grid size-12 place-items-center rounded-full border border-line text-ink transition-colors hover:border-ink hover:bg-ink hover:text-white'
 
   return (
-    <section id="work" aria-labelledby="work-title" className="overflow-hidden py-16 sm:py-24">
+    <section id="work" aria-labelledby="work-title" className="overflow-hidden py-11 sm:py-24">
       <div className="container-x flex items-end justify-between gap-6">
         <div className="max-w-2xl">
           <p className="eyebrow">{copy.work.eyebrow}</p>

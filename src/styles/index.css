@@ -45,9 +45,9 @@
   --font-display: 'Archivo Variable', 'Arial Narrow', Arial, sans-serif;
   --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
-  --text-display: clamp(2.5rem, 1.6rem + 4.2vw, 5.25rem);
+  --text-display: clamp(2.1rem, 1rem + 5vw, 5.25rem);
   --text-display--line-height: 0.95;
-  --text-section: clamp(1.9rem, 1.4rem + 2.2vw, 3.25rem);
+  --text-section: clamp(1.65rem, 1.1rem + 2.6vw, 3.25rem);
   --text-section--line-height: 1.02;
 
   --breakpoint-xs: 26rem;

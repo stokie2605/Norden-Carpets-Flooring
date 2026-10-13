@@ -56,6 +56,10 @@ const SHOWCASE = new Set([
   'work-lounge-laminate-02',
   'work-garden-room-01',
 ])
+// Busy patterns make big files, so these get a lower quality to stay light on phones.
+const SHOW_QUALITY = {
+  'work-utility-vinyl-01': { avif: 38, webp: 58 },
+}
 const lift = (pipeline) =>
   pipeline.normalise({ lower: 1, upper: 99 }).modulate({ brightness: 1.04, saturation: 1.06 }).sharpen({ sigma: 0.6 })
 
@@ -89,8 +93,9 @@ for (const dir of SOURCES) {
     if (SHOWCASE.has(name)) {
       for (const width of WIDTHS) {
         const show = lift(sharp(join(dir, file)).rotate().resize({ width, withoutEnlargement: true }))
-        await show.clone().avif({ quality: 52 }).toFile(join(OUT, `${name}-show-${width}.avif`))
-        await show.clone().webp({ quality: 76 }).toFile(join(OUT, `${name}-show-${width}.webp`))
+        const q = SHOW_QUALITY[name] ?? { avif: 52, webp: 76 }
+        await show.clone().avif({ quality: q.avif }).toFile(join(OUT, `${name}-show-${width}.avif`))
+        await show.clone().webp({ quality: q.webp }).toFile(join(OUT, `${name}-show-${width}.webp`))
       }
     }
     console.log(`optimised ${name}`)

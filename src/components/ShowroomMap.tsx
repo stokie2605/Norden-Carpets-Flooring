@@ -1,12 +1,12 @@
-import { MapPin, Navigation } from 'lucide-react'
-import { addressLines, business, copy, towns } from '../content/site'
+import { Clock, MapPin, Navigation } from 'lucide-react'
+import { addressLines, business, copy, hours, towns } from '../content/site'
 import { buttonClasses } from './ui/Button'
 import { Picture } from './ui/Picture'
 
-/** Showroom and areas we cover: Dave's van, the showroom address, the towns we cover and a directions link. */
+/** Showroom and areas we cover: Dave's van, the showroom address and hours, the towns we cover and a directions link. */
 export function ShowroomMap() {
   return (
-    <section id="showroom" aria-labelledby="showroom-title" className="relative isolate overflow-hidden bg-bg-alt py-12 sm:py-16">
+    <section id="showroom" aria-labelledby="showroom-title" className="relative isolate overflow-hidden bg-bg-alt py-10 sm:py-16">
       {/* Dave's herringbone lounge job, shown whole and faded behind the section like the hero. */}
       <div aria-hidden="true" className="absolute inset-x-0 top-0 -z-10 h-[22rem] sm:h-[26rem] lg:inset-y-0 lg:h-auto">
         <Picture
@@ -32,6 +32,15 @@ export function ShowroomMap() {
               <MapPin className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden="true" />
               <span>{addressLines.join(', ')}</span>
             </p>
+            <p className="mt-3 flex max-w-xl gap-2.5 text-ink-soft">
+              <Clock className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden="true" />
+              <span>
+                {hours
+                  .filter((h) => h.time !== 'Closed')
+                  .map((h) => `${h.days} ${h.time}`)
+                  .join(', ')}
+              </span>
+            </p>
 
             <h3 className="mt-6 text-sm font-bold uppercase tracking-[0.14em] text-ink">{copy.showroom.areasTitle}</h3>
             <ul className="mt-3 flex max-w-xl flex-wrap gap-2" aria-label={copy.showroom.areasTitle}>
@@ -55,14 +64,14 @@ export function ShowroomMap() {
           </div>
 
           {/* Dave's van in a circle, the same size the old map took up. */}
-          <div className="mx-auto w-full max-w-sm lg:order-first lg:max-w-none">
+          <div className="mx-auto w-full max-w-[13rem] sm:max-w-sm lg:order-first lg:max-w-none">
             <Picture
               name="showroom-van"
               alt={copy.showroom.vanAlt}
-              sizes="(min-width: 1024px) 24rem, 24rem"
+              sizes="(min-width: 640px) 24rem, 13rem"
               width={640}
               height={640}
-              className="aspect-square w-full rounded-full object-cover shadow-lg ring-8 ring-bg"
+              className="aspect-square w-full rounded-full object-cover shadow-lg ring-4 ring-bg sm:ring-8"
             />
           </div>
         </div>
