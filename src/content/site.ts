@@ -268,7 +268,7 @@ export const copy = {
     titleStart: 'Welcome to',
     titleAccent: 'Norden Carpets & Flooring.',
     intro:
-      "Hi, we're Dave and Wendy. We've been fitting floors across Rochdale for over 45 years, and every job is fitted by our own team: Dave, Tom and Jake.",
+      "Hi, we're Dave and Wendy. We've been fitting carpets, vinyl and laminate flooring across Rochdale for over 45 years, and every job is fitted by our own fitters, Tom and Jake.",
     reassurance: "Measuring and quotes are free, and there's no obligation.",
     ctaBook: 'Book a free measurement',
     ctaCall: 'Call',
