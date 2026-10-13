@@ -16,7 +16,7 @@ export function TeamStrip() {
               <p>&ldquo;{copy.team.review.quote}&rdquo;</p>
             </blockquote>
             <figcaption className="mt-1 text-sm text-muted">
-              {copy.team.review.author}, {copy.reviews.reviewSource}
+              {copy.reviews.reviewSource}
             </figcaption>
           </figure>
         </div>

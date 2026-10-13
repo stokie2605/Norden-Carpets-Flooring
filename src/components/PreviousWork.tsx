@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
-import type { PointerEvent as ReactPointerEvent } from 'react'
-import { ChevronLeft, ChevronRight, Maximize2, X } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import type { CSSProperties, PointerEvent as ReactPointerEvent } from 'react'
+import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { copy, installations } from '../content/site'
 import { Picture } from './ui/Picture'
 
@@ -10,64 +10,47 @@ const reduceMotion = () =>
   window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 /**
- * Our work: a swipeable slideshow of real jobs with a line of thumbnails and a full size viewer.
- * Photos are shown whole (name-show files, never cropped) over a blurred copy of themselves.
+ * Our work: an edge to edge rail of real jobs. Every photo keeps its own shape at the same height,
+ * so nothing is cropped and there are no empty bands. Tap a photo for the full size viewer.
  */
 export function PreviousWork() {
   const count = installations.length
-  const [index, setIndex] = useState(0)
   const [viewerIndex, setViewerIndex] = useState(0)
-  const trackRef = useRef<HTMLDivElement>(null)
-  const stripRef = useRef<HTMLDivElement>(null)
+  const [bar, setBar] = useState({ start: 0, size: 1 })
+  const railRef = useRef<HTMLUListElement>(null)
   const viewerRef = useRef<HTMLDialogElement>(null)
   const drag = useRef<{ x: number; left: number; moved: number } | null>(null)
   const dragged = useRef(false)
   const swipeX = useRef<number | null>(null)
 
-  const go = useCallback(
-    (next: number) => {
-      const track = trackRef.current
-      if (!track || count === 0) return
-      const i = (next + count) % count
-      track.scrollTo({ left: i * track.clientWidth, behavior: reduceMotion() ? 'auto' : 'smooth' })
-      setIndex(i)
-    },
-    [count],
-  )
-
-  // Keep the counter and thumbnails in step with native swiping and trackpad scrolling.
+  // Progress line under the rail, kept in step with swiping, trackpads and the arrows.
   useEffect(() => {
-    const track = trackRef.current
-    if (!track) return
+    const rail = railRef.current
+    if (!rail) return
     let frame = 0
-    const onScroll = () => {
+    const update = () => {
       cancelAnimationFrame(frame)
       frame = requestAnimationFrame(() => {
-        if (!drag.current) setIndex(Math.round(track.scrollLeft / track.clientWidth))
+        const max = rail.scrollWidth - rail.clientWidth
+        const size = rail.scrollWidth > 0 ? Math.min(1, rail.clientWidth / rail.scrollWidth) : 1
+        setBar({ start: max > 0 ? (rail.scrollLeft / max) * (1 - size) : 0, size })
       })
     }
-    const onResize = () => {
-      track.scrollLeft = Math.round(track.scrollLeft / track.clientWidth) * track.clientWidth
-    }
-    track.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onResize)
+    update()
+    rail.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update)
     return () => {
       cancelAnimationFrame(frame)
-      track.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onResize)
+      rail.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
     }
   }, [])
 
-  // Keep the active thumbnail in view.
-  useEffect(() => {
-    const strip = stripRef.current
-    const thumb = strip?.children[index] as HTMLElement | undefined
-    if (!strip || !thumb || typeof strip.scrollTo !== 'function') return
-    strip.scrollTo({
-      left: thumb.offsetLeft - strip.clientWidth / 2 + thumb.clientWidth / 2,
-      behavior: reduceMotion() ? 'auto' : 'smooth',
-    })
-  }, [index])
+  const page = (direction: 1 | -1) => {
+    const rail = railRef.current
+    if (!rail || typeof rail.scrollBy !== 'function') return
+    rail.scrollBy({ left: direction * rail.clientWidth * 0.8, behavior: reduceMotion() ? 'auto' : 'smooth' })
+  }
 
   const openViewer = (i: number) => {
     setViewerIndex(i)
@@ -78,33 +61,27 @@ export function PreviousWork() {
   const closeViewer = () => viewerRef.current?.close()
 
   // Mouse drag on desktop. Touch and trackpads use native swiping.
-  const onPointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
-    if (e.pointerType !== 'mouse' || !trackRef.current) return
-    drag.current = { x: e.clientX, left: trackRef.current.scrollLeft, moved: 0 }
+  const onPointerDown = (e: ReactPointerEvent<HTMLUListElement>) => {
+    if (e.pointerType !== 'mouse' || !railRef.current) return
+    drag.current = { x: e.clientX, left: railRef.current.scrollLeft, moved: 0 }
     dragged.current = false
   }
-  const onPointerMove = (e: ReactPointerEvent<HTMLDivElement>) => {
+  const onPointerMove = (e: ReactPointerEvent<HTMLUListElement>) => {
     const d = drag.current
-    const track = trackRef.current
-    if (!d || !track) return
+    const rail = railRef.current
+    if (!d || !rail) return
     const dx = e.clientX - d.x
     d.moved = Math.max(d.moved, Math.abs(dx))
     if (d.moved > 6) {
       dragged.current = true
-      track.style.scrollSnapType = 'none'
-      track.scrollLeft = d.left - dx
+      rail.style.scrollSnapType = 'none'
+      rail.scrollLeft = d.left - dx
     }
   }
-  const onPointerUp = (e: ReactPointerEvent<HTMLDivElement>) => {
-    const d = drag.current
-    const track = trackRef.current
+  const endDrag = () => {
+    if (!drag.current || !railRef.current) return
     drag.current = null
-    if (!d || !track) return
-    track.style.scrollSnapType = ''
-    if (d.moved > 6) {
-      const dx = e.clientX - d.x
-      go(Math.abs(dx) > track.clientWidth * 0.12 ? index + (dx < 0 ? 1 : -1) : index)
-    }
+    railRef.current.style.scrollSnapType = ''
   }
 
   if (count === 0) {
@@ -124,14 +101,13 @@ export function PreviousWork() {
   }
 
   // count > 0 here, so the first photo is always there as a fallback.
-  const current = installations[index] ?? installations[0]!
   const shown = installations[viewerIndex] ?? installations[0]!
-  const roundButton =
-    'grid size-10 place-items-center rounded-full bg-bg/90 text-ink shadow-md transition-colors hover:bg-bg sm:size-12'
+  const arrow =
+    'grid size-12 place-items-center rounded-full border border-line text-ink transition-colors hover:border-ink hover:bg-ink hover:text-white'
 
   return (
-    <section id="work" aria-labelledby="work-title" className="py-16 sm:py-24">
-      <div className="container-x">
+    <section id="work" aria-labelledby="work-title" className="overflow-hidden py-16 sm:py-24">
+      <div className="container-x flex items-end justify-between gap-6">
         <div className="max-w-2xl">
           <p className="eyebrow">{copy.work.eyebrow}</p>
           <h2 id="work-title" className="mt-3 text-section font-extrabold">
@@ -139,145 +115,79 @@ export function PreviousWork() {
           </h2>
           <p className="mt-4 text-ink-soft">{copy.work.intro}</p>
         </div>
+        <div className="hidden shrink-0 gap-2 sm:flex">
+          <button type="button" onClick={() => page(-1)} aria-label={copy.work.previous} className={arrow}>
+            <ChevronLeft className="size-5" aria-hidden="true" />
+          </button>
+          <button type="button" onClick={() => page(1)} aria-label={copy.work.next} className={arrow}>
+            <ChevronRight className="size-5" aria-hidden="true" />
+          </button>
+        </div>
+      </div>
 
-        <div className="mt-10" role="region" aria-roledescription="carousel" aria-label={copy.work.slideshowLabel}>
-          <div className="relative overflow-hidden rounded-[1.5rem] bg-ink">
-            <div
-              ref={trackRef}
-              tabIndex={0}
-              aria-label={copy.work.slideshowLabel}
-              onKeyDown={(e) => {
-                if (e.key === 'ArrowRight') {
-                  e.preventDefault()
-                  go(index + 1)
-                }
-                if (e.key === 'ArrowLeft') {
-                  e.preventDefault()
-                  go(index - 1)
-                }
-                if (e.key === 'Enter') openViewer(index)
-              }}
-              onPointerDown={onPointerDown}
-              onPointerMove={onPointerMove}
-              onPointerUp={onPointerUp}
-              onPointerLeave={onPointerUp}
-              className="flex aspect-square snap-x snap-mandatory overflow-x-auto overscroll-x-contain outline-none [scrollbar-width:none] sm:aspect-[4/3] lg:aspect-auto lg:h-[38rem] [&::-webkit-scrollbar]:hidden"
-            >
-              {installations.map((item, i) => (
-                <div
-                  key={item.image}
-                  role="group"
-                  aria-roledescription="slide"
-                  aria-label={`${i + 1} ${copy.work.of} ${count}`}
-                  className="relative w-full shrink-0 snap-start overflow-hidden"
+      <ul
+        ref={railRef}
+        aria-label={copy.work.slideshowLabel}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerLeave={endDrag}
+        className="rail mt-10 flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain [--rail-h:26rem] [scrollbar-width:none] sm:gap-4 lg:[--rail-h:34rem] [&::-webkit-scrollbar]:hidden"
+      >
+        {installations.map((item, i) => {
+          const ratio = item.height / item.width
+          // Same height for every photo, narrower on phones for wide shots so they never overflow.
+          const height = `min(var(--rail-h), calc(86vw * ${ratio.toFixed(4)}))`
+          const size: CSSProperties = { height, width: `calc(${height} / ${ratio.toFixed(4)})` }
+          return (
+            <li key={item.image} className="shrink-0 snap-start">
+              <figure>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (!dragged.current) openViewer(i)
+                  }}
+                  aria-label={`${copy.work.openPhoto} ${item.caption}`}
+                  style={size}
+                  className="group block cursor-zoom-in overflow-hidden rounded-2xl bg-bg-alt"
                 >
-                  <img
-                    src={`/images/${item.image}-show-480.webp`}
-                    alt=""
-                    aria-hidden="true"
-                    loading="lazy"
-                    decoding="async"
-                    className="absolute inset-0 size-full scale-110 object-cover blur-2xl brightness-50"
+                  <Picture
+                    name={`${item.image}-show`}
+                    alt={item.alt}
+                    sizes="(min-width: 1024px) 26rem, 70vw"
+                    width={item.width}
+                    height={item.height}
+                    className="pointer-events-none size-full select-none object-cover transition-transform duration-500 motion-safe:group-hover:scale-[1.02]"
                   />
-                  <button
-                    type="button"
-                    tabIndex={-1}
-                    onClick={() => {
-                      if (!dragged.current) openViewer(i)
-                    }}
-                    className="relative block size-full cursor-zoom-in"
-                  >
-                    <Picture
-                      name={`${item.image}-show`}
-                      alt={item.alt}
-                      sizes="(min-width: 1216px) 1168px, 100vw"
-                      width={768}
-                      height={1024}
-                      className="pointer-events-none size-full select-none object-contain"
-                    />
-                  </button>
-                </div>
-              ))}
-            </div>
+                </button>
+                <figcaption className="mt-3 text-sm font-medium text-ink-soft">{item.caption}</figcaption>
+              </figure>
+            </li>
+          )
+        })}
+      </ul>
 
-            <button
-              type="button"
-              onClick={() => go(index - 1)}
-              aria-label={copy.work.previous}
-              className={`absolute left-3 top-1/2 -translate-y-1/2 sm:left-4 ${roundButton}`}
-            >
-              <ChevronLeft className="size-5" aria-hidden="true" />
-            </button>
-            <button
-              type="button"
-              onClick={() => go(index + 1)}
-              aria-label={copy.work.next}
-              className={`absolute right-3 top-1/2 -translate-y-1/2 sm:right-4 ${roundButton}`}
-            >
-              <ChevronRight className="size-5" aria-hidden="true" />
-            </button>
-            <button
-              type="button"
-              onClick={() => openViewer(index)}
-              className="absolute right-3 top-3 inline-flex min-h-10 items-center gap-1.5 rounded-full bg-bg/90 px-3.5 text-sm font-semibold text-ink shadow-md hover:bg-bg sm:right-4 sm:top-4"
-            >
-              <Maximize2 className="size-4" aria-hidden="true" />
-              {copy.work.fullSize}
-            </button>
-          </div>
-
-          <div className="mt-3 flex items-baseline justify-between gap-4">
-            <p className="font-medium text-ink" aria-live="polite">
-              {current.caption}
-            </p>
-            <p className="shrink-0 text-sm tabular-nums text-muted">
-              {index + 1} {copy.work.of} {count}
-            </p>
-          </div>
-
+      <div className="container-x mt-6">
+        <div className="relative h-0.5 overflow-hidden rounded-full bg-line" aria-hidden="true">
           <div
-            ref={stripRef}
-            aria-label={copy.work.thumbnails}
-            role="group"
-            className="mt-3 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:thin]"
-          >
-            {installations.map((item, i) => (
-              <button
-                key={item.image}
-                type="button"
-                onClick={() => go(i)}
-                aria-label={item.caption}
-                aria-current={i === index ? 'true' : undefined}
-                className={`size-16 shrink-0 overflow-hidden rounded-xl border-2 transition-opacity sm:size-20 ${
-                  i === index ? 'border-accent opacity-100' : 'border-transparent opacity-60 hover:opacity-90'
-                }`}
-              >
-                <img
-                  src={`/images/${item.image}-show-480.webp`}
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                  className="size-full object-cover"
-                />
-              </button>
-            ))}
-          </div>
+            className="absolute inset-y-0 rounded-full bg-ink"
+            style={{ left: `${bar.start * 100}%`, width: `${bar.size * 100}%` }}
+          />
         </div>
       </div>
 
       <dialog
         ref={viewerRef}
         aria-label={shown.caption}
-        onClose={() => go(viewerIndex)}
         onKeyDown={(e) => {
           if (e.key === 'ArrowRight') stepViewer(1)
           if (e.key === 'ArrowLeft') stepViewer(-1)
         }}
-        className="m-0 size-full max-h-none max-w-none bg-ink p-0 text-white backdrop:bg-ink"
+        className="m-0 size-full max-h-none max-w-none bg-transparent p-0 text-white backdrop:bg-ink/55 backdrop:backdrop-blur-xl"
       >
         <div className="flex h-full flex-col" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
           <div className="flex items-center justify-between px-4 py-3 text-sm tabular-nums">
-            <span>
+            <span className="rounded-full bg-ink/40 px-3 py-1.5 backdrop-blur">
               {viewerIndex + 1} {copy.work.of} {count}
             </span>
             <button
@@ -309,9 +219,9 @@ export function PreviousWork() {
               name={`${shown.image}-show`}
               alt={shown.alt}
               sizes="100vw"
-              width={768}
-              height={1024}
-              className="max-h-[calc(100dvh-9rem)] w-auto max-w-full select-none rounded-xl object-contain"
+              width={shown.width}
+              height={shown.height}
+              className="max-h-[calc(100dvh-9rem)] w-auto max-w-full select-none rounded-xl object-contain shadow-2xl"
             />
             <button
               type="button"
@@ -330,7 +240,7 @@ export function PreviousWork() {
               <ChevronRight className="size-5" aria-hidden="true" />
             </button>
           </div>
-          <p className="px-4 py-4 text-center font-medium">{shown.caption}</p>
+          <p className="px-4 py-4 text-center font-medium [text-shadow:0_1px_8px_rgb(15_23_42/0.6)]">{shown.caption}</p>
         </div>
       </dialog>
     </section>

@@ -65,8 +65,7 @@ export function ProofWall() {
               <p>{proof.featured.quote}</p>
             </blockquote>
             <figcaption className="mt-8 border-t border-line pt-5">
-              <span className="block font-semibold text-ink">{proof.featured.author}</span>
-              <span className="block text-sm text-muted">{copy.reviews.reviewSource}</span>
+              <span className="block text-sm font-semibold text-ink">{copy.reviews.reviewSource}</span>
             </figcaption>
           </figure>
         </div>
@@ -79,13 +78,7 @@ export function ProofWall() {
                   <p>&ldquo;{review.quote}&rdquo;</p>
                 </blockquote>
                 <figcaption className="mt-4 text-sm">
-                  {review.author ? (
-                    <>
-                      <span className="font-semibold text-ink">{review.author}</span>
-                      <span className="text-muted">, </span>
-                    </>
-                  ) : null}
-                  <span className={review.author ? 'text-muted' : 'font-semibold text-ink'}>
+                  <span className="font-semibold text-ink">
                     {review.source === 'google' ? copy.reviews.googleSource : copy.reviews.reviewSource}
                   </span>
                 </figcaption>

@@ -61,8 +61,8 @@ export const team = [
 export type MaterialId = 'carpets' | 'lvt' | 'laminate'
 
 // Customer reviews are copied word for word from our Facebook and Google pages. Cut only with "...", never reword.
-// Google reviews are shown without the reviewer's name.
-export type Review = { quote: string; author?: string; source?: 'facebook' | 'google' }
+// No customer names anywhere: each review shows only where it came from. Only our own team are named.
+export type Review = { quote: string; source?: 'facebook' | 'google' }
 
 export type Material = {
   id: MaterialId
@@ -87,7 +87,6 @@ export const materials: readonly Material[] = [
     imageAlt: 'Neutral flecked carpet fitted across a living room and round two curved bottom steps',
     review: {
       quote: 'Very happy with our gorgeous carpet. Very good value and quality and a brilliant service from start to finish.',
-      author: 'Caroline',
     },
   },
   {
@@ -99,7 +98,7 @@ export const materials: readonly Material[] = [
     bestFor: ['Kitchens', 'Bathrooms', 'Open plan living'],
     image: 'tab-vinyl-03',
     imageAlt: 'Grey and white patterned tile effect vinyl fitted across a bathroom floor, round the toilet and up to the shower',
-    review: { quote: 'Excellent service, love my new carpet and lino, thankyou.', author: 'Joanne' },
+    review: { quote: 'Excellent service, love my new carpet and lino, thankyou.' },
   },
   {
     id: 'laminate',
@@ -112,7 +111,6 @@ export const materials: readonly Material[] = [
     imageAlt: 'Rustic oak laminate flooring fitted through a lounge into the dining room',
     review: {
       quote: 'So so happy with the service and the end result. Such good quality flooring.',
-      author: 'Hannah',
     },
   },
 ]
@@ -134,7 +132,6 @@ export const proof = {
   featured: {
     quote:
       'Fitted our whole house with carpets and laminate flooring, looks amazing. Really happy with the results, definitely recommend and will use them again!',
-    author: 'Charlotte',
     detail: 'Facebook review',
   },
   reviews: [
@@ -154,90 +151,116 @@ export const proof = {
     {
       quote:
         'Professional and friendly service. Carpets laid and are fabulous. Thank you Dave, you went over and above, kept me in the loop every step of the way',
-      author: 'Lesley',
     },
     {
       quote:
         'Absolutely amazing carpets and fitting! We had our lounge, hall, stairs and landing carpeted and it looks fabulous!',
-      author: 'Amy',
     },
     {
       quote: 'I have had many carpets from Dave over the years and he has always done a great job...',
-      author: 'Rebecca',
     },
   ] as readonly Review[],
 } as const
 
 // Real installation photos from the team only. Shown in the Our work slideshow.
 // One photo per job, and none of these may appear anywhere else on the page.
-export const installations: readonly { image: string; alt: string; caption: string }[] = [
+// width and height are the photo's real shape, so it is always shown whole.
+export const installations: readonly { image: string; alt: string; caption: string; width: number; height: number }[] = [
   {
     image: 'work-leopard-carpet-01',
+    width: 1024,
+    height: 1360,
     alt: 'Leopard print carpet fitted up a staircase and across the landing',
     caption: 'Leopard print stairs and landing',
   },
   {
     image: 'work-utility-vinyl-01',
+    width: 1024,
+    height: 1820,
     alt: 'Grey patterned tile effect vinyl fitted across a utility room floor',
     caption: 'Patterned vinyl, utility room',
   },
   {
     image: 'work-oak-lounge-laminate-01',
+    width: 1024,
+    height: 1365,
     alt: 'Natural oak effect laminate fitted across a bright living room',
     caption: 'Oak laminate, living room',
   },
   {
     image: 'work-cream-carpet-01',
+    width: 1024,
+    height: 1820,
     alt: 'Cream carpet fitted along a landing and down the stairs, with oak and black spindles',
     caption: 'Cream carpet, stairs and landing',
   },
   {
     image: 'work-cloakroom-vinyl-01',
+    width: 1024,
+    height: 1365,
     alt: 'Wood effect vinyl fitted in a narrow cloakroom',
     caption: 'Wood effect vinyl, cloakroom',
   },
   {
     image: 'work-dining-laminate-01',
+    width: 1024,
+    height: 1365,
     alt: 'Light oak effect laminate fitted through a long dining room',
     caption: 'Oak laminate, dining room',
   },
   {
     image: 'work-stair-runner-01',
+    width: 768,
+    height: 1024,
     alt: 'Beige carpet fitted up a staircase with black painted edges',
     caption: 'Stair carpet, painted edges',
   },
   {
     image: 'work-grey-lounge-laminate-01',
+    width: 1024,
+    height: 1365,
     alt: 'Grey oak effect laminate fitted across a living room',
     caption: 'Grey laminate, living room',
   },
   {
     image: 'work-stairs-carpet-02',
+    width: 1024,
+    height: 1365,
     alt: 'Black and white chevron carpet fitted across a landing',
     caption: 'Chevron carpet, landing',
   },
   {
     image: 'work-kitchen-laminate-02',
+    width: 1024,
+    height: 1365,
     alt: 'Wood effect laminate fitted through a kitchen with an island',
     caption: 'Wood effect laminate, kitchen',
   },
   {
     image: 'work-feature-wall-laminate-01',
+    width: 1024,
+    height: 1365,
     alt: 'Grey oak effect laminate fitted across a living room with a feature wall',
     caption: 'Grey laminate, lounge',
   },
   {
     image: 'work-hallway-transition-01',
+    width: 1024,
+    height: 1365,
     alt: 'Oak effect laminate hallway floor with carpeted stairs and a patterned vinyl doorway',
     caption: 'Oak laminate, hallway',
   },
   {
     image: 'work-lounge-laminate-02',
+    width: 1024,
+    height: 768,
     alt: 'Grey wood effect laminate fitted across a living room with a fireplace',
     caption: 'Wood effect laminate, lounge',
   },
   {
     image: 'work-garden-room-01',
+    width: 1024,
+    height: 1365,
     alt: 'Dark oak effect laminate fitted in a garden room with patio doors',
     caption: 'Dark oak laminate, garden room',
   },
@@ -282,19 +305,18 @@ export const copy = {
     eyebrow: 'Our work',
     title: 'Some of our recent jobs.',
     intro: "Floors we've fitted in homes around Rochdale. Swipe through, or tap a photo to see it full size.",
+    openPhoto: 'See full size:',
     empty: 'New installation photos coming soon.',
     slideshowLabel: 'Photos of recent jobs',
     previous: 'Previous photo',
     next: 'Next photo',
-    fullSize: 'Full size',
     close: 'Close',
-    thumbnails: 'Choose a photo',
     of: 'of',
   },
   team: {
     title: 'Meet the team.',
     intro: "We're a small family team. You'll deal with the same people from your first call to the fit.",
-    review: { quote: 'Such a lovely, super friendly team.', author: 'Amy' },
+    review: { quote: 'Such a lovely, super friendly team.' },
   },
   reviews: {
     reviewSource: 'Facebook review',

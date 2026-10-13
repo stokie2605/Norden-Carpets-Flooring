@@ -122,7 +122,7 @@ export function MaterialSwitcher() {
                       <p>&ldquo;{m.review.quote}&rdquo;</p>
                     </blockquote>
                     <figcaption className="mt-1 text-sm text-muted">
-                      {m.review.author}, {copy.reviews.reviewSource}
+                      {copy.reviews.reviewSource}
                     </figcaption>
                   </figure>
                 )}
