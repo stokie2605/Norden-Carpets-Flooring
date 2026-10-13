@@ -40,7 +40,7 @@ Norden Carpets & Flooring: mobile-first lead generation site for a family run fl
 - 2026-10-09: The business is a sole trader, David Wilshaw trading as Norden Carpets & Flooring, not VAT registered. The legal line sits in the footer and the privacy notice.
 - 2026-10-09: Production domain is nordencarpets.co.uk, registered at Cloudflare to David Wilshaw (UK sole trader), auto renew on.
 - 2026-10-13: Our work is a swipeable slideshow with thumbnails and a full size viewer. Photos show whole, never cropped (`name-show` files with a light colour lift). One photo per job, and no photo is used twice anywhere on the page (`scripts/photos.test.mjs`).
-- 2026-10-13: Reviews also come from Google (4.9 out of 5, 19 reviews). Google quotes are word for word with no reviewer names. Section links are back in the header: always on desktop, and under the bar on smaller screens once the hero buttons scroll away.
+- 2026-10-13: Reviews also come from Google (4.9 out of 5, 19 reviews). Google quotes are word for word with no reviewer names. The header has no section links. Its Call number and Free measure button are always on show. Our work starts with the full room photos.
 - 2026-10-09: Agent rules for Antigravity and other tools live in `AGENTS.md` and `.agents/rules/`. `scripts/guardrails.test.mjs` locks these decisions.
 
 ---

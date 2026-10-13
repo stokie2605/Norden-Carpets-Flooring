@@ -164,42 +164,15 @@ export const proof = {
 
 // Real installation photos from the team only. Shown in the Our work slideshow.
 // One photo per job, and none of these may appear anywhere else on the page.
+// Full room shots come first, then stairs, landings and smaller rooms.
 // width and height are the photo's real shape, so it is always shown whole.
 export const installations: readonly { image: string; alt: string; caption: string; width: number; height: number }[] = [
-  {
-    image: 'work-leopard-carpet-01',
-    width: 1024,
-    height: 1360,
-    alt: 'Leopard print carpet fitted up a staircase and across the landing',
-    caption: 'Leopard print stairs and landing',
-  },
-  {
-    image: 'work-utility-vinyl-01',
-    width: 1024,
-    height: 1820,
-    alt: 'Grey patterned tile effect vinyl fitted across a utility room floor',
-    caption: 'Patterned vinyl, utility room',
-  },
   {
     image: 'work-oak-lounge-laminate-01',
     width: 1024,
     height: 1365,
     alt: 'Natural oak effect laminate fitted across a bright living room',
     caption: 'Oak laminate, living room',
-  },
-  {
-    image: 'work-cream-carpet-01',
-    width: 1024,
-    height: 1820,
-    alt: 'Cream carpet fitted along a landing and down the stairs, with oak and black spindles',
-    caption: 'Cream carpet, stairs and landing',
-  },
-  {
-    image: 'work-cloakroom-vinyl-01',
-    width: 1024,
-    height: 1365,
-    alt: 'Wood effect vinyl fitted in a narrow cloakroom',
-    caption: 'Wood effect vinyl, cloakroom',
   },
   {
     image: 'work-dining-laminate-01',
@@ -209,32 +182,11 @@ export const installations: readonly { image: string; alt: string; caption: stri
     caption: 'Oak laminate, dining room',
   },
   {
-    image: 'work-stair-runner-01',
-    width: 768,
-    height: 1024,
-    alt: 'Beige carpet fitted up a staircase with black painted edges',
-    caption: 'Stair carpet, painted edges',
-  },
-  {
-    image: 'work-grey-lounge-laminate-01',
+    image: 'work-lounge-laminate-02',
     width: 1024,
-    height: 1365,
-    alt: 'Grey oak effect laminate fitted across a living room',
-    caption: 'Grey laminate, living room',
-  },
-  {
-    image: 'work-stairs-carpet-02',
-    width: 1024,
-    height: 1365,
-    alt: 'Black and white chevron carpet fitted across a landing',
-    caption: 'Chevron carpet, landing',
-  },
-  {
-    image: 'work-kitchen-laminate-02',
-    width: 1024,
-    height: 1365,
-    alt: 'Wood effect laminate fitted through a kitchen with an island',
-    caption: 'Wood effect laminate, kitchen',
+    height: 768,
+    alt: 'Grey wood effect laminate fitted across a living room with a fireplace',
+    caption: 'Wood effect laminate, lounge',
   },
   {
     image: 'work-feature-wall-laminate-01',
@@ -244,18 +196,18 @@ export const installations: readonly { image: string; alt: string; caption: stri
     caption: 'Grey laminate, lounge',
   },
   {
-    image: 'work-hallway-transition-01',
+    image: 'work-kitchen-laminate-02',
     width: 1024,
     height: 1365,
-    alt: 'Oak effect laminate hallway floor with carpeted stairs and a patterned vinyl doorway',
-    caption: 'Oak laminate, hallway',
+    alt: 'Wood effect laminate fitted through a kitchen with an island',
+    caption: 'Wood effect laminate, kitchen',
   },
   {
-    image: 'work-lounge-laminate-02',
+    image: 'work-grey-lounge-laminate-01',
     width: 1024,
-    height: 768,
-    alt: 'Grey wood effect laminate fitted across a living room with a fireplace',
-    caption: 'Wood effect laminate, lounge',
+    height: 1365,
+    alt: 'Grey oak effect laminate fitted across a living room',
+    caption: 'Grey laminate, living room',
   },
   {
     image: 'work-garden-room-01',
@@ -264,15 +216,56 @@ export const installations: readonly { image: string; alt: string; caption: stri
     alt: 'Dark oak effect laminate fitted in a garden room with patio doors',
     caption: 'Dark oak laminate, garden room',
   },
+  {
+    image: 'work-hallway-transition-01',
+    width: 1024,
+    height: 1365,
+    alt: 'Oak effect laminate hallway floor with carpeted stairs and a patterned vinyl doorway',
+    caption: 'Oak laminate, hallway',
+  },
+  {
+    image: 'work-leopard-carpet-01',
+    width: 1024,
+    height: 1360,
+    alt: 'Leopard print carpet fitted up a staircase and across the landing',
+    caption: 'Leopard print stairs and landing',
+  },
+  {
+    image: 'work-cream-carpet-01',
+    width: 1024,
+    height: 1820,
+    alt: 'Cream carpet fitted along a landing and down the stairs, with oak and black spindles',
+    caption: 'Cream carpet, stairs and landing',
+  },
+  {
+    image: 'work-stair-runner-01',
+    width: 768,
+    height: 1024,
+    alt: 'Beige carpet fitted up a staircase with black painted edges',
+    caption: 'Stair carpet, painted edges',
+  },
+  {
+    image: 'work-stairs-carpet-02',
+    width: 1024,
+    height: 1365,
+    alt: 'Black and white chevron carpet fitted across a landing',
+    caption: 'Chevron carpet, landing',
+  },
+  {
+    image: 'work-cloakroom-vinyl-01',
+    width: 1024,
+    height: 1365,
+    alt: 'Wood effect vinyl fitted in a narrow cloakroom',
+    caption: 'Wood effect vinyl, cloakroom',
+  },
+  {
+    image: 'work-utility-vinyl-01',
+    width: 1024,
+    height: 1820,
+    alt: 'Grey patterned tile effect vinyl fitted across a utility room floor',
+    caption: 'Patterned vinyl, utility room',
+  },
 ]
-
-// Section links in the header.
-export const nav = [
-  { label: 'Flooring', href: '#flooring' },
-  { label: 'Our work', href: '#work' },
-  { label: 'Reviews', href: '#reviews' },
-  { label: 'Showroom', href: '#showroom' },
-] as const
 
 // Headings, intros and button labels used across the page.
 export const copy = {
