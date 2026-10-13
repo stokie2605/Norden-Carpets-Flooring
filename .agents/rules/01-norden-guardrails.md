@@ -28,7 +28,7 @@ You are an implementer, not a designer. The design is finished and approved. You
 - Light theme only. No dark mode, no `prefers-color-scheme`, no `dark:` classes.
 - No prices anywhere: not on the page, not in `site.ts`, not in the JSON-LD in `index.html`.
 - Section order in `src/App.tsx`: Hero, MaterialSwitcher, PreviousWork, TeamStrip, ProofWall, SectionDivider, ShowroomMap.
-- Team: Dave, Tom and Jake (Fitters), Wendy (Admin).
+- Team: Dave and Wendy (Owners), Tom and Jake (Fitters).
 - Never mention Bury.
 - Reviews in `site.ts` are word for word from Facebook. Never write, reword or tidy a review. Never use customer photos.
 - Never mention subcontractors, and never use the word "subfloor" in client copy.

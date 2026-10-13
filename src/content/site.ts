@@ -8,7 +8,7 @@ export const business = {
   // Sole trader, not VAT registered, so no company or VAT number to show.
   legalName: 'David Wilshaw',
   legalLine: 'Norden Carpets & Flooring is the trading name of David Wilshaw, sole trader.',
-  yearsInTrade: '30+',
+  yearsInTrade: '45+',
   email: 'norden.carpetsflooring@gmail.com',
   address: {
     unit: 'Unit 4, Tenterhouse Mill',
@@ -50,10 +50,10 @@ export const hours = [
 ] as const
 
 export const team = [
-  { name: 'Dave', role: 'Fitter' },
+  { name: 'Dave', role: 'Owner' },
   { name: 'Tom', role: 'Fitter' },
   { name: 'Jake', role: 'Fitter' },
-  { name: 'Wendy', role: 'Admin' },
+  { name: 'Wendy', role: 'Owner' },
 ] as const
 
 export type MaterialId = 'carpets' | 'lvt' | 'laminate'
@@ -268,7 +268,7 @@ export const copy = {
     titleStart: 'Welcome to',
     titleAccent: 'Norden Carpets & Flooring.',
     intro:
-      "Hi, we're Dave and Wendy. We've been fitting floors across Rochdale for over 30 years, and every job is fitted by our own team: Dave, Tom and Jake.",
+      "Hi, we're Dave and Wendy. We've been fitting floors across Rochdale for over 45 years, and every job is fitted by our own team: Dave, Tom and Jake.",
     reassurance: "Measuring and quotes are free, and there's no obligation.",
     ctaBook: 'Book a free measurement',
     ctaCall: 'Call',
@@ -329,5 +329,5 @@ export const copy = {
 export const seo = {
   title: 'Carpets & Flooring in Rochdale | Norden Carpets & Flooring',
   description:
-    'Carpets, vinyl, laminate and underlay, supplied and fitted across Rochdale and Greater Manchester. Family run for over 30 years, with our own fitters. Book a free measure.',
+    'Carpets, vinyl, laminate and underlay, supplied and fitted across Rochdale and Greater Manchester. Family run for over 45 years, with our own fitters. Book a free measure.',
 } as const
