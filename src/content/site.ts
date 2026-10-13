@@ -82,8 +82,8 @@ export const materials: readonly Material[] = [
     pitch:
       'Pop into the showroom to feel the samples and pick your colour. We can supply and fit the underlay, grippers and door bars too, all done by our own team.',
     bestFor: ['Bedrooms', 'Lounges', 'Stairs and landings'],
-    image: 'tab-carpets-02',
-    imageAlt: 'Cream herringbone carpet fitted on a staircase and landing with oak handrails',
+    image: 'tab-carpets-03',
+    imageAlt: 'Neutral flecked carpet fitted across a living room and round two curved bottom steps',
     review: {
       quote: 'Very happy with our gorgeous carpet. Very good value and quality and a brilliant service from start to finish.',
       author: 'Caroline',
@@ -96,8 +96,8 @@ export const materials: readonly Material[] = [
     pitch:
       "It's waterproof and easy to wipe clean, so it's ideal where things get messy. Choose wood effect planks or patterned tiles like these, all laid by our own fitters.",
     bestFor: ['Kitchens', 'Bathrooms', 'Open plan living'],
-    image: 'tab-vinyl-02',
-    imageAlt: 'Grey and white patterned tile effect vinyl fitted in a bathroom',
+    image: 'tab-vinyl-03',
+    imageAlt: 'Grey and white patterned tile effect vinyl fitted across a bathroom floor, round the toilet and up to the shower',
     review: { quote: 'Excellent service, love my new carpet and lino, thankyou.', author: 'Joanne' },
   },
   {
@@ -152,9 +152,9 @@ export const proof = {
 // Real installation photos from the team only. Shown in the Our work section.
 export const installations: readonly { image: string; alt: string; caption: string }[] = [
   {
-    image: 'work-stairs-carpet-02',
-    alt: 'Black and white chevron carpet fitted across a landing',
-    caption: 'Black and white chevron carpet on a landing',
+    image: 'work-utility-vinyl-01',
+    alt: 'Grey patterned tile effect vinyl fitted across a utility room floor',
+    caption: 'Grey patterned vinyl in a utility room',
   },
   {
     image: 'work-hallway-transition-01',
@@ -162,9 +162,9 @@ export const installations: readonly { image: string; alt: string; caption: stri
     caption: 'Oak effect laminate in a hallway, with carpet on the stairs',
   },
   {
-    image: 'work-hall-carpet-01',
-    alt: 'Neutral carpet fitted across a living room and up two curved bottom steps',
-    caption: 'Carpet in a living room, fitted round curved steps',
+    image: 'work-leopard-carpet-01',
+    alt: 'Leopard print carpet fitted up a staircase and across the landing',
+    caption: 'Leopard print carpet on the stairs and landing',
   },
   {
     image: 'work-kitchen-laminate-01',
@@ -186,7 +186,7 @@ export const copy = {
     ctaCall: 'Call',
     trustFitters: 'Our own fitters',
     trustShowroom: 'Showroom at Tenterhouse Mill',
-    imageAlt: 'Grey oak herringbone flooring fitted across a room with glazed doors',
+    imageAlt: 'Grey oak flooring fitted across a room with glazed doors',
   },
   cta: {
     bookShort: 'Free measure',

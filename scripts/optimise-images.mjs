@@ -19,9 +19,13 @@ const CROPS = {
   'tab-vinyl-02': { left: 0, top: 250, width: 1200, height: 900 },
   // Herringbone carpet on the stairs and landing, seen from above
   'tab-carpets-02': { left: 0, top: 560, width: 1134, height: 850 },
+  // Carpet through a living room and round the two curved bottom steps
+  'tab-carpets-03': { left: 0, top: 250, width: 1200, height: 900 },
+  // Grey and white patterned bathroom vinyl, showing the floor up to the shower tray
+  'tab-vinyl-03': { left: 0, top: 200, width: 1200, height: 900 },
 }
 // Fine patterns go soft at the default quality, so these get a higher setting and a light sharpen.
-const CRISP = new Set(['tab-vinyl-02', 'tab-carpets-02'])
+const CRISP = new Set(['tab-vinyl-02', 'tab-carpets-02', 'tab-carpets-03', 'tab-vinyl-03'])
 
 // Hero is shown in its natural panoramic ratio so nothing is cut off; tabs and gallery use 4:3.
 const ASPECT = {
@@ -35,9 +39,9 @@ const EXTRA_WIDTHS = {
 // Our work gallery: extra 3:4 portrait crops (saved as name-tall) with a light colour lift,
 // because the originals are dim phone photos taken upright.
 const TALL = new Set([
-  'work-stairs-carpet-02',
+  'work-utility-vinyl-01',
   'work-hallway-transition-01',
-  'work-hall-carpet-01',
+  'work-leopard-carpet-01',
   'work-kitchen-laminate-01',
 ])
 const lift = (pipeline) =>
