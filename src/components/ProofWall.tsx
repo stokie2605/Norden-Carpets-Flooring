@@ -1,4 +1,4 @@
-import { Check } from 'lucide-react'
+import { Check, Star } from 'lucide-react'
 import { copy, links, proof } from '../content/site'
 import { FacebookIcon } from './ui/BrandIcons'
 import { buttonClasses } from './ui/Button'
@@ -22,6 +22,13 @@ export function ProofWall() {
                 {proof.rating}
               </p>
               <p className="mt-2 text-lg font-semibold text-ink">{proof.ratingLabel}</p>
+              <p className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-lg font-semibold text-ink">
+                <span className="inline-flex items-center gap-1.5 font-display text-3xl font-extrabold text-accent-deep">
+                  <Star className="size-6 fill-current" aria-hidden="true" />
+                  {proof.google.rating}
+                </span>
+                {proof.google.label}
+              </p>
               <ul className="mt-6 space-y-2.5 border-t border-accent/15 pt-6">
                 {proof.highlights.map((item) => (
                   <li key={item} className="flex gap-2.5 text-ink">
@@ -32,7 +39,11 @@ export function ProofWall() {
               </ul>
             </div>
             <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
-              <p className="text-sm text-ink-soft">{proof.ratingSource}</p>
+              <p className="text-sm text-ink-soft">
+                {proof.ratingSource}
+                <br />
+                {proof.google.source}
+              </p>
               <a
                 href={links.facebook}
                 target="_blank"
@@ -62,14 +73,21 @@ export function ProofWall() {
 
         <ul className="mt-6 grid gap-6 md:grid-cols-3">
           {proof.reviews.map((review) => (
-            <li key={review.author + review.quote.slice(0, 16)}>
+            <li key={review.quote.slice(0, 24)}>
               <figure className="flex h-full flex-col justify-between rounded-[1.25rem] border border-line bg-bg-alt p-6">
                 <blockquote className="text-ink">
                   <p>&ldquo;{review.quote}&rdquo;</p>
                 </blockquote>
                 <figcaption className="mt-4 text-sm">
-                  <span className="font-semibold text-ink">{review.author}</span>
-                  <span className="text-muted">, {copy.reviews.reviewSource}</span>
+                  {review.author ? (
+                    <>
+                      <span className="font-semibold text-ink">{review.author}</span>
+                      <span className="text-muted">, </span>
+                    </>
+                  ) : null}
+                  <span className={review.author ? 'text-muted' : 'font-semibold text-ink'}>
+                    {review.source === 'google' ? copy.reviews.googleSource : copy.reviews.reviewSource}
+                  </span>
                 </figcaption>
               </figure>
             </li>

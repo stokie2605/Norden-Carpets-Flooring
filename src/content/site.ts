@@ -60,8 +60,9 @@ export const team = [
 
 export type MaterialId = 'carpets' | 'lvt' | 'laminate'
 
-// Customer reviews are copied word for word from our Facebook page. Cut only with "...", never reword.
-export type Review = { quote: string; author: string }
+// Customer reviews are copied word for word from our Facebook and Google pages. Cut only with "...", never reword.
+// Google reviews are shown without the reviewer's name.
+export type Review = { quote: string; author?: string; source?: 'facebook' | 'google' }
 
 export type Material = {
   id: MaterialId
@@ -120,6 +121,11 @@ export const proof = {
   rating: '96%',
   ratingLabel: 'recommend us on Facebook',
   ratingSource: 'Based on 24 Facebook reviews',
+  google: {
+    rating: '4.9',
+    label: 'out of 5 on Google',
+    source: 'Based on 19 Google reviews',
+  },
   highlights: [
     `${business.yearsInTrade} years fitting floors in Rochdale`,
     'Free measure and quote, no obligation',
@@ -132,6 +138,19 @@ export const proof = {
     detail: 'Facebook review',
   },
   reviews: [
+    {
+      quote: 'Excellent friendly service from all at norden carpets. Very happy with the finish and quality.',
+      source: 'google',
+    },
+    {
+      quote:
+        "Great service and advice on picking the perfect carpet... They even chopped up the old one and put it in my car so I could take it to the dump. I'm definitely using Norden Carpets again.",
+      source: 'google',
+    },
+    {
+      quote: 'Good selection no pushy staff a hassle free experience and very helpful worth a visit to get a new carpet or flooring',
+      source: 'google',
+    },
     {
       quote:
         'Professional and friendly service. Carpets laid and are fabulous. Thank you Dave, you went over and above, kept me in the loop every step of the way',
@@ -149,29 +168,88 @@ export const proof = {
   ] as readonly Review[],
 } as const
 
-// Real installation photos from the team only. Shown in the Our work section.
+// Real installation photos from the team only. Shown in the Our work slideshow.
+// One photo per job, and none of these may appear anywhere else on the page.
 export const installations: readonly { image: string; alt: string; caption: string }[] = [
+  {
+    image: 'work-leopard-carpet-01',
+    alt: 'Leopard print carpet fitted up a staircase and across the landing',
+    caption: 'Leopard print stairs and landing',
+  },
   {
     image: 'work-utility-vinyl-01',
     alt: 'Grey patterned tile effect vinyl fitted across a utility room floor',
-    caption: 'Grey patterned vinyl in a utility room',
+    caption: 'Patterned vinyl, utility room',
+  },
+  {
+    image: 'work-oak-lounge-laminate-01',
+    alt: 'Natural oak effect laminate fitted across a bright living room',
+    caption: 'Oak laminate, living room',
+  },
+  {
+    image: 'work-cream-carpet-01',
+    alt: 'Cream carpet fitted along a landing and down the stairs, with oak and black spindles',
+    caption: 'Cream carpet, stairs and landing',
+  },
+  {
+    image: 'work-cloakroom-vinyl-01',
+    alt: 'Wood effect vinyl fitted in a narrow cloakroom',
+    caption: 'Wood effect vinyl, cloakroom',
+  },
+  {
+    image: 'work-dining-laminate-01',
+    alt: 'Light oak effect laminate fitted through a long dining room',
+    caption: 'Oak laminate, dining room',
+  },
+  {
+    image: 'work-stair-runner-01',
+    alt: 'Beige carpet fitted up a staircase with black painted edges',
+    caption: 'Stair carpet, painted edges',
+  },
+  {
+    image: 'work-grey-lounge-laminate-01',
+    alt: 'Grey oak effect laminate fitted across a living room',
+    caption: 'Grey laminate, living room',
+  },
+  {
+    image: 'work-stairs-carpet-02',
+    alt: 'Black and white chevron carpet fitted across a landing',
+    caption: 'Chevron carpet, landing',
+  },
+  {
+    image: 'work-kitchen-laminate-02',
+    alt: 'Wood effect laminate fitted through a kitchen with an island',
+    caption: 'Wood effect laminate, kitchen',
+  },
+  {
+    image: 'work-feature-wall-laminate-01',
+    alt: 'Grey oak effect laminate fitted across a living room with a feature wall',
+    caption: 'Grey laminate, lounge',
   },
   {
     image: 'work-hallway-transition-01',
     alt: 'Oak effect laminate hallway floor with carpeted stairs and a patterned vinyl doorway',
-    caption: 'Oak effect laminate in a hallway, with carpet on the stairs',
+    caption: 'Oak laminate, hallway',
   },
   {
-    image: 'work-leopard-carpet-01',
-    alt: 'Leopard print carpet fitted up a staircase and across the landing',
-    caption: 'Leopard print carpet on the stairs and landing',
+    image: 'work-lounge-laminate-02',
+    alt: 'Grey wood effect laminate fitted across a living room with a fireplace',
+    caption: 'Wood effect laminate, lounge',
   },
   {
-    image: 'work-kitchen-laminate-01',
-    alt: 'Wood effect laminate flooring fitted through a kitchen',
-    caption: 'Wood effect laminate in a kitchen',
+    image: 'work-garden-room-01',
+    alt: 'Dark oak effect laminate fitted in a garden room with patio doors',
+    caption: 'Dark oak laminate, garden room',
   },
 ]
+
+// Section links in the header.
+export const nav = [
+  { label: 'Flooring', href: '#flooring' },
+  { label: 'Our work', href: '#work' },
+  { label: 'Reviews', href: '#reviews' },
+  { label: 'Showroom', href: '#showroom' },
+] as const
 
 // Headings, intros and button labels used across the page.
 export const copy = {
@@ -203,8 +281,15 @@ export const copy = {
   work: {
     eyebrow: 'Our work',
     title: 'Some of our recent jobs.',
-    intro: "Floors we've fitted in homes around Rochdale.",
+    intro: "Floors we've fitted in homes around Rochdale. Swipe through, or tap a photo to see it full size.",
     empty: 'New installation photos coming soon.',
+    slideshowLabel: 'Photos of recent jobs',
+    previous: 'Previous photo',
+    next: 'Next photo',
+    fullSize: 'Full size',
+    close: 'Close',
+    thumbnails: 'Choose a photo',
+    of: 'of',
   },
   team: {
     title: 'Meet the team.',
@@ -213,6 +298,7 @@ export const copy = {
   },
   reviews: {
     reviewSource: 'Facebook review',
+    googleSource: 'Google review',
     facebookLink: 'Read our reviews',
     eyebrow: 'Reviews',
     title: 'What our customers say.',

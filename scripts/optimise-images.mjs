@@ -36,13 +36,23 @@ const DEFAULT_ASPECT = 4 / 3
 const EXTRA_WIDTHS = {
   'work-herringbone-02': [2048],
 }
-// Our work gallery: extra 3:4 portrait crops (saved as name-tall) with a light colour lift,
-// because the originals are dim phone photos taken upright.
-const TALL = new Set([
-  'work-utility-vinyl-01',
-  'work-hallway-transition-01',
+// Our work slideshow: the whole photo, never cropped, with a light colour lift (saved as name-show),
+// because the originals are dim phone photos. Files are never made bigger than the original.
+const SHOWCASE = new Set([
   'work-leopard-carpet-01',
-  'work-kitchen-laminate-01',
+  'work-cream-carpet-01',
+  'work-stair-runner-01',
+  'work-stairs-carpet-02',
+  'work-utility-vinyl-01',
+  'work-cloakroom-vinyl-01',
+  'work-grey-lounge-laminate-01',
+  'work-oak-lounge-laminate-01',
+  'work-kitchen-laminate-02',
+  'work-feature-wall-laminate-01',
+  'work-dining-laminate-01',
+  'work-hallway-transition-01',
+  'work-lounge-laminate-02',
+  'work-garden-room-01',
 ])
 const lift = (pipeline) =>
   pipeline.normalise({ lower: 1, upper: 99 }).modulate({ brightness: 1.04, saturation: 1.06 }).sharpen({ sigma: 0.6 })
@@ -59,7 +69,9 @@ for (const dir of SOURCES) {
   for (const file of files) {
     const name = basename(file, extname(file))
     const ratio = ASPECT[name] ?? DEFAULT_ASPECT
-    for (const width of [...WIDTHS, ...(EXTRA_WIDTHS[name] ?? [])]) {
+    // Slideshow photos only need their uncropped -show files.
+    const cropWidths = SHOWCASE.has(name) ? [] : [...WIDTHS, ...(EXTRA_WIDTHS[name] ?? [])]
+    for (const width of cropWidths) {
       const height = Math.round(width / ratio)
       let pipeline = sharp(join(dir, file))
       if (CROPS[name]) {
@@ -72,11 +84,11 @@ for (const dir of SOURCES) {
       await pipeline.clone().avif({ quality: crisp ? 64 : 50 }).toFile(join(OUT, `${name}-${width}.avif`))
       await pipeline.clone().webp({ quality: crisp ? 85 : 72 }).toFile(join(OUT, `${name}-${width}.webp`))
     }
-    if (TALL.has(name)) {
+    if (SHOWCASE.has(name)) {
       for (const width of WIDTHS) {
-        const tall = lift(sharp(join(dir, file)).resize(width, Math.round((width * 4) / 3), { fit: 'cover', position: 'attention' }))
-        await tall.clone().avif({ quality: 50 }).toFile(join(OUT, `${name}-tall-${width}.avif`))
-        await tall.clone().webp({ quality: 72 }).toFile(join(OUT, `${name}-tall-${width}.webp`))
+        const show = lift(sharp(join(dir, file)).rotate().resize({ width, withoutEnlargement: true }))
+        await show.clone().avif({ quality: 52 }).toFile(join(OUT, `${name}-show-${width}.avif`))
+        await show.clone().webp({ quality: 76 }).toFile(join(OUT, `${name}-show-${width}.webp`))
       }
     }
     console.log(`optimised ${name}`)

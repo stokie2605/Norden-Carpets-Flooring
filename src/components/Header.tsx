@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Phone } from 'lucide-react'
-import { copy, links, phones } from '../content/site'
+import { copy, links, nav, phones } from '../content/site'
 import { useBooking } from '../context/BookingContext'
 import { Button } from './ui/Button'
 import { FacebookIcon } from './ui/BrandIcons'
@@ -44,6 +44,18 @@ export function Header() {
           <Wordmark />
         </a>
 
+        <nav aria-label="Sections" className="hidden lg:block">
+          <ul className="flex items-center gap-7 text-sm font-medium text-ink-soft">
+            {nav.map((item) => (
+              <li key={item.href}>
+                <a href={`/${item.href}`} className="rounded py-2 hover:text-accent-deep">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
         <div className="flex items-center gap-1 sm:gap-2">
           <div
             className={`flex items-center gap-1 transition-[opacity,visibility] duration-200 sm:gap-2 ${
@@ -74,6 +86,27 @@ export function Header() {
           </a>
         </div>
       </div>
+
+      {/* Below 1024px the section links drop in under the bar once the hero buttons scroll away. */}
+      <nav
+        aria-label="Sections"
+        className={`absolute inset-x-0 top-full border-b border-line bg-bg/95 backdrop-blur transition-[opacity,visibility,transform] duration-200 lg:hidden ${
+          showActions ? 'visible translate-y-0 opacity-100' : 'invisible -translate-y-1 opacity-0'
+        }`}
+      >
+        <ul className="container-x flex items-center gap-1 overflow-x-auto py-1.5 text-sm font-medium text-ink-soft [scrollbar-width:none]">
+          {nav.map((item) => (
+            <li key={item.href} className="shrink-0">
+              <a
+                href={`/${item.href}`}
+                className="inline-flex min-h-10 items-center rounded-full px-3 hover:bg-bg-alt hover:text-accent-deep"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </header>
   )
 }
