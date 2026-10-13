@@ -134,18 +134,11 @@ export const proof = {
       'Fitted our whole house with carpets and laminate flooring, looks amazing. Really happy with the results, definitely recommend and will use them again!',
     detail: 'Facebook review',
   },
+  // Strongest first: on phones these are a swipe row, so the best ones are seen first.
   reviews: [
-    {
-      quote: 'Excellent friendly service from all at norden carpets. Very happy with the finish and quality.',
-      source: 'google',
-    },
     {
       quote:
         "Great service and advice on picking the perfect carpet... They even chopped up the old one and put it in my car so I could take it to the dump. I'm definitely using Norden Carpets again.",
-      source: 'google',
-    },
-    {
-      quote: 'Good selection no pushy staff a hassle free experience and very helpful worth a visit to get a new carpet or flooring',
       source: 'google',
     },
     {
@@ -157,7 +150,15 @@ export const proof = {
         'Absolutely amazing carpets and fitting! We had our lounge, hall, stairs and landing carpeted and it looks fabulous!',
     },
     {
+      quote: 'Excellent friendly service from all at norden carpets. Very happy with the finish and quality.',
+      source: 'google',
+    },
+    {
       quote: 'I have had many carpets from Dave over the years and he has always done a great job...',
+    },
+    {
+      quote: 'Good selection no pushy staff a hassle free experience and very helpful worth a visit to get a new carpet or flooring',
+      source: 'google',
     },
   ] as readonly Review[],
 } as const

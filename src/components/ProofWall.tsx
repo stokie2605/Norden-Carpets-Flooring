@@ -70,9 +70,10 @@ export function ProofWall() {
           </figure>
         </div>
 
-        <ul className="mt-6 grid gap-6 md:grid-cols-3">
+        {/* Phones: a side swipe row, edge to edge. From 768px: a three column grid. */}
+        <ul className="-mx-4 mt-6 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:-mx-6 sm:scroll-px-6 sm:px-6 md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0 [&::-webkit-scrollbar]:hidden">
           {proof.reviews.map((review) => (
-            <li key={review.quote.slice(0, 24)}>
+            <li key={review.quote.slice(0, 24)} className="w-[82%] shrink-0 snap-start sm:w-[60%] md:w-auto">
               <figure className="flex h-full flex-col justify-between rounded-[1.25rem] border border-line bg-bg-alt p-6">
                 <blockquote className="text-ink">
                   <p>&ldquo;{review.quote}&rdquo;</p>
