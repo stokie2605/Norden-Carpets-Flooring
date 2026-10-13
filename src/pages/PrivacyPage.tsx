@@ -113,15 +113,7 @@ export default function PrivacyPage() {
             </p>
           </Section>
 
-          <Section title="Maps">
-            <p>
-              The map in our showroom section is built from OpenStreetMap images. To show them, your browser sends
-              your IP address to the OpenStreetMap Foundation, which uses it only to deliver the map, under the{' '}
-              <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener noreferrer">
-                OpenStreetMap privacy policy
-              </a>
-              .
-            </p>
+          <Section title="Directions">
             <p>
               The &ldquo;Get directions&rdquo; button opens Google Maps in a new tab. Nothing is sent to Google unless
               you tap it, and from then on the{' '}

@@ -30,6 +30,8 @@ const CRISP = new Set(['tab-vinyl-02', 'tab-carpets-02', 'tab-carpets-03', 'tab-
 // Hero is shown in its natural panoramic ratio so nothing is cut off; tabs and gallery use 4:3.
 const ASPECT = {
   'hero-herringbone': 1024 / 456,
+  // Dave's van, cut from the link preview image. Shown square in the showroom section.
+  'showroom-van': 1,
 }
 const DEFAULT_ASPECT = 4 / 3
 // Full width images also get a 2048px file so large screens are not stretching the 1600px one.

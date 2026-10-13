@@ -323,9 +323,7 @@ export const copy = {
     title: 'Come and see us at Tenterhouse Mill.',
     intro: "We do free home measures within about 15 miles of our Norden showroom.",
     areasTitle: 'Areas we cover',
-    mapPin: 'Norden showroom',
-    mapRadius: 'About 15 miles',
-    mapLabel: 'Map of the areas we cover: about 15 miles around our Norden showroom.',
+    vanAlt: 'The Norden Carpets & Flooring van, with our name and phone number on the side',
   },
   footer: {
     blurb: 'Carpets, vinyl, laminate and underlay, supplied and fitted by our own team.',
