@@ -31,6 +31,7 @@ export const links = {
   whatsapp:
     "https://wa.me/447904322879?text=Hi%20Dave%20and%20Wendy,%20I'd%20like%20to%20send%20some%20room%20photos%20for%20a%20flooring%20quote.",
   facebook: 'https://www.facebook.com/nordencarpetsandflooring',
+  googleReviews: 'https://www.google.com/search?q=norden+carpets',
   privacy: '/privacy',
   terms: '/terms',
   designer: 'https://www.designsystemsweb.co.uk/',
@@ -308,7 +309,8 @@ export const copy = {
   reviews: {
     reviewSource: 'Facebook review',
     googleSource: 'Google review',
-    facebookLink: 'Read our reviews',
+    facebookLink: 'Facebook',
+    googleLink: 'Google',
     eyebrow: 'Reviews',
     title: 'What our customers say.',
   },

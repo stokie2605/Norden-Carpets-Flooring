@@ -1,6 +1,6 @@
 import { Star } from 'lucide-react'
 import { copy, links, proof } from '../content/site'
-import { FacebookIcon } from './ui/BrandIcons'
+import { FacebookIcon, GoogleIcon } from './ui/BrandIcons'
 import { buttonClasses } from './ui/Button'
 
 export function ProofWall() {
@@ -36,16 +36,28 @@ export function ProofWall() {
                 <br />
                 {proof.google.source}
               </p>
-              <a
-                href={links.facebook}
-                target="_blank"
-                rel="noopener"
-                className={buttonClasses({ variant: 'secondary', size: 'md' })}
-              >
-                <FacebookIcon className="size-4 text-[#1877F2]" />
-                {copy.reviews.facebookLink}
-                <span className="sr-only">(opens Facebook in a new tab)</span>
-              </a>
+              <div className="flex flex-wrap items-center gap-2.5">
+                <a
+                  href={links.facebook}
+                  target="_blank"
+                  rel="noopener"
+                  className={buttonClasses({ variant: 'secondary', size: 'md' })}
+                >
+                  <FacebookIcon className="size-4 text-[#1877F2]" />
+                  {copy.reviews.facebookLink}
+                  <span className="sr-only">(opens Facebook in a new tab)</span>
+                </a>
+                <a
+                  href={links.googleReviews}
+                  target="_blank"
+                  rel="noopener"
+                  className={buttonClasses({ variant: 'secondary', size: 'md' })}
+                >
+                  <GoogleIcon className="size-4" />
+                  {copy.reviews.googleLink}
+                  <span className="sr-only">(opens Google in a new tab)</span>
+                </a>
+              </div>
             </div>
           </div>
 
