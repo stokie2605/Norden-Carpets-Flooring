@@ -1,4 +1,4 @@
-const WIDTHS = [480, 720, 1024, 1600] as const
+const WIDTHS = [480, 720, 800, 1024, 1600] as const
 
 type PictureProps = {
   name: string
