@@ -36,17 +36,11 @@ const NAMED_ENTITY = /&([a-zA-Z]+);/g
 const NUMERIC_ENTITY = /&#(x[0-9a-fA-F]+|[0-9]+);/g
 
 const FONTS = [
-  // Headings only use bold and extrabold, at widths from 75 to 112.
+  // Archivo is the only typeface: regular body copy through extrabold headings, all at normal width.
   {
     from: 'node_modules/@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2',
     to: 'archivo-wdth-subset.woff2',
-    axes: { wght: { min: 700, max: 800 }, wdth: { min: 75, max: 112 } },
-  },
-  // Body copy uses regular through bold.
-  {
-    from: 'node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2',
-    to: 'inter-wght-subset.woff2',
-    axes: { wght: { min: 400, max: 700 } },
+    axes: { wght: { min: 400, max: 800 }, wdth: 100 },
   },
 ]
 

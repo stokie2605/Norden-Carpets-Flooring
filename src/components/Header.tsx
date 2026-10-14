@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react'
-import { Phone } from 'lucide-react'
 import { copy, links, phones } from '../content/site'
 import { useBooking } from '../context/BookingContext'
 import { Button } from './ui/Button'
@@ -8,53 +6,41 @@ import { Wordmark } from './ui/Wordmark'
 
 export function Header() {
   const { openBooking } = useBooking()
-  const [scrolled, setScrolled] = useState(false)
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   return (
-    <header
-      className={`sticky top-0 z-40 border-b bg-bg/95 backdrop-blur transition-[border-color,box-shadow] ${
-        scrolled ? 'border-line shadow-[0_1px_0_rgb(15_23_42/0.04)]' : 'border-transparent'
-      }`}
-    >
-      <div className="container-x flex h-16 items-center justify-between gap-2 md:h-[4.5rem]">
+    <header className="sticky top-0 z-40 border-b border-line bg-bg">
+      <div className="container-x flex items-center justify-between gap-3 py-3 lg:py-5">
         <a href="/" className="shrink-0 rounded">
           <Wordmark />
         </a>
 
-        <div className="flex items-center gap-1 sm:gap-2">
-          {/* Call and Free measure are always on show, so booking is one tap away anywhere on the page. */}
-          <div className="flex items-center gap-1 sm:gap-2">
-            <a
-              href={phones.showroom.href}
-              className="hidden min-h-11 items-center gap-2 whitespace-nowrap rounded-full px-3 text-sm font-semibold text-ink hover:text-accent-deep md:inline-flex"
-            >
-              <Phone className="size-[1.1rem] text-accent" aria-hidden="true" />
-              {/* Phones use the Call button in the bottom bar instead. */}
-              <span className="sr-only">{copy.cta.callShort} </span>
-              {phones.showroom.display}
-            </a>
-            <Button size="md" onClick={() => openBooking()} className="whitespace-nowrap px-3 xs:px-4 sm:px-5">
-              {copy.cta.bookShort}
-            </Button>
-          </div>
+        {/* Call and Get quote are always on show, so booking is one tap away anywhere on the page. */}
+        <div className="flex items-center gap-2 md:gap-5">
+          {/* Phones use the Call button in the bottom bar instead. */}
+          <a
+            href={phones.showroom.href}
+            className="hidden whitespace-nowrap text-[0.9375rem] font-semibold text-ink hover:text-accent md:inline"
+          >
+            {copy.cta.callShort} {phones.showroom.display}
+          </a>
+          <Button
+            size="md"
+            onClick={() => openBooking()}
+            className="min-h-10 whitespace-nowrap px-3.5 text-sm lg:min-h-11 lg:px-[1.125rem] lg:text-[0.9375rem]"
+          >
+            {copy.cta.bookShort}
+          </Button>
           <a
             href={links.facebook}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Norden Carpets & Flooring on Facebook (opens in a new tab)"
-            className="grid size-11 place-items-center rounded-full text-ink-soft hover:bg-bg-alt hover:text-accent-deep"
+            className="-mr-2 grid size-11 shrink-0 place-items-center rounded-md text-[#1877F2] hover:bg-bg-alt md:-ml-2"
           >
-            <FacebookIcon />
+            <FacebookIcon className="size-6" />
           </a>
         </div>
       </div>
-
     </header>
   )
 }

@@ -46,10 +46,10 @@ export default function PrivacyPage() {
           </Section>
 
           <Section title="What we collect and why">
-            <p>When you request a free measure we collect:</p>
+            <p>When you ask for a free quote we collect:</p>
             <ul>
-              <li>your name, phone number and, if you give it, your email address</li>
-              <li>your postcode, the type of flooring you are interested in and a preferred visit time</li>
+              <li>your name and phone number</li>
+              <li>your postcode and the type of flooring you are interested in</li>
               <li>any notes you choose to add about the job</li>
             </ul>
             <p>
@@ -84,7 +84,7 @@ export default function PrivacyPage() {
           <Section title="Do you have to give us your details?">
             <p>
               No, but we need your name, phone number and postcode to arrange a measure. Without them we can&apos;t book
-              the visit. Your email address and notes are optional.
+              the visit. Your notes are optional.
             </p>
             <p>We don&apos;t make any automated decisions about you. A real person reads every request.</p>
           </Section>

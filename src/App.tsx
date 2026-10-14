@@ -5,7 +5,6 @@ import { ProofWall } from './components/ProofWall'
 import { ShowroomMap } from './components/ShowroomMap'
 import { SiteShell } from './components/SiteShell'
 import { TeamStrip } from './components/TeamStrip'
-import { SectionDivider } from './components/ui/SectionDivider'
 
 export default function App() {
   return (
@@ -15,7 +14,6 @@ export default function App() {
       <PreviousWork />
       <TeamStrip />
       <ProofWall />
-      <SectionDivider />
       <ShowroomMap />
     </SiteShell>
   )

@@ -1,4 +1,3 @@
-import { Clock, Navigation } from 'lucide-react'
 import { business, copy, hours } from '../content/site'
 import { buttonClasses } from './ui/Button'
 import { Picture } from './ui/Picture'
@@ -6,60 +5,42 @@ import { Picture } from './ui/Picture'
 /** Showroom: Dave's van, opening hours and a directions link. The full address is in the footer. */
 export function ShowroomMap() {
   return (
-    <section id="showroom" aria-labelledby="showroom-title" className="relative isolate overflow-hidden bg-bg-alt py-10 sm:py-16">
-      {/* Dave's herringbone lounge job, shown whole and faded behind the section like the hero. */}
-      <div aria-hidden="true" className="absolute inset-x-0 top-0 -z-10 h-[22rem] sm:h-[26rem] lg:inset-y-0 lg:h-auto">
-        <Picture
-          name="hero-herringbone"
-          alt=""
-          sizes="100vw"
-          width={1024}
-          height={456}
-          className="size-full object-cover object-[35%_60%] lg:object-[50%_55%]"
-        />
-        <div className="absolute inset-0 bg-linear-to-b from-bg-alt/45 via-bg-alt/80 to-bg-alt lg:bg-linear-to-l lg:from-bg-alt lg:from-35% lg:via-bg-alt/80 lg:via-55% lg:to-bg-alt/5" />
-      </div>
-      <div className="container-x">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,24rem)_1fr] lg:items-center lg:gap-14">
-          <div>
-            <p className="eyebrow">{copy.showroom.eyebrow}</p>
-            <h2 id="showroom-title" className="mt-3 max-w-2xl text-section font-extrabold">
-              {copy.showroom.title}
-            </h2>
-            <p className="mt-4 max-w-xl text-ink-soft">{copy.showroom.coverage}</p>
-            <p className="mt-5 flex max-w-xl gap-2.5 text-ink-soft">
-              <Clock className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden="true" />
-              <span>
-                {hours
-                  .filter((h) => h.time !== 'Closed')
-                  .map((h) => `${h.days} ${h.time}`)
-                  .join(', ')}
-              </span>
-            </p>
+    <section id="showroom" aria-labelledby="showroom-title" className="container-x mt-16 lg:mt-[6.5rem]">
+      {/* A panel inside the page width, so its edges line up with every section above it. */}
+      <div className="overflow-hidden rounded-lg bg-ink text-white lg:grid lg:grid-cols-2">
+        <div className="relative h-60 bg-ink-soft sm:h-80 lg:h-auto lg:min-h-[28rem]">
+          <Picture
+            name="showroom-van"
+            alt={copy.showroom.vanAlt}
+            sizes="(min-width: 1440px) 656px, (min-width: 1024px) 45vw, 100vw"
+            width={1024}
+            height={1024}
+            className="absolute inset-0 size-full object-cover"
+          />
+        </div>
 
-            <a
-              href={business.mapsDirectionsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={buttonClasses({ variant: 'secondary', size: 'md', className: 'mt-6' })}
-            >
-              <Navigation className="size-4 text-accent" aria-hidden="true" />
-              {copy.cta.directions}
-              <span className="sr-only">(opens Google Maps in a new tab)</span>
-            </a>
-          </div>
-
-          {/* Dave's van in a circle, the same size the old map took up. */}
-          <div className="mx-auto w-full max-w-[13rem] sm:max-w-sm lg:order-first lg:max-w-none">
-            <Picture
-              name="showroom-van"
-              alt={copy.showroom.vanAlt}
-              sizes="(min-width: 640px) 24rem, 13rem"
-              width={640}
-              height={640}
-              className="aspect-square w-full rounded-full object-cover shadow-lg ring-4 ring-bg sm:ring-8"
-            />
-          </div>
+        <div className="flex flex-col gap-3.5 px-5 pb-8 pt-7 sm:px-8 lg:justify-center lg:gap-[1.125rem] lg:p-14 xl:p-16">
+          <p className="eyebrow text-accent-bright">{copy.showroom.eyebrow}</p>
+          <h2 id="showroom-title" className="text-[1.875rem] font-extrabold leading-[1.05] lg:text-[2.625rem]">
+            {copy.showroom.title}
+          </h2>
+          <p className="text-[0.9375rem] leading-[1.6] text-white/80 lg:text-base">
+            {copy.showroom.coverage}
+            <br />
+            {hours
+              .filter((h) => h.time !== 'Closed')
+              .map((h) => `${h.days} ${h.time}`)
+              .join(', ')}
+          </p>
+          <a
+            href={business.mapsDirectionsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={buttonClasses({ variant: 'inverse', size: 'lg', className: 'lg:mt-2 lg:self-start' })}
+          >
+            {copy.cta.directions}
+            <span className="sr-only">(opens Google Maps in a new tab)</span>
+          </a>
         </div>
       </div>
     </section>

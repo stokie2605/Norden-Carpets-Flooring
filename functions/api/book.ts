@@ -52,14 +52,14 @@ function buildEmail(input: BookingInput) {
     ['Notes', input.notes.trim() || 'None'],
   ]
   const text = rows.map(([k, v]) => `${k}: ${v}`).join('\n')
-  const html = `<h2 style="font-family:Arial,sans-serif">New free measure request</h2><table style="font-family:Arial,sans-serif;border-collapse:collapse">${rows
+  const html = `<h2 style="font-family:Arial,sans-serif">New quote request</h2><table style="font-family:Arial,sans-serif;border-collapse:collapse">${rows
     .map(
       ([k, v]) =>
         `<tr><td style="padding:6px 12px 6px 0;font-weight:bold;vertical-align:top">${escapeHtml(k)}</td><td style="padding:6px 0;white-space:pre-wrap">${escapeHtml(v)}</td></tr>`,
     )
     .join('')}</table>`
   return {
-    subject: `Free measure request: ${labelFor(MATERIAL_OPTIONS, input.material)}, ${normalisePostcode(input.postcode)}`,
+    subject: `Quote request: ${labelFor(MATERIAL_OPTIONS, input.material)}, ${normalisePostcode(input.postcode)}`,
     text,
     html,
   }

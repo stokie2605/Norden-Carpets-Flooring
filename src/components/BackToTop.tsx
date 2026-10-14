@@ -25,7 +25,7 @@ export function BackToTop() {
       type="button"
       onClick={backToTop}
       aria-label={copy.cta.backToTop}
-      className={`fixed right-4 z-50 grid size-14 place-items-center rounded-full bg-ink text-white shadow-[0_10px_25px_-8px_rgb(15_23_42/0.45)] transition-[opacity,visibility] duration-200 active:scale-95 md:hidden ${
+      className={`fixed right-4 z-50 grid size-14 place-items-center rounded-full bg-ink text-white shadow-[0_10px_25px_-8px_rgb(17_17_17/0.45)] transition-[opacity,visibility] duration-200 active:scale-95 md:hidden ${
         show ? 'visible opacity-100' : 'invisible opacity-0'
       }`}
       style={{ bottom: 'calc(5.5rem + env(safe-area-inset-bottom))' }}
