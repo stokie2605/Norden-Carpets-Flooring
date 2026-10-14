@@ -27,13 +27,13 @@ You are an implementer, not a designer. The design is finished and approved. You
 
 - Light theme only. No dark mode, no `prefers-color-scheme`, no `dark:` classes.
 - No prices anywhere: not on the page, not in `site.ts`, not in the JSON-LD in `index.html`.
-- Section order in `src/App.tsx`: Hero, MaterialSwitcher, PreviousWork, TeamStrip, ProofWall, SectionDivider, ShowroomMap.
+- Section order in `src/App.tsx`: Hero, MaterialSwitcher, PreviousWork, TeamStrip, ProofWall, ShowroomMap.
 - Team: Dave and Wendy (Owners), Tom and Jake (Fitters).
 - Never mention Bury.
 - Reviews in `site.ts` are word for word from Facebook. Never write, reword or tidy a review. Never use customer photos.
 - Never mention subcontractors, and never use the word "subfloor" in client copy.
 - All client copy lives in `src/content/site.ts`. Components read from it. No hardcoded sentences in components.
-- Colours come only from the tokens in `src/styles/index.css` (`bg`, `bg-alt`, `ink`, `ink-soft`, `muted`, `accent`, `accent-deep`, `pill`, `line`). No new hex values. The only allowed raw hex values are brand colours for Facebook (#1877F2), WhatsApp (#128C7E) and white (#fff).
+- Colours come only from the tokens in `src/styles/index.css` (`bg`, `bg-alt`, `ink`, `ink-soft`, `muted`, `accent`, `accent-deep`, `accent-bright`, `star`, `pill`, `line`). No new hex values. The only allowed raw hex values are brand colours for Facebook (#1877F2), WhatsApp (#128C7E) and white (#fff).
 - No new npm packages. Ask first.
 - Never push to `main`. Work on `develop` or a branch off it.
 - Never read or print `.dev.vars` or any secret.

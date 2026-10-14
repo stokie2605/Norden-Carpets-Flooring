@@ -37,17 +37,11 @@ function setup() {
 
 const dialog = () => document.querySelector('dialog')!
 
-async function fillStepOne(user: ReturnType<typeof userEvent.setup>) {
+async function fillForm(user: ReturnType<typeof userEvent.setup>) {
   await user.click(screen.getByLabelText('Carpets'))
-  await user.type(screen.getByLabelText('Postcode'), 'OL12 7TD')
-  await user.click(screen.getByLabelText('Weekday morning'))
-  await user.click(screen.getByRole('button', { name: 'Continue' }))
-}
-
-async function fillStepTwo(user: ReturnType<typeof userEvent.setup>) {
   await user.type(screen.getByLabelText('Your name'), 'Jo Bloggs')
-  await user.type(screen.getByLabelText('Phone number'), '07904 322 879')
-  await user.click(screen.getByRole('button', { name: 'Continue' }))
+  await user.type(screen.getByLabelText('Phone number'), '07904 322879')
+  await user.type(screen.getByLabelText('Postcode'), 'OL12 7TD')
 }
 
 afterEach(() => {
@@ -61,13 +55,13 @@ describe('BookingModal', () => {
     await user.click(screen.getByText('Open booking'))
     expect(dialog()).toHaveAttribute('open')
     expect(document.documentElement.style.overflow).toBe('hidden')
-    expect(screen.getByRole('heading', { name: 'Your floor' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Get a free quote' })).toBeInTheDocument()
   })
 
   it('closes from the close button and restores scroll', async () => {
     const user = setup()
     await user.click(screen.getByText('Open booking'))
-    await user.click(screen.getByRole('button', { name: 'Close booking form' }))
+    await user.click(screen.getByRole('button', { name: 'Close quote form' }))
     expect(dialog()).not.toHaveAttribute('open')
     expect(document.documentElement.style.overflow).toBe('')
   })
@@ -78,23 +72,22 @@ describe('BookingModal', () => {
     expect(screen.getByLabelText('Laminate')).toBeChecked()
   })
 
-  it('blocks progress and shows inline errors for missing step fields', async () => {
+  it('shows inline errors for every missing field and focuses the first', async () => {
     const user = setup()
     await user.click(screen.getByText('Open booking'))
-    await user.click(screen.getByRole('button', { name: 'Continue' }))
+    await user.click(screen.getByRole('button', { name: 'Send my request' }))
     expect(screen.getByText('Choose a flooring type.')).toBeInTheDocument()
+    expect(screen.getByText('Enter your name.')).toBeInTheDocument()
     expect(screen.getByText('Enter your postcode.')).toBeInTheDocument()
-    expect(screen.getByText('Choose a preferred time.')).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: 'Your floor' })).toBeInTheDocument()
+    expect(screen.getByText('Please tick the box so we can contact you about your quote.')).toBeInTheDocument()
+    await waitFor(() => expect(screen.getByLabelText('Carpets')).toHaveFocus())
   })
 
-  it('validates phone numbers on the details step', async () => {
+  it('validates phone numbers', async () => {
     const user = setup()
     await user.click(screen.getByText('Open booking'))
-    await fillStepOne(user)
-    await user.type(screen.getByLabelText('Your name'), 'Jo')
     await user.type(screen.getByLabelText('Phone number'), '123')
-    await user.click(screen.getByRole('button', { name: 'Continue' }))
+    await user.click(screen.getByRole('button', { name: 'Send my request' }))
     expect(screen.getByLabelText('Phone number')).toHaveAttribute('aria-invalid', 'true')
     expect(screen.getByText('Enter a valid UK phone number.')).toBeInTheDocument()
   })
@@ -104,34 +97,41 @@ describe('BookingModal', () => {
     vi.stubGlobal('fetch', fetchMock)
     const user = setup()
     await user.click(screen.getByText('Open booking'))
-    await fillStepOne(user)
-    await fillStepTwo(user)
+    await fillForm(user)
 
-    await user.click(screen.getByRole('button', { name: 'Request my free measure' }))
-    expect(screen.getByText('Please tick the box so we can contact you about your measure.')).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'Send my request' }))
+    expect(screen.getByText('Please tick the box so we can contact you about your quote.')).toBeInTheDocument()
     expect(fetchMock).not.toHaveBeenCalled()
 
     await user.click(screen.getByRole('checkbox'))
-    await user.click(screen.getByRole('button', { name: 'Request my free measure' }))
+    await user.click(screen.getByRole('button', { name: 'Send my request' }))
 
     await waitFor(() => expect(screen.getByRole('heading', { name: 'Thank you' })).toBeInTheDocument())
     const [url, init] = fetchMock.mock.calls[0] as unknown as [string, RequestInit]
     expect(url).toBe('/api/book')
     const body = JSON.parse(String(init.body))
-    expect(body).toMatchObject({ material: 'carpets', postcode: 'OL12 7TD', consent: true, turnstileToken: 'test-token', website: '' })
+    expect(body).toMatchObject({
+      material: 'carpets',
+      name: 'Jo Bloggs',
+      postcode: 'OL12 7TD',
+      preferredTime: 'any',
+      email: '',
+      consent: true,
+      turnstileToken: 'test-token',
+      website: '',
+    })
   })
 
   it('offers call and WhatsApp fallbacks when sending fails', async () => {
     vi.stubGlobal('fetch', vi.fn(async () => Response.json({ ok: false, error: 'Upstream down.' }, { status: 502 })))
     const user = setup()
     await user.click(screen.getByText('Open booking'))
-    await fillStepOne(user)
-    await fillStepTwo(user)
+    await fillForm(user)
     await user.click(screen.getByRole('checkbox'))
-    await user.click(screen.getByRole('button', { name: 'Request my free measure' }))
+    await user.click(screen.getByRole('button', { name: 'Send my request' }))
 
     await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent('Upstream down.'))
-    expect(screen.getByRole('link', { name: /Call 01706 659 962/ })).toHaveAttribute('href', 'tel:+441706659962')
+    expect(screen.getByRole('link', { name: /Call 01706 659962/ })).toHaveAttribute('href', 'tel:+441706659962')
     expect(screen.getByRole('link', { name: /WhatsApp us/ })).toHaveAttribute('href', expect.stringContaining('wa.me/447904322879'))
   })
 })

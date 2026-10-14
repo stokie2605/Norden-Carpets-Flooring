@@ -38,7 +38,6 @@ describe('guardrails', () => {
       'PreviousWork',
       'TeamStrip',
       'ProofWall',
-      'SectionDivider',
       'ShowroomMap',
     ])
   })

@@ -1,25 +1,22 @@
 import { useId, useRef, useState, type KeyboardEvent } from 'react'
-import { Check } from 'lucide-react'
 import { copy, materials } from '../content/site'
-import { useBooking } from '../context/BookingContext'
-import { Button } from './ui/Button'
 import { Picture } from './ui/Picture'
 
 export function MaterialSwitcher() {
-  const { openBooking } = useBooking()
   const [active, setActive] = useState(0)
   const [visited, setVisited] = useState(() => new Set([0]))
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
   const baseId = useId()
+  const [titleStart, titleEnd] = copy.flooring.titleLines
+
+  const select = (index: number) => {
+    setActive(index)
+    setVisited((prev) => new Set(prev).add(index))
+  }
 
   const focusTab = (index: number) => {
     const next = (index + materials.length) % materials.length
-    setActive(next)
-    setVisited((prev) => {
-      const copy = new Set(prev)
-      copy.add(next)
-      return copy
-    })
+    select(next)
     tabRefs.current[next]?.focus()
   }
 
@@ -38,23 +35,18 @@ export function MaterialSwitcher() {
   }
 
   return (
-    <section id="flooring" aria-labelledby="flooring-title" className="bg-bg-alt py-11 sm:py-24">
+    <section id="flooring" aria-labelledby="flooring-title" className="pt-16 lg:pt-[6.5rem]">
       <div className="container-x">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-2xl">
-            <p className="eyebrow">{copy.flooring.eyebrow}</p>
-            <h2 id="flooring-title" className="mt-3 text-section font-extrabold">
-              {copy.flooring.title}
-            </h2>
-          </div>
-          <p className="max-w-sm text-ink-soft">{copy.flooring.intro}</p>
+        <p className="eyebrow mb-2.5 lg:mb-3">{copy.flooring.eyebrow}</p>
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+          <h2 id="flooring-title" className="text-[2rem] font-extrabold leading-[1.05] lg:text-[2.875rem] lg:leading-[1.02]">
+            {titleStart}
+            <br className="max-lg:hidden" /> {titleEnd}
+          </h2>
+          <p className="text-[0.9375rem] leading-normal text-ink-soft lg:max-w-[20.625rem] lg:text-base">{copy.flooring.intro}</p>
         </div>
 
-        <div
-          role="tablist"
-          aria-label="Flooring types"
-          className="mt-10 flex flex-wrap gap-2"
-        >
+        <div role="tablist" aria-label="Flooring types" className="mt-6 flex gap-6 border-b border-line lg:mt-10 lg:gap-7">
           {materials.map((m, i) => {
             const selected = i === active
             return (
@@ -69,19 +61,10 @@ export function MaterialSwitcher() {
                 aria-selected={selected}
                 aria-controls={`${baseId}-panel-${m.id}`}
                 tabIndex={selected ? 0 : -1}
-                onClick={() => {
-                  setActive(i)
-                  setVisited((prev) => {
-                    const copy = new Set(prev)
-                    copy.add(i)
-                    return copy
-                  })
-                }}
+                onClick={() => select(i)}
                 onKeyDown={onKeyDown}
-                className={`min-h-12 shrink-0 rounded-full border px-5 text-sm font-semibold transition-colors ${
-                  selected
-                    ? 'border-ink bg-ink text-white'
-                    : 'border-line bg-bg text-ink-soft hover:border-ink/30 hover:text-ink'
+                className={`-mb-px border-b-2 pb-3 pt-2 text-base font-semibold transition-colors lg:pb-3.5 lg:text-[1.0625rem] ${
+                  selected ? 'border-accent text-ink' : 'border-transparent text-muted hover:text-ink'
                 }`}
               >
                 {m.label}
@@ -98,52 +81,38 @@ export function MaterialSwitcher() {
             aria-labelledby={`${baseId}-tab-${m.id}`}
             hidden={i !== active}
             tabIndex={0}
-            className="mt-6 overflow-hidden rounded-[1.75rem] border border-line bg-bg"
+            className="pt-5 lg:pt-10"
           >
-            <div className="grid md:grid-cols-[1.1fr_1fr]">
-              <div className="aspect-[4/3] bg-bg-alt md:aspect-auto md:min-h-[26rem]">
+            <div className="lg:grid lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-14">
+              <div className="h-60 overflow-hidden rounded-lg bg-bg-alt sm:h-[22rem] lg:h-[26.25rem] xl:h-[30rem]">
                 {visited.has(i) && (
                   <Picture
                     name={m.image}
                     alt={m.imageAlt}
-                    sizes="(min-width: 768px) 50vw, 100vw"
+                    sizes="(min-width: 1024px) 55vw, 100vw"
                     width={1024}
                     height={768}
                     className="size-full object-cover"
                   />
                 )}
               </div>
-              <div className="flex flex-col p-6 sm:p-9">
-                <h3 className="text-2xl font-extrabold sm:text-3xl">{m.headline}</h3>
-                <p className="mt-3 text-ink-soft">{m.pitch}</p>
+              <div className="flex flex-col lg:justify-center lg:gap-5">
+                <h3 className="mt-5 text-2xl font-extrabold leading-[1.15] tracking-[-0.02em] lg:mt-0 lg:text-[1.875rem] lg:leading-[1.1]">
+                  {m.headline}
+                </h3>
+                <p className="mt-2.5 text-[0.9375rem] leading-[1.6] text-ink-soft lg:mt-0 lg:text-base">{m.pitch}</p>
                 {m.review && (
-                  <figure className="mt-6 border-l-2 border-accent pl-4">
-                    <blockquote className="text-ink">
+                  <figure className="mt-4 border-y border-line py-3.5 text-[0.9375rem] leading-normal lg:mt-0 lg:py-[1.125rem] lg:text-base">
+                    <blockquote>
                       <p>&ldquo;{m.review.quote}&rdquo;</p>
                     </blockquote>
-                    <figcaption className="mt-1 text-sm text-muted">
-                      {copy.reviews.reviewSource}
-                    </figcaption>
+                    <figcaption className="mt-1.5 text-[0.8125rem] text-muted">{copy.reviews.reviewSource}</figcaption>
                   </figure>
                 )}
-
-                <ul className="mt-8 flex flex-wrap gap-2 border-t border-line pt-6" aria-label={`${m.label} is ideal for`}>
-                  {m.bestFor.map((room) => (
-                    <li
-                      key={room}
-                      className="inline-flex items-center gap-1.5 rounded-full bg-pill px-3 py-1.5 text-sm font-medium text-ink"
-                    >
-                      <Check className="size-3.5 text-accent-deep" aria-hidden="true" />
-                      {room}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-8 md:mt-auto md:pt-8">
-                  <Button onClick={() => openBooking(m.id)} className="w-full sm:w-auto">
-                    Book a measure for {m.label.toLowerCase()}
-                  </Button>
-                </div>
+                <p className="mt-3.5 text-sm text-ink-soft lg:mt-0">
+                  <span className="sr-only">{m.label} is ideal for: </span>
+                  {m.bestFor.join(' · ')}
+                </p>
               </div>
             </div>
           </div>

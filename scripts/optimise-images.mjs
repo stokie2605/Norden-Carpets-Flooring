@@ -1,5 +1,5 @@
 // Converts source photos in design-source/ into responsive AVIF and WebP files in public/images.
-// Usage: npm run images
+// Usage: npm run images (or npm run images -- name to redo one photo)
 import { mkdir, readdir } from 'node:fs/promises'
 import { basename, extname, join } from 'node:path'
 import sharp from 'sharp'
@@ -60,6 +60,14 @@ const SHOWCASE = new Set([
 const SHOW_QUALITY = {
   'work-utility-vinyl-01': { avif: 38, webp: 58 },
 }
+// Small or dull photos that get a tailored crop and a stronger lift. Files stop at the widths listed,
+// because enlarging past that adds size without detail.
+const ENHANCE = {
+  // Shopfront at Tenterhouse Mill: sky strip and empty car park trimmed, colour and contrast lifted for the hero.
+  'hero-shopfront': { crop: { left: 0, top: 30, width: 574, height: 830 }, widths: [480, 720, 1024] },
+}
+const ONLY = process.argv[2]
+
 const lift = (pipeline) =>
   pipeline.normalise({ lower: 1, upper: 99 }).modulate({ brightness: 1.04, saturation: 1.06 }).sharpen({ sigma: 0.6 })
 
@@ -74,6 +82,23 @@ for (const dir of SOURCES) {
   }
   for (const file of files) {
     const name = basename(file, extname(file))
+    if (ONLY && name !== ONLY) continue
+    if (ENHANCE[name]) {
+      const { crop, widths } = ENHANCE[name]
+      for (const width of widths) {
+        const pipeline = sharp(join(dir, file))
+          .rotate()
+          .extract(crop)
+          .normalise({ lower: 1, upper: 99.5 })
+          .modulate({ brightness: 1.05, saturation: 1.15 })
+          .resize({ width, kernel: 'lanczos3' })
+          .sharpen({ sigma: width > crop.width ? 1 : 0.6 })
+        await pipeline.clone().avif({ quality: 46 }).toFile(join(OUT, `${name}-${width}.avif`))
+        await pipeline.clone().webp({ quality: 72 }).toFile(join(OUT, `${name}-${width}.webp`))
+      }
+      console.log(`optimised ${name}`)
+      continue
+    }
     const ratio = ASPECT[name] ?? DEFAULT_ASPECT
     // Slideshow photos only need their uncropped -show files.
     const cropWidths = SHOWCASE.has(name) ? [] : [...WIDTHS, ...(EXTRA_WIDTHS[name] ?? [])]

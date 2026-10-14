@@ -92,7 +92,7 @@ export function validateBooking(input: BookingInput, fields?: readonly BookingFi
     if (email && (email.length > LIMITS.email || !EMAIL.test(email))) errors.email = 'Enter a valid email address or leave it blank.'
   }
   if (check('consent') && input.consent !== true) {
-    errors.consent = 'Please tick the box so we can contact you about your measure.'
+    errors.consent = 'Please tick the box so we can contact you about your quote.'
   }
   return errors
 }

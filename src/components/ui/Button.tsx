@@ -1,20 +1,23 @@
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react'
 
-type Variant = 'primary' | 'secondary' | 'quiet'
-type Size = 'md' | 'lg'
+type Variant = 'primary' | 'secondary' | 'ink' | 'inverse' | 'quiet'
+type Size = 'sm' | 'md' | 'lg'
 
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-colors duration-150 select-none disabled:cursor-not-allowed disabled:opacity-60'
+  'inline-flex items-center justify-center gap-2 rounded-md font-semibold transition-colors duration-150 select-none disabled:cursor-not-allowed disabled:opacity-60'
 
 const variants: Record<Variant, string> = {
   primary: 'bg-accent text-white hover:bg-accent-deep active:bg-accent-deep',
-  secondary: 'border border-ink/15 bg-bg text-ink hover:border-ink/40 hover:bg-bg-alt',
+  secondary: 'border-[1.5px] border-ink bg-bg text-ink hover:bg-bg-alt',
+  ink: 'bg-ink text-white hover:bg-ink/85',
+  inverse: 'bg-white text-ink hover:bg-bg-alt',
   quiet: 'text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-deep',
 }
 
 const sizes: Record<Size, string> = {
-  md: 'min-h-11 px-5 text-sm',
-  lg: 'min-h-12 px-6 text-base',
+  sm: 'min-h-10 px-3.5 text-sm',
+  md: 'min-h-11 px-[1.125rem] text-[0.9375rem]',
+  lg: 'min-h-12 px-[1.375rem] text-base',
 }
 
 type Common = { variant?: Variant; size?: Size; className?: string; children: ReactNode }

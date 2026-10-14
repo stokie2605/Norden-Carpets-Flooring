@@ -1,27 +1,23 @@
 import { addressLines, business, copy, hours, links, phones } from '../content/site'
 import { credits } from '../content/credits'
-import { FacebookIcon, WhatsAppIcon } from './ui/BrandIcons'
-import { Wordmark } from './ui/Wordmark'
+import { buttonClasses } from './ui/Button'
+import { FacebookIcon } from './ui/BrandIcons'
 
 export function Footer() {
   return (
-    <footer className="border-t border-line bg-bg">
-      {/* Phones: showroom and hours side by side, contact full width underneath. */}
-      <div className="container-x grid grid-cols-2 gap-x-6 gap-y-8 py-10 sm:py-14 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
-        <div className="col-span-2 lg:col-span-1">
-          <Wordmark />
-          <p className="mt-4 max-w-xs text-sm text-ink-soft">
-            {copy.footer.blurb}
-          </p>
-          {/* Phones get the fixed WhatsApp and Call bar instead. */}
-          <div className="mt-5 hidden flex-wrap gap-3 md:flex">
+    <footer className="bg-bg">
+      <div className="container-x flex flex-col gap-6 py-8 text-sm leading-[1.6] text-ink-soft lg:grid lg:grid-cols-[1.3fr_1fr_1fr_1fr] lg:gap-10 lg:pb-10 lg:pt-14">
+        <div>
+          <p className="text-xl font-extrabold tracking-[-0.02em] text-accent lg:text-[1.375rem]">Norden</p>
+          <p className="mt-1.5 lg:mt-2">{copy.footer.blurb}</p>
+          <div className="mt-4 flex gap-2">
             <a
               href={links.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-11 items-center gap-2 rounded-full bg-[#128C7E] px-5 text-sm font-semibold text-white hover:opacity-90"
+              /* Phones get WhatsApp in the fixed bottom bar instead. */
+              className={buttonClasses({ variant: 'ink', size: 'sm', className: 'min-h-9 px-3 text-[0.8125rem] max-md:hidden' })}
             >
-              <WhatsAppIcon className="size-5" />
               {copy.cta.whatsapp}
               <span className="sr-only">(opens in a new tab)</span>
             </a>
@@ -29,9 +25,9 @@ export function Footer() {
               href={links.facebook}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-11 items-center gap-2 rounded-full bg-[#1877F2] px-5 text-sm font-semibold text-white hover:opacity-90"
+              className="inline-flex min-h-11 items-center gap-2 rounded-md border border-ink/20 px-3 text-[0.8125rem] font-semibold text-ink hover:border-ink md:min-h-9"
             >
-              <FacebookIcon className="size-5" />
+              <FacebookIcon className="size-4 text-[#1877F2]" />
               {copy.footer.facebook}
               <span className="sr-only">(opens in a new tab)</span>
             </a>
@@ -39,9 +35,9 @@ export function Footer() {
         </div>
 
         <div>
-          <h2 className="text-sm font-bold uppercase tracking-[0.14em] text-ink">Showroom</h2>
-          <address className="mt-3 text-sm not-italic leading-relaxed text-ink-soft">
-            <span className="block font-semibold text-ink">{business.name}</span>
+          <h2 className="mb-1.5 font-bold text-ink lg:mb-2">Showroom</h2>
+          <address className="not-italic">
+            <span className="block">{business.name}</span>
             {addressLines.map((line) => (
               <span key={line} className="block">
                 {line}
@@ -51,66 +47,66 @@ export function Footer() {
         </div>
 
         <div>
-          <h2 className="text-sm font-bold uppercase tracking-[0.14em] text-ink">Opening hours</h2>
-          <dl className="mt-3 space-y-1 text-sm text-ink-soft">
+          <h2 className="mb-1.5 font-bold text-ink lg:mb-2">Opening hours</h2>
+          <dl>
             {hours.map((h) => (
               <div key={h.days}>
-                <dt className="inline font-medium text-ink">{h.days}: </dt>
+                <dt className="inline">{h.days}: </dt>
                 <dd className="inline">{h.time}</dd>
               </div>
             ))}
           </dl>
         </div>
 
-        {/* Full width on phones so the email address stays on one line. */}
-        <div className="col-span-2 lg:col-span-1">
-          <h2 className="text-sm font-bold uppercase tracking-[0.14em] text-ink">Contact</h2>
-          <div className="mt-1 text-sm text-ink-soft">
-            <a href={phones.showroom.href} className="flex min-h-11 items-center font-semibold text-ink hover:text-accent-deep">
-              {phones.showroom.display}
-            </a>
-            <a href={phones.mobile.href} className="flex min-h-11 items-center hover:text-accent-deep">
-              {phones.mobile.display} (mobile)
-            </a>
-            <a href={`mailto:${business.email}`} className="flex min-h-11 items-center whitespace-nowrap hover:text-accent-deep">
-              {business.email}
-            </a>
-          </div>
+        <div>
+          <h2 className="mb-1.5 font-bold text-ink lg:mb-2">Contact</h2>
+          <a href={phones.showroom.href} className="block hover:text-accent">
+            {phones.showroom.display}
+          </a>
+          <a href={phones.mobile.href} className="block hover:text-accent">
+            {phones.mobile.display} (mobile)
+          </a>
+          <a href={`mailto:${business.email}`} className="block whitespace-nowrap hover:text-accent">
+            {business.email}
+          </a>
         </div>
       </div>
 
-      <div className="border-t border-line">
-        <div className="container-x flex flex-col gap-3 pb-28 pt-6 text-xs text-muted md:flex-row md:pb-6 md:items-center md:justify-between">
-          <p>
-            {/* Prerendered at build time, so the year may differ from the visitor's clock on hydration. */}
-            &copy; <span suppressHydrationWarning>{new Date().getFullYear()}</span> {business.name}. {business.legalLine}{' '}
-            <a href={links.privacy} className="underline hover:text-ink">
-              Privacy notice
-            </a>{' '}
-            <a href={links.terms} className="underline hover:text-ink">
-              Terms and conditions
-            </a>
-          </p>
-          <p>
-            {copy.footer.designedBy}{' '}
-            <a href={links.designer} target="_blank" rel="noopener" className="font-semibold underline hover:text-ink">
-              {copy.footer.designerName}
-            </a>
-            <span className="sr-only"> (opens in a new tab)</span>
-          </p>
-          {credits.length > 0 && (
+      <div className="lg:border-t lg:border-line">
+        <div className="container-x">
+          <div className="flex flex-col gap-4 border-t border-line pb-28 pt-4 text-xs text-muted md:pb-6 lg:flex-row lg:justify-between lg:gap-6 lg:border-t-0 lg:py-[1.125rem]">
             <p>
-              Illustrative photography from Unsplash by{' '}
-              {credits.map((c, i) => (
-                <span key={c.url}>
-                  <a href={c.url} target="_blank" rel="noopener noreferrer" className="underline hover:text-ink">
-                    {c.photographer}
-                  </a>
-                  {i < credits.length - 2 ? ', ' : i === credits.length - 2 ? ' and ' : '.'}
-                </span>
-              ))}
+              {/* Prerendered at build time, so the year may differ from the visitor's clock on hydration. */}
+              &copy; <span suppressHydrationWarning>{new Date().getFullYear()}</span> {business.name}. {business.legalLine}{' '}
+              <a href={links.privacy} className="hover:text-ink hover:underline">
+                Privacy notice
+              </a>{' '}
+              &middot;{' '}
+              <a href={links.terms} className="hover:text-ink hover:underline">
+                Terms and conditions
+              </a>
             </p>
-          )}
+            <p className="lg:shrink-0">
+              {copy.footer.designedBy}{' '}
+              <a href={links.designer} target="_blank" rel="noopener" className="hover:text-ink hover:underline">
+                {copy.footer.designerName}
+              </a>
+              <span className="sr-only"> (opens in a new tab)</span>
+            </p>
+            {credits.length > 0 && (
+              <p>
+                Illustrative photography from Unsplash by{' '}
+                {credits.map((c, i) => (
+                  <span key={c.url}>
+                    <a href={c.url} target="_blank" rel="noopener noreferrer" className="underline hover:text-ink">
+                      {c.photographer}
+                    </a>
+                    {i < credits.length - 2 ? ', ' : i === credits.length - 2 ? ' and ' : '.'}
+                  </span>
+                ))}
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </footer>

@@ -23,8 +23,8 @@ export const business = {
 } as const
 
 export const phones = {
-  showroom: { label: 'Showroom', display: '01706 659 962', href: 'tel:+441706659962' },
-  mobile: { label: 'Mobile', display: '07904 322 879', href: 'tel:+447904322879' },
+  showroom: { label: 'Showroom', display: '01706 659962', href: 'tel:+441706659962' },
+  mobile: { label: 'Mobile', display: '07904 322879', href: 'tel:+447904322879' },
 } as const
 
 export const links = {
@@ -52,9 +52,9 @@ export const hours = [
 
 export const team = [
   { name: 'Dave', role: 'Owner' },
+  { name: 'Wendy', role: 'Owner' },
   { name: 'Tom', role: 'Fitter' },
   { name: 'Jake', role: 'Fitter' },
-  { name: 'Wendy', role: 'Owner' },
 ] as const
 
 export type MaterialId = 'carpets' | 'lvt' | 'laminate'
@@ -157,9 +157,9 @@ export const proof = {
   ] as readonly Review[],
 } as const
 
-// Real installation photos from the team only. Shown in the Our work slideshow.
+// Real installation photos from the team only. Shown in the Our work grid and full size viewer.
 // One photo per job, and none of these may appear anywhere else on the page.
-// Full room shots come first, then stairs, landings and smaller rooms.
+// The grid shows the first four, so add new jobs to the top. The viewer shows them all.
 // width and height are the photo's real shape, so it is always shown whole.
 export const installations: readonly { image: string; alt: string; caption: string; width: number; height: number }[] = [
   {
@@ -175,6 +175,20 @@ export const installations: readonly { image: string; alt: string; caption: stri
     height: 1365,
     alt: 'Light oak effect laminate fitted through a long dining room',
     caption: 'Oak laminate, dining room',
+  },
+  {
+    image: 'work-leopard-carpet-01',
+    width: 1024,
+    height: 1360,
+    alt: 'Leopard print carpet fitted up a staircase and across the landing',
+    caption: 'Leopard print stairs and landing',
+  },
+  {
+    image: 'work-hallway-transition-01',
+    width: 1024,
+    height: 1365,
+    alt: 'Oak effect laminate hallway floor with carpeted stairs and a patterned vinyl doorway',
+    caption: 'Oak laminate, hallway',
   },
   {
     image: 'work-lounge-laminate-02',
@@ -210,20 +224,6 @@ export const installations: readonly { image: string; alt: string; caption: stri
     height: 1365,
     alt: 'Dark oak effect laminate fitted in a garden room with patio doors',
     caption: 'Dark oak laminate, garden room',
-  },
-  {
-    image: 'work-hallway-transition-01',
-    width: 1024,
-    height: 1365,
-    alt: 'Oak effect laminate hallway floor with carpeted stairs and a patterned vinyl doorway',
-    caption: 'Oak laminate, hallway',
-  },
-  {
-    image: 'work-leopard-carpet-01',
-    width: 1024,
-    height: 1360,
-    alt: 'Leopard print carpet fitted up a staircase and across the landing',
-    caption: 'Leopard print stairs and landing',
   },
   {
     image: 'work-cream-carpet-01',
@@ -271,14 +271,14 @@ export const copy = {
     intro:
       "Hi, we're Dave and Wendy. We've been fitting carpets, vinyl and laminate flooring across Rochdale for over 45 years, and every job is fitted by our own fitters, Tom and Jake.",
     reassurance: "Measuring and quotes are free, and there's no obligation.",
-    ctaBook: 'Book a free measurement',
+    ctaBook: 'Get a free quote',
     ctaCall: 'Call',
     trustFitters: 'Our own fitters',
-    trustShowroom: 'Showroom at Tenterhouse Mill',
-    imageAlt: 'Grey oak flooring fitted across a room with glazed doors',
+    trustYearsLabel: 'years fitting flooring',
+    imageAlt: 'The Norden Carpets & Flooring shopfront at Tenterhouse Mill, with the doors open onto the showroom',
   },
   cta: {
-    bookShort: 'Free measure',
+    bookShort: 'Get quote',
     callShort: 'Call us',
     whatsapp: 'WhatsApp us',
     backToTop: 'Back to top',
@@ -286,7 +286,8 @@ export const copy = {
   },
   flooring: {
     eyebrow: 'Flooring',
-    title: 'Floors for every room and every budget.',
+    // Two lines on desktop, as in the design.
+    titleLines: ['Floors for every room', 'and every budget.'],
     intro: "Pop into the showroom to see samples. You'll get an exact quote after a free home measure.",
   },
   work: {
@@ -300,6 +301,8 @@ export const copy = {
     next: 'Next photo',
     close: 'Close',
     of: 'of',
+    seeAll: 'See all',
+    photos: 'photos',
   },
   team: {
     title: 'Meet the team.',
@@ -313,6 +316,43 @@ export const copy = {
     googleLink: 'Google',
     eyebrow: 'Reviews',
     title: 'What our customers say.',
+    readAll: 'Read our reviews',
+    tapNext: 'Tap for the next review',
+    startAgain: 'Tap to start again',
+    swipeNext: 'Swipe for the next review',
+    swipeMore: 'Swipe for more',
+    read: 'read',
+    of: 'of',
+    deckLabel: 'Customer reviews',
+    goTo: 'Show review',
+  },
+  booking: {
+    eyebrow: 'Free, no obligation',
+    title: 'Get a free quote',
+    intro: 'Tell us a little about the job. Dave or Wendy will call you back to arrange a free home measure.',
+    materialLegend: 'What would you like fitted?',
+    name: 'Your name',
+    phone: 'Phone number',
+    postcode: 'Postcode',
+    notes: 'Anything else we should know?',
+    optional: '(optional)',
+    notesPlaceholder: 'Rooms, stairs, or when you need it fitted',
+    consentStart: "I'm happy for you to contact me about my quote, as set out in the",
+    consentLink: 'privacy notice',
+    submit: 'Send my request',
+    sending: 'Sending...',
+    close: 'Close quote form',
+    reply: 'We usually call back within one working day.',
+    securityPrompt: 'Please complete the security check above the button.',
+    securityFailed: 'The security check could not load. Please refresh, or call us on',
+    successEyebrow: 'Request sent',
+    successTitle: 'Thank you',
+    successBody: (name: string, phone: string) =>
+      `Thanks ${name}. Dave or Wendy will call you on ${phone} to arrange your free measure and quote, usually within one working day.`,
+    done: 'Done',
+    errorTitle: "Sorry, that didn't send",
+    errorBody: 'Your details have not been lost. You can try again or reach us directly.',
+    back: 'Back to the form',
   },
   showroom: {
     eyebrow: 'Showroom',
