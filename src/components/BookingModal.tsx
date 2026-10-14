@@ -89,6 +89,8 @@ export function BookingModal() {
   const [token, setToken] = useState('')
   const [turnstileFailed, setTurnstileFailed] = useState(false)
   const [honeypot, setHoneypot] = useState('')
+  // Turnstile loads only once the form has been opened, so visitors who never open it never download it.
+  const [hasOpened, setHasOpened] = useState(false)
 
   // Open and close the native dialog in step with context state, and lock page scroll while open.
   useEffect(() => {
@@ -102,6 +104,7 @@ export function BookingModal() {
       }
       if (presetMaterial) setForm((f) => ({ ...f, material: presetMaterial }))
       setErrors({})
+      setHasOpened(true)
       dialog.showModal()
       document.documentElement.style.overflow = 'hidden'
     } else if (!isOpen && dialog.open) {
@@ -367,19 +370,21 @@ export function BookingModal() {
               </div>
 
               <div>
-                <Turnstile
-                  ref={turnstileRef}
-                  onToken={(tk) => {
-                    setToken(tk)
-                    setTurnstileFailed(false)
-                    setServerMessage('')
-                  }}
-                  onExpire={() => setToken('')}
-                  onError={() => {
-                    setToken('')
-                    setTurnstileFailed(true)
-                  }}
-                />
+                {hasOpened && (
+                  <Turnstile
+                    ref={turnstileRef}
+                    onToken={(tk) => {
+                      setToken(tk)
+                      setTurnstileFailed(false)
+                      setServerMessage('')
+                    }}
+                    onExpire={() => setToken('')}
+                    onError={() => {
+                      setToken('')
+                      setTurnstileFailed(true)
+                    }}
+                  />
+                )}
                 {turnstileFailed && (
                   <p className="mt-2 text-sm text-accent-deep">
                     {t.securityFailed}{' '}
