@@ -33,17 +33,18 @@ export function Hero() {
           <p className="mt-2.5 text-center text-[0.8125rem] text-muted lg:mt-3 lg:text-left">{copy.hero.reassurance}</p>
         </div>
 
-        <div className="-order-1 sm:px-6 sm:pt-6 lg:order-none lg:p-0">
-          {/* The shopfront at Tenterhouse Mill, always shown whole: full width on phones, its natural tall shape on desktop. */}
+        <div className="-order-1 px-5 pt-6 sm:px-6 lg:order-none lg:p-0">
+          {/* The shopfront at Tenterhouse Mill, always shown whole and never cropped: a smaller centred photo on phones so the headline
+              sits higher, its natural tall shape on desktop. The original is small, so files stop at 720px. */}
           <Picture
             name="hero-shopfront"
             alt={copy.hero.imageAlt}
-            sizes="(min-width: 1280px) 440px, (min-width: 1024px) 400px, (min-width: 640px) 448px, 100vw"
+            sizes="(min-width: 1280px) 440px, (min-width: 1024px) 400px, (min-width: 640px) 448px, 256px"
             width={574}
             height={830}
             priority
-            maxWidth={1024}
-            className="block h-auto w-full bg-bg-alt sm:mx-auto sm:max-w-[28rem] sm:rounded-lg lg:h-[36rem] lg:w-auto lg:max-w-none xl:h-[40rem]"
+            maxWidth={720}
+            className="mx-auto block h-auto w-full max-w-[16rem] rounded-lg bg-bg-alt sm:max-w-[28rem] lg:h-[36rem] lg:w-auto lg:max-w-none xl:h-[40rem]"
           />
         </div>
       </div>

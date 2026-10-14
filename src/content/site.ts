@@ -163,6 +163,20 @@ export const proof = {
 // width and height are the photo's real shape, so it is always shown whole.
 export const installations: readonly { image: string; alt: string; caption: string; width: number; height: number }[] = [
   {
+    image: 'work-herringbone-01',
+    width: 1024,
+    height: 1365,
+    alt: 'Grey oak effect herringbone flooring fitted across an empty living room',
+    caption: 'Grey herringbone, living room',
+  },
+  {
+    image: 'work-oak-herringbone-01',
+    width: 1024,
+    height: 456,
+    alt: 'Oak effect herringbone flooring through a living room with a white corner sofa and a wall fireplace',
+    caption: 'Oak herringbone, living room',
+  },
+  {
     image: 'work-oak-lounge-laminate-01',
     width: 1024,
     height: 1365,
@@ -205,9 +219,9 @@ export const installations: readonly { image: string; alt: string; caption: stri
     caption: 'Grey laminate, lounge',
   },
   {
-    image: 'work-kitchen-laminate-02',
+    image: 'work-kitchen-laminate-01',
     width: 1024,
-    height: 1365,
+    height: 768,
     alt: 'Wood effect laminate fitted through a kitchen with an island',
     caption: 'Wood effect laminate, kitchen',
   },

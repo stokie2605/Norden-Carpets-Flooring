@@ -6,7 +6,8 @@ import sharp from 'sharp'
 
 const SOURCES = ['design-source/installations']
 const OUT = 'public/images'
-const WIDTHS = [480, 720, 1024, 1600]
+// 800 sits between 720 and 1024 so phones that need just over 720px do not jump to the 1024px file.
+const WIDTHS = [480, 720, 800, 1024, 1600]
 // Tailored crops for flooring tabs so the flooring material is the clear focus.
 const CROPS = {
   // Focus on the carpet treads and the full curved bullnose step
@@ -49,12 +50,14 @@ const SHOWCASE = new Set([
   'work-cloakroom-vinyl-01',
   'work-grey-lounge-laminate-01',
   'work-oak-lounge-laminate-01',
-  'work-kitchen-laminate-02',
+  'work-kitchen-laminate-01',
   'work-feature-wall-laminate-01',
   'work-dining-laminate-01',
   'work-hallway-transition-01',
   'work-lounge-laminate-02',
   'work-garden-room-01',
+  'work-herringbone-01',
+  'work-oak-herringbone-01',
 ])
 // Busy patterns make big files, so these get a lower quality to stay light on phones.
 const SHOW_QUALITY = {
