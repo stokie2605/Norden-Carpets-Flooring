@@ -10,7 +10,7 @@ export function Hero() {
   return (
     <section aria-labelledby="hero-title">
       {/* Phones: full width photo on top, text underneath. Desktop: text on the left, photo on the right. */}
-      <div className="mx-auto flex max-w-[90rem] flex-col lg:grid lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-14 lg:px-16 lg:py-[4.5rem] xl:gap-20">
+      <div className="mx-auto flex max-w-[90rem] flex-col lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-14 lg:px-16 lg:py-[4.5rem] xl:gap-20">
         <div className="px-5 pt-7 sm:px-6 lg:flex lg:flex-col lg:justify-center lg:p-0">
           <p className="eyebrow">{copy.hero.eyebrow}</p>
           <h1
@@ -33,17 +33,17 @@ export function Hero() {
           <p className="mt-2.5 text-center text-[0.8125rem] text-muted lg:mt-3 lg:text-left">{copy.hero.reassurance}</p>
         </div>
 
-        <div className="-order-1 lg:order-none">
-          {/* The shopfront at Tenterhouse Mill. Positioned so the sign and the open doors stay in frame at every size. */}
+        <div className="-order-1 sm:px-6 sm:pt-6 lg:order-none lg:p-0">
+          {/* The shopfront at Tenterhouse Mill, always shown whole: full width on phones, its natural tall shape on desktop. */}
           <Picture
             name="hero-shopfront"
             alt={copy.hero.imageAlt}
-            sizes="(min-width: 1024px) 45vw, 100vw"
+            sizes="(min-width: 1280px) 440px, (min-width: 1024px) 400px, (min-width: 640px) 448px, 100vw"
             width={574}
             height={830}
             priority
             maxWidth={1024}
-            className="h-[23rem] w-full bg-bg-alt object-cover object-[50%_30%] sm:h-[30rem] lg:h-[34rem] lg:rounded-lg lg:object-[50%_35%] xl:h-[38rem]"
+            className="block h-auto w-full bg-bg-alt sm:mx-auto sm:max-w-[28rem] sm:rounded-lg lg:h-[36rem] lg:w-auto lg:max-w-none xl:h-[40rem]"
           />
         </div>
       </div>
