@@ -34,17 +34,17 @@ export function Hero() {
         </div>
 
         <div className="-order-1 px-5 pt-6 sm:px-6 lg:order-none lg:p-0">
-          {/* The shopfront at Tenterhouse Mill, always shown whole and never cropped: a smaller centred photo on phones so the headline
-              sits higher, its natural tall shape on desktop. The original is small, so files stop at 720px. */}
+          {/* The shopfront at Tenterhouse Mill, always shown whole and never cropped. Phones: as wide as the screen allows, but never
+              taller than 70% of it, so the whole photo fits on screen. Desktop: its natural tall shape. The original is small, so files stop at 720px. */}
           <Picture
             name="hero-shopfront"
             alt={copy.hero.imageAlt}
-            sizes="(min-width: 1280px) 440px, (min-width: 1024px) 400px, (min-width: 640px) 448px, 256px"
+            sizes="(min-width: 1280px) 440px, (min-width: 1024px) 400px, (min-width: 640px) 448px, calc(100vw - 2.5rem)"
             width={574}
             height={830}
             priority
             maxWidth={720}
-            className="mx-auto block h-auto w-full max-w-[16rem] rounded-lg bg-bg-alt sm:max-w-[28rem] lg:h-[36rem] lg:w-auto lg:max-w-none xl:h-[40rem]"
+            className="mx-auto block h-auto max-h-[70svh] w-auto max-w-full rounded-lg bg-bg-alt sm:max-w-[28rem] lg:h-[36rem] lg:max-h-none lg:max-w-none xl:h-[40rem]"
           />
         </div>
       </div>
