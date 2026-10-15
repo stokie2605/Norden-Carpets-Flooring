@@ -33,18 +33,20 @@ export function Hero() {
           <p className="mt-2.5 text-center text-[0.8125rem] text-muted lg:mt-3 lg:text-left">{copy.hero.reassurance}</p>
         </div>
 
-        <div className="-order-1 px-5 pt-6 sm:px-6 lg:order-none lg:p-0">
-          {/* The shopfront at Tenterhouse Mill, always shown whole and never cropped. Phones: as wide as the screen allows, but never
-              taller than 70% of it, so the whole photo fits on screen. Desktop: its natural tall shape. The original is small, so files stop at 720px. */}
+        <div className="hidden sm:-order-1 sm:block sm:px-6 sm:pt-6 lg:order-none lg:p-0">
+          {/* The shopfront at Tenterhouse Mill, always shown whole and never cropped. Hidden on phones (under 640px) so the headline
+              is the first thing seen, and hideBelow stops phones downloading it at all. Tablets: up to 28rem wide. Desktop: its natural
+              tall shape. The original is small, so files stop at 720px. */}
           <Picture
             name="hero-shopfront"
             alt={copy.hero.imageAlt}
-            sizes="(min-width: 1280px) 440px, (min-width: 1024px) 400px, (min-width: 640px) 448px, calc(100vw - 2.5rem)"
+            sizes="(min-width: 1280px) 440px, (min-width: 1024px) 400px, 448px"
             width={574}
             height={830}
             priority
+            hideBelow={640}
             maxWidth={720}
-            className="mx-auto block h-auto max-h-[70svh] w-auto max-w-full rounded-lg bg-bg-alt sm:max-w-[28rem] lg:h-[36rem] lg:max-h-none lg:max-w-none xl:h-[40rem]"
+            className="mx-auto block h-auto w-full max-w-[28rem] rounded-lg bg-bg-alt lg:h-[36rem] lg:w-auto lg:max-w-none xl:h-[40rem]"
           />
         </div>
       </div>
