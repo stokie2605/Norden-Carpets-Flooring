@@ -466,7 +466,7 @@ export const copy = {
     titleAccent: 'Norden Carpets & Flooring.',
     intro:
       "Hi, we're Dave and Wendy. We've been fitting carpets, vinyl and laminate flooring across Rochdale for over 45 years, and every job is fitted by our own fitters, Tom and Jake.",
-    reassurance: "Measuring and quotes are free, and there's no obligation.",
+    reassurance: "Quotes are free, and there's no obligation.",
     ctaBook: 'Get a free quote',
     ctaCall: 'Call',
     trustFitters: 'Our own fitters',
