@@ -677,7 +677,6 @@ export const copy = {
     intro:
       "Hi, we're Dave and Wendy. We've been fitting carpets, vinyl and laminate flooring across Rochdale for over 45 years, and every job is fitted by our own fitters, Tom and Jake.",
     reassurance: "Quotes are free, and there's no obligation.",
-    enter: 'Tap to step inside',
     ctaBook: 'Get a free quote',
     ctaCall: 'Call',
     trustFitters: 'Our own fitters',
