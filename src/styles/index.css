@@ -123,6 +123,14 @@
   }
 }
 
+/* Phones: once the visitor has tapped Tap to step inside, the address ends in #inside and the shopfront stays hidden on refresh.
+   Plain CSS, so it works before any JavaScript runs and nothing is stored on the device. */
+@media (max-width: 639px) {
+  html:has(#inside:target) #step-inside {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

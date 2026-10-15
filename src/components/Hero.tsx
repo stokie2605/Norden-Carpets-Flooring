@@ -1,3 +1,4 @@
+import { useRef, useState, type MouseEvent } from 'react'
 import { business, copy, phones, proof } from '../content/site'
 import { useBooking } from '../context/BookingContext'
 import { Button, ButtonLink } from './ui/Button'
@@ -6,16 +7,35 @@ import { Stars } from './ui/Stars'
 
 export function Hero() {
   const { openBooking } = useBooking()
+  // Phones only: the shopfront fills the first screen. Tapping it zooms in, as if walking through the door, then it folds away.
+  const [entry, setEntry] = useState<'closed' | 'entering' | 'inside'>('closed')
+  const titleRef = useRef<HTMLHeadingElement>(null)
+  const stepInside = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    setEntry('entering')
+    window.setTimeout(() => {
+      setEntry('inside')
+      // Marks the address as #inside, so a refresh or the back button keeps the photo away (the CSS in index.css hides it
+      // while the #inside marker is the target). Nothing is stored on the visitor's phone.
+      window.history.replaceState(null, '', '#inside')
+      window.scrollTo({ top: 0 })
+      titleRef.current?.focus({ preventScroll: true })
+    }, 900)
+  }
 
   return (
     <section aria-labelledby="hero-title">
+      {/* Target for /#inside. The huge scroll margin keeps the page at the very top when the address has it. */}
+      <span id="inside" className="block scroll-mt-[100vh]" />
       {/* Phones: full width photo on top, text underneath. Desktop: text on the left, photo on the right. */}
       <div className="mx-auto flex max-w-[90rem] flex-col lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-14 lg:px-16 lg:py-[4.5rem] xl:gap-20">
         <div className="px-5 pt-7 sm:px-6 lg:flex lg:flex-col lg:justify-center lg:p-0">
           <p className="eyebrow">{copy.hero.eyebrow}</p>
           <h1
             id="hero-title"
-            className="mt-3 text-[2.5rem] font-extrabold leading-[1.02] text-ink lg:mt-4 lg:text-[4.25rem] lg:leading-none xl:text-[5rem]"
+            ref={titleRef}
+            tabIndex={-1}
+            className="mt-3 text-[2.5rem] font-extrabold focus:outline-none leading-[1.02] text-ink lg:mt-4 lg:text-[4.25rem] lg:leading-none xl:text-[5rem]"
           >
             {copy.hero.titleStart} {copy.hero.titleAccent}
           </h1>
@@ -33,19 +53,34 @@ export function Hero() {
           <p className="mt-2.5 text-center text-[0.8125rem] text-muted lg:mt-3 lg:text-left">{copy.hero.reassurance}</p>
         </div>
 
-        <div className="-order-1 px-5 pt-6 sm:px-6 lg:order-none lg:p-0">
-          {/* The shopfront at Tenterhouse Mill, always shown whole and never cropped. Phones: as wide as the screen allows, but never
-              taller than 70% of it, so the whole photo fits on screen. Desktop: its natural tall shape. The original is small, so files stop at 720px. */}
-          <Picture
-            name="hero-shopfront"
-            alt={copy.hero.imageAlt}
-            sizes="(min-width: 1280px) 440px, (min-width: 1024px) 400px, (min-width: 640px) 448px, calc(100vw - 2.5rem)"
-            width={574}
-            height={830}
-            priority
-            maxWidth={720}
-            className="mx-auto block h-auto max-h-[70svh] w-auto max-w-full rounded-lg bg-bg-alt sm:max-w-[28rem] lg:h-[36rem] lg:max-h-none lg:max-w-none xl:h-[40rem]"
-          />
+        {/* The shopfront at Tenterhouse Mill. Phones (under 640px): fills the screen between the header and the contact bar, and a tap
+            steps inside (zoom, then the photo folds away). It stays in the page flow, not a popup, so the content is never covered.
+            Without JavaScript the tap is a plain link to the headline. Tablets: shown whole, up to 28rem wide. Desktop: its natural tall
+            shape, never cropped. The original is small, so files stop at 720px. */}
+        <div
+          id="step-inside"
+          data-entry={entry}
+          className="group -order-1 grid grid-rows-[1fr] transition-[grid-template-rows] delay-300 duration-500 ease-in-out data-[entry=entering]:grid-rows-[0fr] data-[entry=inside]:max-sm:hidden sm:block sm:px-6 sm:pt-6 lg:order-none lg:p-0"
+        >
+          <div className="relative min-h-0 overflow-hidden">
+            <Picture
+              name="hero-shopfront"
+              alt={copy.hero.imageAlt}
+              sizes="(min-width: 1280px) 440px, (min-width: 1024px) 400px, (min-width: 640px) 448px, 100vw"
+              width={574}
+              height={830}
+              priority
+              maxWidth={720}
+              className="block h-[calc(100svh-9.25rem)] min-h-[24rem] w-full bg-bg-alt object-cover transition duration-700 ease-in group-data-[entry=entering]:scale-[1.8] group-data-[entry=entering]:opacity-0 sm:mx-auto sm:h-auto sm:min-h-0 sm:max-w-[28rem] sm:rounded-lg lg:h-[36rem] lg:w-auto lg:max-w-none xl:h-[40rem]"
+            />
+            <a
+              href="#hero-title"
+              onClick={stepInside}
+              className="absolute inset-0 flex items-end justify-center bg-linear-to-t from-black/55 via-transparent to-transparent pb-8 transition-opacity duration-300 group-data-[entry=entering]:opacity-0 sm:hidden"
+            >
+              <span className="rounded-md bg-accent px-6 py-3.5 text-base font-bold text-white shadow-lg">{copy.hero.enter}</span>
+            </a>
+          </div>
         </div>
       </div>
 
