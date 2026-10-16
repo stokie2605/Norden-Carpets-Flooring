@@ -45,7 +45,7 @@ export const addressLines = [
 ] as const
 
 export const hours = [
-  { days: 'Monday to Friday', time: '9am to 4pm' },
+  { days: 'Monday to Friday', time: '9am to 4:30pm' },
   { days: 'Saturday', time: '9am to 12pm' },
   { days: 'Sunday', time: 'Closed' },
 ] as const
